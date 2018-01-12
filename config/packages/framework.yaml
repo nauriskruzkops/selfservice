@@ -1,0 +1,34 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    #default_locale: en
+    #csrf_protection: ~
+    #http_method_override: true
+
+    # uncomment this entire section to enable sessions
+    #session:
+    #    # With this config, PHP's native session handling is used
+    #    handler_id: ~
+
+    #esi: ~
+    #fragments: ~
+    php_errors:
+        log: true
+    templating:
+        engines: ['php']
+        #cache: false
+    assets:
+        base_path: '/assets'
+        packages:
+          sbadmin:
+            base_path: '/assets'
+            version: 'v1'
+            version_format: '%%s?%%s'
+          vendor:
+            base_path: '/vendor'
+          css:
+            base_path: '/css'
+          js:
+            base_path: '/js'
+
+
+

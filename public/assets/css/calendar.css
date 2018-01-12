@@ -1,0 +1,7 @@
+.calendar_content .month-container {
+    float: left;
+}
+
+.calendar_content .month-block {
+    border-right: 2px solid #b2b2b2
+}

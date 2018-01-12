@@ -1,0 +1,10 @@
+/.idea/
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+/public/sb-admin/
+/public/assets/vendor/
+/assets/
