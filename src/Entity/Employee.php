@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="employee")
+ * @ORM\Entity(repositoryClass="App\Repository\EmployeeRepository")epository\ProductReposi
  */
 class Employee {
 
@@ -51,6 +52,12 @@ class Employee {
      * @ORM\Column(type="boolean", nullable=false)
      */
     private $foreigner;
+
+    /**
+     * One Product has Many Features.
+     * @ORM\OneToMany(targetEntity="Vocation", mappedBy="employee")
+     */
+    private $vocations;
 
     public function __construct()
     {
@@ -119,6 +126,15 @@ class Employee {
         return $this;
     }
 
+    public function getFullName()
+    {
+        return implode(' ', array_filter([
+            $this->getName(),
+            $this->getSecondName(),
+            $this->getSurname()
+        ]));
+    }
+
     /**
      * @return mixed
      */
@@ -172,4 +188,25 @@ class Employee {
         $this->foreigner = $foreigner;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVocations()
+    {
+        return $this->vocations;
+    }
+
+    /**
+     * @param mixed $vocations
+     * @return Employee
+     */
+    public function setVocations($vocations)
+    {
+        $this->vocations = $vocations;
+
+        return $this;
+    }
+
+
 }

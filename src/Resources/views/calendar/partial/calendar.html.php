@@ -6,67 +6,63 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var PhpEngine $view
  * @var \DatePeriod $calendar
  * @var \DateTime $calendarDay
+ * @var \DateTime $startDate
+ * @var \App\Entity\Employee[] $employees
+ * @var \App\Entity\Vocation $vocation
  */
 
-$view->extend('layout/blocks/card.html.php');
+$view->extend('layout/blocks/div.html.php');
 
-$data = [
-    'startDate' => '2018-01-01',
-    'employees' => [
-        'Nauris' => [
-            ['start'=>'2018-01-03','end'=>'2018-02-06']
-        ],
-        'Juris' => [
-            ['start'=>'2018-01-03','end'=>'2018-02-06']
-        ],
-        'Jaanis' => [
-            ['start'=>'2018-01-03','end'=>'2018-02-06']
-        ],
-    ],
-]
+$daysFromPeriodStart = function (\DateTime $vocationStartDate) use ($startDate) {
+    $days = $startDate->diff($vocationStartDate)->days;
+    return $days === 1 ? 0 : $days;
+};
 
-?><div class="calendar_content row">
+$styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
+    $days = $daysFromPeriodStart($vocationStartDate);
+    //if ($days > 1)
+        $days++;
+    return $days * 30;
+}
 
+?><div class="calendar_content">
     <div class="timetable">
-        <aside>
-            <ul>
-                <?php foreach ($data['employees'] as $employee=>$vocation):?>
-                    <li>
-                        <span class="row-heading"><?=$employee?></span>
-                    </li>
-                <?php endforeach;?>
-            </ul>
-        </aside>
+        <ul class="timeline-employees">
+            <?php foreach ($employees as $employee):?>
+                <li>
+                    <span class="row-heading"><?=$employee->getFullName()?></span>
+                </li>
+            <?php endforeach;?>
+        </ul>
         <section>
             <time>
-                <header>
+                <div class="timeline-header">
                     <ul>
                         <?php foreach ($calendar as $month):?>
                             <?php $daysPeriod = new \DatePeriod( clone $month->modify('first day of this month'), new \DateInterval('P1D'), clone $month->modify('last day of this month')); ?>
                             <?php foreach ($daysPeriod as $day):?>
                                 <li class="day day-info day-name-<?= $day->format('N')?> <?= $day->format('N')>5?'weekend':''?>" data-date="<?= $day->format('Y-m-d')?>">
-                                    <span class="time-label"><?= $day->format('d')?></span>
+                                    <span class="day-label"><?= $day->format('d')?></span>
                                 </li>
                             <?php endforeach;?>
                         <?php endforeach;?>
                     </ul>
-                </header>
-                <ul class="room-timeline">
-                    <?php foreach ($data['employees'] as $employee=>$vocation):?>
+                </div>
+
+                <ul class="timeline-vocation">
+                    <?php foreach ($employees as $employee):?>
                         <li>
-                            <a href="#" class="time-entry"> </a>
+                            <?php foreach ($employee->getVocations() as $vocation): ?>
+                                <a href="#" class="time-entry" <?php
+                                ?> style="width: <?=$vocation->getDays()*30 ?>px; left: <?=$styleLeft($vocation->getStartDate()) ?>px"<?php
+                                ?> data-days="<?= $vocation->getDays()?>"<?php
+                                ?> data-start-date="<?= $vocation->getStartDate()->format('Y-m-d');?>"<?php
+                                ?> data-end-date="<?= $vocation->getStartDate()->format('Y-m-d');?>"> </a>
+                            <?php endforeach;?>
                         </li>
                     <?php endforeach;?>
                 </ul>
             </time>
         </section>
     </div>
-
 </div>
-
-<script>
-    (function() {
-      //
-    })();
-    var timeTableData = JSON.parse('<?= json_encode($data)?>');
-</script>

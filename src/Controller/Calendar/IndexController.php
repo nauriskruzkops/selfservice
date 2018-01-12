@@ -2,6 +2,7 @@
 
 namespace App\Controller\Calendar;
 
+use App\Entity\Employee;
 use App\Entity\Vocation;
 use App\Service\VocationRender;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,10 +16,11 @@ class IndexController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $vocations = $this->getDoctrine()->getRepository(Vocation::class)->findAll();
+        $employees = $this->getDoctrine()->getRepository(Employee::class)->getList();
 
         return $this->render('calendar/index.html.php', [
-            'vocations' => $vocations
+            'startDate' => (new \DateTime('now'))->modify('first day of this month'),
+            'employees' => $employees,
         ]);
     }
 

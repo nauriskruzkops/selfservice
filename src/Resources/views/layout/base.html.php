@@ -28,7 +28,6 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <script src="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/vendor/jquery-easing/jquery.easing.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/theme/sb-admin.js', 'sbadmin') ?>"></script>
-        <script src="<?= $view['assets']->getUrl('/assets/js/calendar-timetable.js', 'js') ?>"></script>
     </body>
 </html>
 
