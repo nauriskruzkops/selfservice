@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  * @ORM\Table(name="company")
  */
 class Company {
@@ -27,6 +28,12 @@ class Company {
     private $parent;
 
     /**
+     * One Customer has One Cart.
+     * @ORM\OneToMany(targetEntity="CompanyEmployees", mappedBy="company")
+     */
+    private $employees;
+
+    /**
      * @ORM\Column(type="string", length=100)
      */
     private $title;
@@ -35,6 +42,15 @@ class Company {
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $registrationNo;
+
+    /**
+     * Company constructor.
+     */
+    public function __construct()
+    {
+        $this->employees = new ArrayCollection();
+        $this->parent = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -91,5 +107,25 @@ class Company {
     {
         $this->registrationNo = $registrationNo;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmployees()
+    {
+        return $this->employees;
+    }
+
+    /**
+     * @param mixed $employees
+     * @return Company
+     */
+    public function setEmployees($employees)
+    {
+        $this->employees = $employees;
+
+        return $this;
+    }
+
 
 }

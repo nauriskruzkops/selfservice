@@ -21,14 +21,14 @@ class CompanyEmployees {
 
     /**
      * @var Company
-     * @ORM\OneToOne(targetEntity="App\Entity\Company")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     private $company;
 
     /**
      * @var Employee
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      */
     private $employee;
@@ -44,7 +44,7 @@ class CompanyEmployees {
     private $startDate;
 
     /**
-     * @ORM\Column(type="date", nullable=false)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $endDate;
 

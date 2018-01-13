@@ -33,6 +33,14 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
             </a>
         </li>
 
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="<?php echo $view['router']->path('system',[]) ?>">
+                <i class="fa fa-fw fa-compass"></i>
+                <span class="nav-link-text">System settings</span>
+            </a>
+        </li>
+
+
     </ul>
     <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
