@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <link href="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/css/bootstrap.min.css', 'vendor') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
         <link href="<?= $view['assets']->getUrl('/assets/theme/sb-admin.css', 'sbadmin') ?>" rel="stylesheet">
+        <link href="<?= $view['assets']->getUrl('/assets/css/custom-overwrite.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar-timetable.css', 'css') ?>" rel="stylesheet">
 

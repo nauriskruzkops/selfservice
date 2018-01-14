@@ -10,11 +10,8 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
  */
 $view->extend('layout/layout.html.php');
 
-?><div class="site-header">
-    <h1>System : Company : <?= $company->getTitle()?></h1>
-    <hr>
-</div>
-
+?>
+<?= $view->render('layout/partial/page-title.html.php', ['pageTitle' => 'System : Company : '.$company->getTitle()])?>
 <div class="row">
     <div class="col-md-6">
         <?php echo $view['actions']->render(

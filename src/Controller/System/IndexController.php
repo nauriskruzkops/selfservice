@@ -14,7 +14,7 @@ class IndexController extends ExtendController
     public function indexAction(Request $request)
     {
         return $this->render('system/index.html.php', [
-            'name' => 'Me!'
+            'pageTitle' => 'System settings'
         ]);
     }
 }

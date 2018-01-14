@@ -7,12 +7,8 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
  * @var PhpEngine $view
  */
 $view->extend('layout/layout.html.php');
-
 ?>
-<div class="site-header">
-    <h1>System settings</h1>
-</div>
-
+<?= $view->render('layout/partial/page-title.html.php', ['pageTitle' => $pageTitle ?? null])?>
 <div class="row">
     <div class="col-md-6">
         <?php echo $view['actions']->render(
