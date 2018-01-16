@@ -12,6 +12,18 @@ class Vocation {
 
     use Traits\Traceability;
 
+    const TYPE_ANNUAL = 'annual';
+    const TYPE_UNPAID = 'unpaid';
+    const TYPE_PARENTAL = 'parental';
+    const TYPE_OTHER = 'other';
+
+    const TYPES = [
+        self::TYPE_ANNUAL => 'Annual',
+        self::TYPE_UNPAID => 'Unpaid',
+        self::TYPE_PARENTAL => 'Parental',
+        self::TYPE_OTHER => 'Other',
+    ];
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -25,11 +37,16 @@ class Vocation {
     private $type;
 
     /**
-     * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="vocations")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      */
     private $employee;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\VocationPeriod", inversedBy="vocations")
+     * @ORM\JoinColumn(name="vocation_period_id", referencedColumnName="id")
+     */
+    private $vocationPeriod;
 
     /**
      * @ORM\Column(type="date", nullable=false)

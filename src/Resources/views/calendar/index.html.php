@@ -17,3 +17,7 @@ $view->extend('layout/layout.html.php');
             'date' => new \DateTime('now')
     ])
 ) ?>
+
+<?= $view['form']->start($form) ?>
+
+<?= $view['form']->end($form) ?>
