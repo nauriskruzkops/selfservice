@@ -19,13 +19,11 @@
     float:left;
     width: 250px;
     padding:0!important;
-    margin-top:46px;
     border-right:5px solid transparent
 }
 .timetable .timeline-employees li {
     padding:0 15px;
     background-color:#EFEFEF;
-    line-height:46px
 }
 .timetable .timeline-employees li:not(:last-of-type) {
     border-bottom:1px solid #fff
@@ -42,9 +40,7 @@
     list-style-type:none;
     margin:0
 }
-.timetable .timeline-employees li,.timetable time li {
-    height:46px
-}
+
 .timetable section {
     margin-left: 255px;
     display: block;
@@ -58,7 +54,7 @@
 }
 
 .timetable section .timeline-header {
-    height:46px;
+
     -webkit-transform-style:preserve-3d;
     transform-style:preserve-3d;
     font-size:0
@@ -73,7 +69,7 @@
     display:inline-block;
     font-size: 12px;
     overflow:visible;
-    line-height:46px;
+
     position:relative;
     width:30px;
     text-align: center;
@@ -113,9 +109,6 @@
 .timetable ul.timeline-vocation li:not(:last-of-type) {
     border-bottom:none
 }
-.timetable ul.timeline-vocation li:first-child .time-entry {
-    height:30px;
-}
 
 .timetable ul.timeline-vocation li:after,.timetable ul.timeline-vocation li:before {
     content:"";
@@ -132,10 +125,8 @@
 }
 
 .timetable .time-entry {
-    margin-top: 7px;
     background-color: #bcd4f1;
     transition:200ms background-color;
-    height:30px;
     width:30px;
     display:block;
     position:absolute;
@@ -157,4 +148,17 @@
 }
 .timetable .time-entry:hover {
     background-color:#bcd4f1
+}
+
+.timetable .timeline-employees li,.timetable time li,
+.timetable section .timeline-header, .timetable section .timeline-header li {
+    height:35px;
+    line-height:35px;
+}
+.timetable .timeline-employees {
+    margin-top:35px;
+}
+.timetable .time-entry {
+    margin-top: 10px;
+    height:15px;
 }

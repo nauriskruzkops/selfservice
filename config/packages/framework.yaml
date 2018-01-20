@@ -16,6 +16,11 @@ framework:
     templating:
         engines: ['php']
         #cache: false
+        form:
+          resources:
+            - ':form'
+            - ':form/vertical'
+            - ':form/horizontal'
     assets:
         base_path: '/assets'
         packages:

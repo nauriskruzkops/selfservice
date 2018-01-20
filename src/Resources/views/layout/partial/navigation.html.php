@@ -27,15 +27,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         </li>
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="<?php echo $view['router']->path('companies',[]) ?>">
-                <i class="fa fa-fw fa-compass"></i>
-                <span class="nav-link-text">Companies</span>
-            </a>
-        </li>
-
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="<?php echo $view['router']->path('system',[]) ?>">
-                <i class="fa fa-fw fa-compass"></i>
+                <i class="fa fa-fw fa-cogs"></i>
                 <span class="nav-link-text">System settings</span>
             </a>
         </li>
