@@ -4,6 +4,6 @@ if (!empty(array_filter($value))) {
 } else {
     $value = (new \DateTime('now'))->format('Y-m-d');
 }
-
 ?>
-<input class="form-control" type="text" <?php echo $view['form']->block($form, 'widget_attributes') ?><?php if (!empty($value) || is_numeric($value)): ?> value="<?php echo $view->escape($value) ?>"<?php endif ?> />
+
+<input class="form-control datepicker" data-provide="datepicker" data-date-format="yyyy-mm-dd" type="text" <?php echo $view['form']->block($form, 'widget_attributes') ?><?php if (!empty($value) || is_numeric($value)): ?> value="<?php echo $view->escape($value) ?>"<?php endif ?> />

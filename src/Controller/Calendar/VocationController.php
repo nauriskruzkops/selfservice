@@ -2,6 +2,8 @@
 
 namespace App\Controller\Calendar;
 
+use App\Entity\Employee;
+use App\Entity\Vocation;
 use App\Form\CalendarVocationForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,23 +12,44 @@ use Symfony\Component\Routing\Annotation\Route;
 class VocationController extends Controller
 {
     /**
-     * @Route("/calendar/add", name="calendar_add_post")
+     * AJAX request
+     * @Route("/calendar/vocation/add", name="vocation_add")
      */
-    public function addAction(Request $request)
+    public function addFormAction(Request $request)
     {
-        $form = $this->createForm(CalendarVocationForm::class);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $vocation = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($vocation);
-            $em->flush();
-
-            return $this->redirectToRoute('task_success');
+        $employee = $request->get('employee', null);
+        $entity = new Vocation();
+        if ($employee) {
+            $entity->setEmployee($this->getDoctrine()->getRepository(Employee::class)->find($employee));
         }
 
-        return $this->render('calendar/index.html.php', [
+        $form = $this->createForm(CalendarVocationForm::class, $entity, [
+            'action' => $this->generateUrl('vocation_add'),
+            'method' => 'POST',
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->json([
+                    'status' => 'OK'
+                ]);
+            } catch (\Exception $e) {
+                var_dump($entity);
+
+                return $this->json([
+                    'status' => 'ERROR',
+                    'message' => $e->getMessage()
+                ]);
+            }
+        }
+
+        return $this->render('calendar/partial/vocation_manage_form.html.php',[
             'form' => $form->createView(),
         ]);
     }

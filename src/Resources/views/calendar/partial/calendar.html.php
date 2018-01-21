@@ -20,7 +20,6 @@ $daysFromPeriodStart = function (\DateTime $vocationStartDate) use ($startDate) 
 
 $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
     $days = $daysFromPeriodStart($vocationStartDate);
-    //if ($days > 1)
         $days++;
     return $days * 30;
 }
@@ -30,7 +29,13 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
         <ul class="timeline-employees">
             <?php foreach ($employees as $employee):?>
                 <li>
-                    <span class="row-heading"><?=$employee->getFullName()?></span>
+                    <span class="row-heading">
+                        <?=$employee->getFullName()?>
+                    </span>
+                    <span class="pull-right" style="font-size: 80%">
+                        <a href="#" data-url="<?php echo $view['router']->path('vocation_add',['employee' => $employee->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
+                    </span>
                 </li>
             <?php endforeach;?>
         </ul>
