@@ -5,8 +5,9 @@
  * @var Symfony\Component\Form\FormView $form
  */
 
+$vocation  = $vocation ?? null;
 $formHelper = $view['form'];
-$form->setMethodRendered('POST')
+
 ?>
 <?= $formHelper->start($form);?>
 <div class="modal-header">
@@ -48,7 +49,7 @@ $form->setMethodRendered('POST')
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Add vocation</button>
+    <button type="submit" class="btn btn-primary"><?= $vocation ? 'Edit' : 'Add'?> vocation</button>
 </div>
 <?= $formHelper->end($form);?>
 

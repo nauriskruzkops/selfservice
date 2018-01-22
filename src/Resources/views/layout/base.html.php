@@ -37,7 +37,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <div class="modal fade" id="globalAjaxModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-body">Please wait ...</div>
+                    <div class="modal-body"></div>
                 </div>
             </div>
         </div>
@@ -46,21 +46,6 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <script src="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/theme/sb-admin.js', 'sbadmin') ?>"></script>
-        <script type="text/javascript">
-            $(function () {
-                var globalAjaxModal = $('#globalAjaxModal');
-                globalAjaxModal.on('show.bs.modal', function(e) {
-                    var globalAjaxModalUrl = $(e.relatedTarget).data('url');
-                    $(this)
-                        .addClass('modal-scrollfix')
-                        .find('.modal-content')
-                        .html('loading...')
-                        .load(globalAjaxModalUrl, function() {
-                            globalAjaxModal.removeClass('modal-scrollfix').modal('handleUpdate');
-                        });
-                });
-            });
-        </script>
     </body>
 </html>
 

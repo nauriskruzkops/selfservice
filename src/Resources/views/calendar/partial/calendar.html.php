@@ -53,16 +53,13 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
                         <?php endforeach;?>
                     </ul>
                 </div>
-
                 <ul class="timeline-vocation">
                     <?php foreach ($employees as $employee):?>
                         <li>
                             <?php foreach ($employee->getVocations() as $vocation): ?>
-                                <a href="#" class="time-entry" <?php
+                                <a href="#" data-url="<?php echo $view['router']->path('vocation_info',['id' => $vocation->getId()]) ?>" class="time-entry" data-toggle="modal" data-target="#globalAjaxModal" <?php
                                 ?> style="width: <?=$vocation->getDays()*30 ?>px; left: <?=$styleLeft($vocation->getStartDate()) ?>px"<?php
-                                ?> data-days="<?= $vocation->getDays()?>"<?php
-                                ?> data-start-date="<?= $vocation->getStartDate()->format('Y-m-d');?>"<?php
-                                ?> data-end-date="<?= $vocation->getStartDate()->format('Y-m-d');?>"> </a>
+                                ?> data-days="<?= $vocation->getDays()?>"> </a>
                             <?php endforeach;?>
                         </li>
                     <?php endforeach;?>

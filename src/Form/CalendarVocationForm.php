@@ -8,7 +8,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\Entity\Vocation;
 
@@ -17,18 +16,17 @@ class CalendarVocationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, array(
+            ->add('type', ChoiceType::class, [
                 'choice_translation_domain' => null,
-                'choices'  => Vocation::TYPES,
+                'choices'  => array_flip(Vocation::TYPES),
                 'attr' => [
                     'class' => 'form-control',
                 ],
                 'label_attr' => [
 
                 ]
-            ))
-
-            ->add('employee', EntityType::class, array(
+            ])
+            ->add('employee', EntityType::class, [
                 'class' => Employee::class,
                 'query_builder' => function (EmployeeRepository $er) {
                     return $er->getSelectList();
@@ -40,10 +38,15 @@ class CalendarVocationForm extends AbstractType
                 'label_attr' => [
 
                 ]
-            ))
-
-            ->add('startDate', DateType::class)
-            ->add('endDate', DateType::class)
+            ])
+            ->add('startDate', DateType::class, [
+                'widget' => 'single_text',
+                'input' => 'datetime',
+            ])
+            ->add('endDate', DateType::class, [
+                'widget' => 'single_text',
+                'input' => 'datetime',
+            ])
         ;
     }
 }
