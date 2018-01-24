@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 /**
  * @var PhpEngine $view
  * @var \App\Entity\Company $company
- * @var \App\Entity\CompanyEmployees $employee
+ * @var \App\Entity\CompanyEmployee $employee
  */
 $view->extend('layout/layout.html.php');
 

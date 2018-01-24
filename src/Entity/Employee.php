@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,9 +59,16 @@ class Employee {
      */
     private $vocations;
 
+    /**
+     * One Product has Many Features.
+     * @ORM\OneToMany(targetEntity="CompanyEmployee", mappedBy="employee")
+     */
+    private $companyRelation;
+
     public function __construct()
     {
         $this->foreigner = false;
+        $this->companyRelation = new ArrayCollection();
     }
 
     /**
@@ -207,5 +215,29 @@ class Employee {
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCompanyRelation()
+    {
+        return $this->companyRelation;
+    }
 
+    /**
+     * @return CompanyEmployee
+     */
+    public function getLastRelation()
+    {
+        return $this->companyRelation->last();
+    }
+
+    /**
+     * @param mixed $companyRelation
+     * @return Employee
+     */
+    public function setCompanyRelation($companyRelation)
+    {
+        $this->companyRelation = $companyRelation;
+        return $this;
+    }
 }

@@ -4,6 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 /**
  * @var PhpEngine $view
  * @var \App\Entity\Company $company
+ * @var \App\Entity\CompanyEmployee $employee
  */
 
 $view->extend('layout/blocks/card.html.php');
@@ -13,8 +14,9 @@ $view->extend('layout/blocks/card.html.php');
     <tr>
         <th class="col-md-6">Full name</th>
         <th>Start date</th>
+        <th>Department</th>
         <th>Position</th>
-        <th></th>
+        <th> </th>
     </tr>
     </thead>
     <tbody>
@@ -23,8 +25,9 @@ $view->extend('layout/blocks/card.html.php');
                 <tr>
                     <td><?= $employee->getEmployee()->getFullName()?></td>
                     <td><?= $employee->getStartDate()->format('d.m.Y')?></td>
+                    <td><?= $employee->getDepartment()?></td>
                     <td><?= $employee->getPosition()?></td>
-                    <td><a href="" class="btn btn-sm btn-default">Edit</a></td>
+                    <td><a href="<?= $view['router']->path('system_employee',['id'=>$employee->getEmployee()->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>
             <?php endforeach;?>
         <?php else:?>

@@ -24,6 +24,18 @@ class Vocation {
         self::TYPE_OTHER => 'Other',
     ];
 
+    const STATUS_DRAFT = 'draft';
+    const STATUS_PLANNED = 'planned';
+    const STATUS_APPROVED = 'approved';
+    const STATUS_REJECTED = 'rejected';
+
+    const STATUSES = [
+        self::STATUS_DRAFT => 'Draft',
+        self::STATUS_PLANNED => 'Planned',
+        self::STATUS_APPROVED => 'Approved',
+        self::STATUS_REJECTED => 'Rejected',
+    ];
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -59,7 +71,12 @@ class Vocation {
     private $endDate;
 
     /**
-     * @return mixed
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @return int
      */
     public function getId()
     {
@@ -73,6 +90,7 @@ class Vocation {
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -91,6 +109,7 @@ class Vocation {
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -109,6 +128,7 @@ class Vocation {
     public function setEmployee($employee)
     {
         $this->employee = $employee;
+
         return $this;
     }
 
@@ -127,6 +147,7 @@ class Vocation {
     public function setStartDate($startDate)
     {
         $this->startDate = $startDate;
+
         return $this;
     }
 
@@ -145,6 +166,7 @@ class Vocation {
     public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
+
         return $this;
     }
 
@@ -162,7 +184,45 @@ class Vocation {
     public function getDays()
     {
         $dateInterval = $this->getStartDate()->diff($this->getEndDate());
+
         return $dateInterval->days;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getVocationPeriod()
+    {
+        return $this->vocationPeriod;
+    }
+
+    /**
+     * @param mixed $vocationPeriod
+     * @return Vocation
+     */
+    public function setVocationPeriod($vocationPeriod)
+    {
+        $this->vocationPeriod = $vocationPeriod;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     * @return Vocation
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 }

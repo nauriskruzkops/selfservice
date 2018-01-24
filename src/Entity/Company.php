@@ -29,7 +29,13 @@ class Company {
 
     /**
      * One Customer has One Cart.
-     * @ORM\OneToMany(targetEntity="CompanyEmployees", mappedBy="company")
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyDepartment", mappedBy="company")
+     */
+    private $departments;
+
+    /**
+     * One Customer has One Cart.
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyEmployee", mappedBy="company")
      */
     private $employees;
 
@@ -66,6 +72,24 @@ class Company {
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartments()
+    {
+        return $this->departments;
+    }
+
+    /**
+     * @param mixed $departments
+     * @return Company
+     */
+    public function setDepartments($departments)
+    {
+        $this->departments = $departments;
+        return $this;
     }
 
     /**
