@@ -27,6 +27,7 @@ $view->extend('layout/base.html.php')
         ) ?>
         <div class="row">
             <div class="col-12">
+                <?= $view->render('layout/partial/flash-messages.html.php')?>
                 <?php $view['slots']->output('_content') ?>
             </div>
         </div>

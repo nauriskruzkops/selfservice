@@ -4,7 +4,7 @@ namespace App\Controller\System;
 
 use App\Entity\Company;
 use App\Entity\Employee;
-use App\Form\EmployeeForm;
+use App\Form\System\EmployeeForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -53,6 +53,11 @@ class EmployeeController extends ExtendController
                 $em = $this->getDoctrine()->getManager();
                 $em->merge($form->getData());
                 $em->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Your changes were saved!'
+                );
 
                 return $this->redirectToRoute('system_employee', ['id' => $employee->getId()]);
             } catch (\Exception $e) {

@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 
 $view->extend('layout/blocks/card.html.php');
 
-?><table class="table table-bordered" role="grid">
+?>
+<table class="table table-sm table-hover" role="grid">
     <thead>
     <tr>
         <th class="col-md-6">Full name</th>

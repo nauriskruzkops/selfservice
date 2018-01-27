@@ -43,10 +43,133 @@ class VocationPeriod {
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $planned_days;
+    private $annualDays;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $used_days;
+    private $additionalDays;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmployee()
+    {
+        return $this->employee;
+    }
+
+    /**
+     * @param mixed $employee
+     * @return VocationPeriod
+     */
+    public function setEmployee($employee)
+    {
+        $this->employee = $employee;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVocations()
+    {
+        return $this->vocations;
+    }
+
+    /**
+     * @param mixed $vocations
+     * @return VocationPeriod
+     */
+    public function setVocations($vocations)
+    {
+        $this->vocations = $vocations;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param mixed $startDate
+     * @return VocationPeriod
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     * @return VocationPeriod
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnnualDays()
+    {
+        return $this->annualDays;
+    }
+
+    /**
+     * @param mixed $annualDays
+     * @return VocationPeriod
+     */
+    public function setAnnualDays($annualDays)
+    {
+        $this->annualDays = $annualDays;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdditionalDays()
+    {
+        return $this->additionalDays;
+    }
+
+    /**
+     * @param mixed $additionalDays
+     * @return VocationPeriod
+     */
+    public function setAdditionalDays($additionalDays)
+    {
+        $this->additionalDays = $additionalDays;
+
+        return $this;
+    }
+
 }

@@ -18,6 +18,7 @@ $request = $app->getRequest();
 $view->extend('layout/layout.html.php');
 ?>
 <?= $view->render('layout/partial/page-title.html.php', ['pageTitle' => 'System : Employee'])?>
+
 <form action="<?= $view['router']->path('system_employee_edit',['id'=>$employee->getId()]) ?>" name="employee_form" method="post">
     <div class="row">
         <div class="col-sm-2">
@@ -83,7 +84,7 @@ $view->extend('layout/layout.html.php');
             <div class="form-group row">
                 <div class="col-sm-3 text-right"></div>
                 <div class="col-sm-9 text-right">
-                    <a href="<?= $request->headers->get('referer') ?? '/'?>" class="btn btn-link">Cancel</a>
+                    <a href="<?= $view['router']->path('system_company_edit',['id'=>$employee->getLastRelation()->getCompany()->getId()]) ?>" class="btn btn-link">Cancel</a>
                     <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </div>
