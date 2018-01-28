@@ -7,12 +7,12 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class EmployeeRepository extends EntityRepository
+class CompanyDepartmentRepository extends EntityRepository
 {
     private function getMyAvailable(): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('e');
-        $qb->where($qb->expr()->isNull('e.deletedAt'));
+        $qb = $this->createQueryBuilder('cd');
+        $qb->where($qb->expr()->isNull('cd.deletedAt'));
 
         return $qb;
     }
@@ -20,31 +20,22 @@ class EmployeeRepository extends EntityRepository
     public function getList()
     {
         $qb = $this->getMyAvailable();
+
         return $qb;
     }
 
-    public function getSelectList()
+    public function getListByDepartments($department = null)
     {
         $qb = $this->getMyAvailable();
-        $qb->orderBy('e.name', 'ASC');
+        $result = $qb->getQuery()->getResult();
 
-        return $qb;
+        return $result;
     }
 
-    public function getPaginateList(Company $company, $page = 1, $limit = 5)
+    public function getPaginateList(Company $company, $page = 1, $limit = 20)
     {
         $qb = $this->getList();
-        $qb->select([
-            'e',
-            'cr.startDate',
-            'cr.endDate',
-            'cr.department',
-            'cr.position',
-            ]);
-        $qb->join('e.companyRelation', 'cr');
-        $qb->where($qb->expr()->eq('cr.company', $company->getId()));
-
-
+        $qb->where($qb->expr()->eq('cd.company', $company->getId()));
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()

@@ -33,7 +33,7 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
                         <?=$employee->getEmployee()->getFullName()?>
                     </span>
                     <span class="pull-right" style="font-size: 80%">
-                        <a href="#" data-url="<?php echo $view['router']->path('vocation_add',['employee' => $employee->getEmployee()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                        <a href="#" data-url="<?php echo $view['router']->path('vocation_add',['employee' => $employee->getEmployee()->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
                             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
                     </span>
                 </li>

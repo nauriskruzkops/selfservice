@@ -7,14 +7,18 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  */
 ?>
 <?php foreach ($view['session']->getFlashes() as $type => $flash_messages): ?>
+    <?php
+        $alertType = 'alert-success';
+        if ($type == 'error') {
+            $alertType = 'alert-danger';
+        }
+    ?>
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 alert alert-success">
-            <?php foreach ($flash_messages as $flash_message): ?>
-                <div class="flash-<?= $type ?>">
-                    <?= $flash_message ?>
-                </div>
-            <?php endforeach ?>
+        <div class="offset-sm-3 col-sm-6 alert <?= $alertType?> alert-dismissible fade show" role="alert">
+            <?= '- '.implode('<br>- ', $flash_messages)?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
 <?php endforeach ?>

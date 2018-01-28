@@ -2,7 +2,6 @@
 
 namespace App\Controller\System;
 
-use App\Entity\Company;
 use App\Entity\Employee;
 use App\Form\System\EmployeeForm;
 use Symfony\Component\HttpFoundation\Request;

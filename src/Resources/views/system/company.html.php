@@ -33,10 +33,12 @@ $request = $app->getRequest();
                     <a class="nav-link active" data-toggle="pill" href="#baseData" role="tab" aria-controls="v-pills-home" aria-selected="true">Base info</a>
                     <a class="nav-link" data-toggle="pill" href="#settings" role="tab" aria-controls="v-pills-profile" aria-selected="false">Settings</a>
                     <a class="nav-link" data-toggle="pill" href="#employees" role="tab" aria-controls="v-pills-messages" aria-selected="false">Employees</a>
+                    <a class="nav-link" data-toggle="pill" href="#departments" role="tab" aria-controls="v-pills-messages" aria-selected="false">Departments</a>
                 </div>
             </div>
             <div class="col-sm-12 col-md-10">
                 <div class="tab-content">
+
                     <div class="tab-pane fade show active" id="baseData" role="tabpanel">
                         <div class="col-sm-12 col-md-10">
                             <form class="" action="" method="post">
@@ -65,6 +67,7 @@ $request = $app->getRequest();
                             </form>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="settings" role="tabpanel">
                         <?php echo $view['actions']->render(
                             new ControllerReference('App\\Controller\\System\\SettingsController::companyList',['company' => $company])
@@ -79,11 +82,19 @@ $request = $app->getRequest();
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="employees" role="tabpanel">
                         <?php echo $view['actions']->render(
                             new ControllerReference('App\\Controller\\System\\CompanyController::employees',['company' => $company])
                         ) ?>
                     </div>
+
+                    <div class="col-sm-8 tab-pane fade" id="departments" role="tabpanel">
+                        <?php echo $view['actions']->render(
+                            new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
+                        ) ?>
+                    </div>
+
                 </div>
             </div>
         </div>

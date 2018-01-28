@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyDepartmentRepository")
  * @ORM\Table(name="company_departments")
  */
 class CompanyDepartment {
@@ -25,6 +25,11 @@ class CompanyDepartment {
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     private $company;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
+    private $title;
 
     /**
      * @return mixed
@@ -50,6 +55,25 @@ class CompanyDepartment {
     {
         $this->company = $company;
         
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     * @return CompanyDepartment
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
         return $this;
     }
 }
