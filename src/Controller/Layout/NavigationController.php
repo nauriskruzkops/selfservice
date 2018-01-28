@@ -12,8 +12,8 @@ class NavigationController extends Controller
         return $this->render('layout/partial/navigation.html.php', []);
     }
 
-    public function breadcrumb()
+    public function breadcrumb(array $params = [])
     {
-        return $this->render('layout/partial/breadcrumb.html.php', []);
+        return $this->render('layout/partial/breadcrumb.html.php', $params);
     }
 }

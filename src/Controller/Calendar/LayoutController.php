@@ -2,7 +2,7 @@
 
 namespace App\Controller\Calendar;
 
-use App\Entity\Employee;
+use App\Entity\CompanyEmployee;
 use App\Service\CalendarGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +16,7 @@ class LayoutController extends Controller
             $getDate = new \DateTime($getDate);
         }
 
-        $employees = $this->getDoctrine()->getRepository(Employee::class)->getList();
+        $employees = $this->getDoctrine()->getRepository(CompanyEmployee::class)->getListByDepartments();
 
         return $this->render('calendar/partial/calendar.html.php', [
             'icon' => 'fa fa-fw fa-calendar',

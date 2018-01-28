@@ -3,9 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CompanyEmployeeRepository;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyEmployeeRepository")
  * @ORM\Table(name="company_employees")
  */
 class CompanyEmployee implements \ArrayAccess

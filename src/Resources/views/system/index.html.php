@@ -8,7 +8,16 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
  */
 $view->extend('layout/layout.html.php');
 ?>
-<?= $view->render('layout/partial/page-title.html.php', ['pageTitle' => $pageTitle ?? null])?>
+
+<?= $view->render('system/layout/page-title.html.php', [
+    'parentPage' => [
+        'pageTitle' => 'System',
+        'pageUrl' => $view['router']->path('system'),
+    ],
+    'pageTitle' => 'System settings',
+    'pageIcon' => 'fa fa-cogs',
+])?>
+
 <div class="row">
     <div class="col-md-6">
         <?php echo $view['actions']->render(

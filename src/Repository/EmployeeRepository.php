@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Company;
+use App\Entity\CompanyEmployee;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EmployeeRepository extends EntityRepository
 {
@@ -17,7 +21,8 @@ class EmployeeRepository extends EntityRepository
 
     public function getList()
     {
-        return $this->findAll();
+        $qb = $this->getMyAvailable();
+        return $qb;
     }
 
     public function getSelectList()
@@ -28,4 +33,26 @@ class EmployeeRepository extends EntityRepository
         return $qb;
     }
 
+    public function getPaginateList(Company $company, $page = 1, $limit = 5)
+    {
+        $qb = $this->getList();
+        $qb->select([
+            'e',
+            'cr.startDate',
+            'cr.endDate',
+            'cr.department',
+            'cr.position',
+            ]);
+        $qb->join('e.companyRelation', 'cr');
+        $qb->where($qb->expr()->eq('cr.company', $company->getId()));
+
+
+
+        $paginator = new Paginator($qb->getQuery());
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1))
+            ->setMaxResults($limit);
+
+        return $paginator;
+    }
 }

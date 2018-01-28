@@ -22,12 +22,8 @@ $view->extend('layout/base.html.php')
 
 <div class="content-wrapper">
     <div class="container-fluid">
-        <?php echo $view['actions']->render(
-            new ControllerReference('App\\Controller\\Layout\\NavigationController::breadcrumb')
-        ) ?>
         <div class="row">
             <div class="col-12">
-                <?= $view->render('layout/partial/flash-messages.html.php')?>
                 <?php $view['slots']->output('_content') ?>
             </div>
         </div>

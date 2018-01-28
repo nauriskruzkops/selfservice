@@ -25,3 +25,6 @@ services:
         tags: ['controller.service_arguments']
     App\Service\VocationRender:
         arguments: ['@doctrine.orm.entity_manager']
+    App\Service\SettingsService:
+        arguments: ['@doctrine.orm.entity_manager']
+

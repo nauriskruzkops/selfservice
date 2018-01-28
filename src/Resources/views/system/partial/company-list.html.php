@@ -6,12 +6,32 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var \App\Entity\Company[] $companies
  */
 
-$view->extend('layout/blocks/list.html.php');
+//$view->extend('layout/blocks/list.html.php');
 
 ?>
-<?php foreach ($companies as $company):?>
-    <li class="list-group-item justify-content-betwee">
-        <a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>"><?= $company->getTitle()?></a>
-        <span class="badge badge-default badge-pill"><?= $company->getEmployees()->count()?></span>
-    </li>
-<?php endforeach;?>
+
+<table class="table table-hover" role="grid">
+    <thead>
+    <tr>
+        <th class="col-md-6">Title</th>
+        <th>Employees</th>
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php if ($companies): ?>
+        <?php foreach ($companies ?? [] as $company) :?>
+            <tr>
+                <td><a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>"><?= $company->getTitle()?></a></td>
+                <td><?= $company->getEmployees()->count()?></td>
+                <td><a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
+            </tr>
+        <?php endforeach;?>
+    <?php endif;?>
+    <tr>
+        <td class="text-center" colspan="4">
+            <a href="" class="btn btn-default">Add company</a>
+        </td>
+    </tr>
+    </tbody>
+</table>

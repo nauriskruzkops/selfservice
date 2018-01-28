@@ -17,16 +17,18 @@ $request = $app->getRequest();
 
 $view->extend('layout/layout.html.php');
 ?>
-<?= $view->render('layout/partial/page-title.html.php', ['pageTitle' => 'System : Employee'])?>
+<?= $view->render('system/layout/page-title.html.php', [
+    'parentPage' => [
+        'pageTitle' => 'System',
+        'pageUrl' => $view['router']->path('system'),
+    ],
+    'pageTitle' => 'Employee : '.$employee->getFullName(),
+    'pageIcon' => 'fa fa-user-o',
+])?>
 
 <form action="<?= $view['router']->path('system_employee_edit',['id'=>$employee->getId()]) ?>" name="employee_form" method="post">
     <div class="row">
-        <div class="col-sm-2">
-            <div class="text-center" style="font-size: 800%; color: #6c6c6c">
-                <i class="fa fa-user-o" style="display: block"></i>
-            </div>
-        </div>
-        <div class="col-sm-6">
+        <div class="offset-md-2 col-sm-6">
             <div class="form-group row">
                 <div class="col-sm-3 text-right"><?= $formHelper->label($formView['name']) ?></div>
                 <div class="col-sm-9">
@@ -49,11 +51,7 @@ $view->extend('layout/layout.html.php');
                 </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-6">
+        <div class="offset-md-2 col-sm-6">
             <div class="form-group row">
                 <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['company']) ?></div>
                 <div class="col-sm-9">

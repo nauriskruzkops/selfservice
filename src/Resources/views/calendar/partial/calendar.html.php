@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var \DatePeriod $calendar
  * @var \DateTime $calendarDay
  * @var \DateTime $startDate
- * @var \App\Entity\Employee[] $employees
+ * @var \App\Entity\CompanyEmployee[] $employees
  * @var \App\Entity\Vocation $vocation
  */
 
@@ -22,7 +22,7 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
     $days = $daysFromPeriodStart($vocationStartDate);
         $days++;
     return $days * 30;
-}
+};
 
 ?><div class="calendar_content">
     <div class="timetable">
@@ -30,10 +30,10 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
             <?php foreach ($employees as $employee):?>
                 <li>
                     <span class="row-heading">
-                        <?=$employee->getFullName()?>
+                        <?=$employee->getEmployee()->getFullName()?>
                     </span>
                     <span class="pull-right" style="font-size: 80%">
-                        <a href="#" data-url="<?php echo $view['router']->path('vocation_add',['employee' => $employee->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                        <a href="#" data-url="<?php echo $view['router']->path('vocation_add',['employee' => $employee->getEmployee()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
                             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
                     </span>
                 </li>
@@ -56,7 +56,7 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
                 <ul class="timeline-vocation">
                     <?php foreach ($employees as $employee):?>
                         <li>
-                            <?php foreach ($employee->getVocations() as $vocation): ?>
+                            <?php foreach ($employee->getEmployee()->getVocations() as $vocation): ?>
                                 <a href="#" data-url="<?php echo $view['router']->path('vocation_info',['id' => $vocation->getId()]) ?>" class="time-entry" data-toggle="modal" data-target="#globalAjaxModal" <?php
                                 ?> style="width: <?=$vocation->getDays()*30 ?>px; left: <?=$styleLeft($vocation->getStartDate()) ?>px"<?php
                                 ?> data-days="<?= $vocation->getDays()?>"> </a>

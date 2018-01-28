@@ -8,17 +8,23 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var PhpEngine $view
  * @var GlobalVariables $app
  * @var RequestHelper $request
+ * @var array $parent
  */
 
 $request = $app->getRequest();
-$attributes = $request->attributes->get('_route'); // ToDO : empty?
+$current = $current ?? '';
 
 ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item">
         <a href="/">Home</a>
     </li>
-    <li class="breadcrumb-item active"><?= $attributes?></li>
+    <?php if ($parent) :?>
+        <li class="breadcrumb-item">
+            <a href="<?=$parent['pageUrl']??''?>"><?=$parent['pageTitle']??''?></a>
+        </li>
+    <?php endif;?>
+    <li class="breadcrumb-item active"><?= $current?></li>
 </ol>
 <div class="clearfix"></div>
 
