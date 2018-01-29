@@ -3,17 +3,23 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 
 /**
  * @var PhpEngine $view
- * @var \App\Entity\Company[] $companies
- * @var \App\Entity\CompanyDepartment[] $departments
+ * @var Doctrine\ORM\Tools\Pagination\Paginator  $departments
+ * @var \App\Entity\CompanyDepartment $department
  */
 
+$company = null;
+if ($departments->getIterator()->count()) {
+    $company = $departments->getIterator()->current();
+}
 ?>
 <table class="table table-hover" role="grid">
     <thead>
         <tr>
             <th class="col-md-6">Title</th>
             <th></th>
-            <th style="width: 3%"><a href="./" class="btn btn-sm btn-primary">Add</a></th>
+            <th style="width: 3%">
+                <a href="<?= $view['router']->path('system_department_add',['id'=> $company ? $company->getId() : 0]) ?>" class="btn btn-sm btn-primary">Add</a>
+            </th>
         </tr>
     </thead>
     <tbody>

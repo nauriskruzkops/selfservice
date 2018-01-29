@@ -26,6 +26,15 @@ class CompanyDepartment {
      */
     private $company;
 
+
+    /**
+     * @var Employee
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
+     * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
+     */
+    private $manager;
+
+
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      */
@@ -40,9 +49,17 @@ class CompanyDepartment {
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    /**
      * @return Company
      */
-    public function getCompany(): Company
+    public function getCompany()
     {
         return $this->company;
     }
@@ -55,6 +72,25 @@ class CompanyDepartment {
     {
         $this->company = $company;
         
+        return $this;
+    }
+
+    /**
+     * @return Employee
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param Employee $manager
+     * @return CompanyDepartment
+     */
+    public function setManager(Employee $manager)
+    {
+        $this->manager = $manager;
+
         return $this;
     }
 

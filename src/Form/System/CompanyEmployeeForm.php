@@ -3,7 +3,9 @@
 namespace App\Form\System;
 
 use App\Entity\Company;
+use App\Entity\CompanyDepartment;
 use App\Entity\CompanyEmployee;
+use App\Repository\CompanyDepartmentRepository;
 use App\Repository\CompanyRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,13 +30,15 @@ class CompanyEmployeeForm extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('department', ChoiceType::class, [
+            ->add('department', EntityType::class, [
                 'required' => false,
-                'choice_translation_domain' => null,
-                'choices'  => array_flip([''=>'-- Please select --']+CompanyEmployee::DEPARTMENTS),
+                'class' => CompanyDepartment::class,
+                'query_builder' => function (CompanyDepartmentRepository $er) {
+                    return $er->getSelectList();
+                },
+                'choice_label' => 'title',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'xxx',
                 ],
             ])
             ->add('startDate', DateType::class, [

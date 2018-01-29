@@ -13,6 +13,7 @@ class CompanyDepartmentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('cd');
         $qb->where($qb->expr()->isNull('cd.deletedAt'));
+        $qb->orderBy('cd.title', 'ASC');
 
         return $qb;
     }
@@ -30,6 +31,13 @@ class CompanyDepartmentRepository extends EntityRepository
         $result = $qb->getQuery()->getResult();
 
         return $result;
+    }
+
+    public function getSelectList()
+    {
+        $qb = $this->getMyAvailable();
+
+        return $qb;
     }
 
     public function getPaginateList(Company $company, $page = 1, $limit = 20)

@@ -13,6 +13,7 @@ class EmployeeRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('e');
         $qb->where($qb->expr()->isNull('e.deletedAt'));
+        $qb->orderBy('e.name', 'ASC');
 
         return $qb;
     }
@@ -26,7 +27,6 @@ class EmployeeRepository extends EntityRepository
     public function getSelectList()
     {
         $qb = $this->getMyAvailable();
-        $qb->orderBy('e.name', 'ASC');
 
         return $qb;
     }

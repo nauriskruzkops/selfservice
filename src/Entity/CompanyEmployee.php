@@ -43,7 +43,9 @@ class CompanyEmployee implements \ArrayAccess
     private $employee;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @var CompanyDepartment
+     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyDepartment")
+     * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
      */
     private $department;
 
@@ -78,9 +80,17 @@ class CompanyEmployee implements \ArrayAccess
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getEmployee()->getFullName();
+    }
+
+    /**
      * @return Company
      */
-    public function getCompany(): Company
+    public function getCompany()
     {
         return $this->company;
     }
@@ -98,7 +108,7 @@ class CompanyEmployee implements \ArrayAccess
     /**
      * @return Employee
      */
-    public function getEmployee(): Employee
+    public function getEmployee()
     {
         return $this->employee;
     }
@@ -168,7 +178,7 @@ class CompanyEmployee implements \ArrayAccess
     }
 
     /**
-     * @return mixed
+     * @return CompanyDepartment
      */
     public function getDepartment()
     {
@@ -176,12 +186,13 @@ class CompanyEmployee implements \ArrayAccess
     }
 
     /**
-     * @param mixed $department
+     * @param CompanyDepartment $department
      * @return CompanyEmployee
      */
-    public function setDepartment($department)
+    public function setDepartment(CompanyDepartment $department)
     {
         $this->department = $department;
+
         return $this;
     }
 
@@ -197,7 +208,7 @@ class CompanyEmployee implements \ArrayAccess
      * @param Employee $manager
      * @return CompanyEmployee
      */
-    public function setManager(Employee $manager): CompanyEmployee
+    public function setManager(Employee $manager)
     {
         $this->manager = $manager;
         return $this;

@@ -89,7 +89,7 @@ $request = $app->getRequest();
                         ) ?>
                     </div>
 
-                    <div class="col-sm-8 tab-pane fade" id="departments" role="tabpanel">
+                    <div class="col-sm-12 col-md-10 tab-pane fade" id="departments" role="tabpanel">
                         <?php echo $view['actions']->render(
                             new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
                         ) ?>
