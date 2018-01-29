@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 $formView = $form;
 $formHelper = $view['form'];
 $request = $app->getRequest();
-
+$new = (!$employee || !$employee->getId());
 
 $view->extend('layout/layout.html.php');
 ?>
@@ -22,11 +22,11 @@ $view->extend('layout/layout.html.php');
         'pageTitle' => 'System',
         'pageUrl' => $view['router']->path('system'),
     ],
-    'pageTitle' => 'Employee : '.$employee->getFullName(),
+    'pageTitle' => 'Employee : '.($company ? $employee->getFullName() : 'New'),
     'pageIcon' => 'fa fa-user-o',
 ])?>
 
-<form action="<?= $view['router']->path('system_employee_edit',['id'=>$employee->getId()]) ?>" name="employee_form" method="post">
+<?= $formHelper->start($form);?>
     <div class="row">
         <div class="offset-md-2 col-sm-6">
             <div class="form-group row">
@@ -82,7 +82,7 @@ $view->extend('layout/layout.html.php');
             <div class="form-group row">
                 <div class="col-sm-3 text-right"></div>
                 <div class="col-sm-9 text-right">
-                    <a href="<?= $view['router']->path('system_company_edit',['id'=>$employee->getLastRelation()->getCompany()->getId()]) ?>" class="btn btn-link">Cancel</a>
+                    <a href="<?= $view['router']->path('system_company_edit',['id'=>$company ? $company->getId() : 0]) ?>" class="btn btn-link">Cancel</a>
                     <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </div>

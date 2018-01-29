@@ -2,6 +2,8 @@
 
 namespace App\Controller\System;
 
+use App\Entity\Company;
+use App\Entity\CompanyEmployee;
 use App\Entity\Employee;
 use App\Form\System\EmployeeForm;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +33,49 @@ class EmployeeController extends ExtendController
     }
 
     /**
+     * @Route("/system/company/{id}/employee/add", name="system_employee_add", requirements={"id"="\d+"})
+     */
+    public function addAction($id, Request $request)
+    {
+        $employee = new Employee();
+        if (($company = $this->getDoctrine()->getRepository(Company::class)->find($id))){
+            $relation = new CompanyEmployee();
+            $relation->setCompany($company);
+            $employee->addCompanyRelation($relation);
+        }
+
+        /** @var EmployeeForm $form */
+        $form = $this->createForm(EmployeeForm::class, $employee, [
+            'action' => $this->generateUrl('system_employee_add', ['id' => $company->getId()]),
+            'method' => 'POST',
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($form->getData());
+                $em->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Your changes were saved!'
+                );
+
+                return $this->redirectToRoute('system_employee_edit', ['id' => $employee->getId()]);
+            } catch (\Exception $e) {
+                var_dump($e);
+            }
+        }
+
+        return $this->render('system/employee.html.php', [
+            'company' => $company,
+            'employee' => $employee,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/system/employee/{id}/edit", name="system_employee_edit", requirements={"id"="\d+"})
      */
     public function editAction($id, Request $request)
@@ -42,7 +87,7 @@ class EmployeeController extends ExtendController
 
         /** @var EmployeeForm $form */
         $form = $this->createForm(EmployeeForm::class, $employee, [
-            'action' => $this->generateUrl('vocation_info', ['id' => $employee->getId()]),
+            'action' => $this->generateUrl('system_employee_edit', ['id' => $employee->getId()]),
             'method' => 'POST',
         ]);
 
@@ -65,6 +110,7 @@ class EmployeeController extends ExtendController
         }
 
         return $this->render('system/employee.html.php', [
+            'company' => null,
             'employee' => $employee,
             'form' => $form->createView(),
         ]);

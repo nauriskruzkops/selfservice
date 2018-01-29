@@ -32,6 +32,7 @@ class EmployeeForm extends AbstractType
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('personalId', TextType::class, [
+                'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
             //->add('companyRelation', CompanyEmployeeForm::class)

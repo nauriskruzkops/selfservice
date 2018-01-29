@@ -30,33 +30,33 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @var Company
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     private $company;
 
     /**
      * @var Employee
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      */
     private $employee;
 
     /**
      * @var CompanyDepartment
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyDepartment")
+     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyDepartment", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
      */
     private $department;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $position;
 
     /**
      * @var Employee
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee")
+     * @ORM\OneToOne(targetEntity="App\Entity\Employee", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      */
     private $manager;

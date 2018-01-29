@@ -17,7 +17,7 @@ $view->extend('layout/blocks/card.html.php');
         <th>Start date</th>
         <th>Department</th>
         <th>Position</th>
-        <th><a href="./" class="btn btn-sm btn-primary">Add</a></th>
+        <th><a href="<?= $view['router']->path('system_employee_add',['id'=>$company ? $company->getId() : 0]) ?>" class="btn btn-sm btn-primary">Add</a></th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@ $view->extend('layout/blocks/card.html.php');
                     <td><?= $employee->getEmployee()->getFullName()?></td>
                     <td><?= $employee->getStartDate()->format('d.m.Y')?></td>
                     <td><?= $employee->getDepartment()?></td>
-                    <td><?= $employee->getPosition()?></td>
+                    <td> </td>
                     <td><a href="<?= $view['router']->path('system_employee',['id'=>$employee->getEmployee()->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>
             <?php endforeach;?>

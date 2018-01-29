@@ -61,7 +61,7 @@ class Employee {
 
     /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="CompanyEmployee", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="CompanyEmployee", mappedBy="employee", cascade={"persist", "remove"})
      */
     private $companyRelation;
 
@@ -238,6 +238,19 @@ class Employee {
     public function setCompanyRelation($companyRelation)
     {
         $this->companyRelation = $companyRelation;
+        return $this;
+    }
+
+    /**
+     * @param mixed $companyRelation
+     * @return Employee
+     */
+    public function addCompanyRelation(CompanyEmployee $companyRelation)
+    {
+        if (!$this->companyRelation->contains($companyRelation)) {
+            $companyRelation->setEmployee($this);
+            $this->companyRelation->add($companyRelation);
+        }
         return $this;
     }
 }

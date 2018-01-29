@@ -21,28 +21,31 @@ class CompanyEmployeeForm extends AbstractType
     {
         $builder
             ->add('company', EntityType::class, [
+                'required' => true,
                 'class' => Company::class,
                 'query_builder' => function (CompanyRepository $er) {
                     return $er->getSelectList();
                 },
                 'choice_label' => 'title',
+                'placeholder' => '-- Select --',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('department', EntityType::class, [
-                'required' => false,
+                'required' => true,
                 'class' => CompanyDepartment::class,
                 'query_builder' => function (CompanyDepartmentRepository $er) {
                     return $er->getSelectList();
                 },
                 'choice_label' => 'title',
+                'placeholder' => '-- Select --',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('startDate', DateType::class, [
-                'required' => false,
+                'required' => true,
                 'widget' => 'single_text',
                 'label' => 'Labor period',
                 'input' => 'datetime',
