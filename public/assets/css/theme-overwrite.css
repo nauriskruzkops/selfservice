@@ -1,15 +1,15 @@
 body, .content-wrapper {
-    background: #ffffff;
-    background: -moz-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
-    background: -webkit-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
-    background: -o-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
-    background: -ms-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
-    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4', GradientType=1 );
+    background: #f5f5f5;
+    background: linear-gradient(160deg, #ffffff 0%, #f5f5f5 31%, #ededed 71%, #d4d4d4 100%);
 }
 
 a:link, a:visited, a {
     color: #1e9bfa;
+}
+
+#mainNav.bg-dark {
+    background: rgba(42,38,34,1);
+    background: linear-gradient(150deg, #343a40 0%, #5c6978 50%, #343a40 100%);
 }
 
 .breadcrumb .breadcrumb-item {
@@ -30,14 +30,24 @@ a:link, a:visited, a {
     font-size: 80%;
     background-color: transparent;
     border:0;
-    border-bottom: 1px solid #bebebe;
+    border-bottom:1px;
     color: #4d4d4d;
     border-radius: 0;
 }
 .jumbotron {
     background: rgba(235,235,235,0);
-    //background: linear-gradient(to right, rgba(235,235,235,0) 0%, rgba(235,235,235,0.66) 66%, rgba(100,181,246,1) 100%);
-    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.66) 66%, rgba(30,155,250,1) 100%);
+    background: linear-gradient(160deg, rgba(235,235,235,0) 0%, rgba(235,235,235,0.2) 20%, rgba(100,180,246,0.2) 65%, rgba(100,180,246,0.2) 66%, rgba(100,180,246,1) 84%, rgba(100,180,246,0.02) 94%);
+}
+
+.bot-left { position: relative; }
+.bot-left:before, .bot-left:after { content: ""; position: absolute; bottom: -1px; left: -1px; }
+.bot-left:after {
+    right: -1px; height: 1px;
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#5c6978), to(transparent));
+    background-image: -webkit-linear-gradient(left, #5c6978, transparent);
+    background-image: -moz-linear-gradient(left, #5c6978, transparent);
+    background-image: -o-linear-gradient(left, #5c6978, transparent);
+    background-image: -o-linear-gradient(left, #5c6978, transparent);
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
         ]
     ])
 ) ?>
-<div class="jumbotron">
+<div class="jumbotron bot-left">
     <div class="row">
         <div class="col-sm-12">
             <h2 class="display-5">
