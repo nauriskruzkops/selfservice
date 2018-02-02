@@ -36,6 +36,47 @@ class CompanyController extends ExtendController
     }
 
     /**
+     * @Route("/system/company/add", name="system_company_add")
+     */
+    public function addAction(Request $request)
+    {
+        $company = new Company();
+
+        /** @var CompanyForm $form */
+        $form = $this->createForm(CompanyForm::class, $company, [
+            'action' => $this->generateUrl('system_company_add', ['id' => $company->getId()]),
+            'method' => 'POST',
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($form->getData());
+                $em->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Your changes were saved!'
+                );
+
+                return $this->redirectToRoute('system_company_edit', ['id' => $company->getId()]);
+            } catch (\Exception $e) {
+                //var_dump($e);
+                $this->addFlash(
+                    'error',
+                    'Something wrong, data was not saved'
+                );
+            }
+        }
+
+        return $this->render('system/company.html.php', [
+            'form' => $form,
+            'company' => $company,
+        ]);
+    }
+
+    /**
      * @Route("/system/company/{id}/edit", name="system_company_edit", requirements={"id"="\d+"})
      */
     public function editAction(Request $request, $id)
@@ -46,7 +87,7 @@ class CompanyController extends ExtendController
 
         /** @var CompanyForm $form */
         $form = $this->createForm(CompanyForm::class, $company, [
-            'action' => $this->generateUrl('vocation_info', ['id' => $company->getId()]),
+            'action' => $this->generateUrl('system_company_edit', ['id' => $company->getId()]),
             'method' => 'POST',
         ]);
 

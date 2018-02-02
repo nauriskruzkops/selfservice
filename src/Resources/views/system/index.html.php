@@ -19,7 +19,7 @@ $view->extend('layout/layout.html.php');
 ])?>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <?php echo $view['actions']->render(
             new ControllerReference('App\\Controller\\System\\CompanyController::list',[])
         ) ?>

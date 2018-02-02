@@ -11,8 +11,10 @@ $company = null;
 if ($departments->getIterator()->count()) {
     $company = $departments->getIterator()->current();
 }
-?>
-<table class="table table-hover" role="grid">
+
+$view->extend('layout/blocks/card.html.php');
+
+?><table class="table table-sm table-hover" role="grid">
     <thead>
         <tr>
             <th class="col-md-6">Title</th>

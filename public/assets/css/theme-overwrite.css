@@ -1,0 +1,64 @@
+body, .content-wrapper {
+    background: #ffffff;
+    background: -moz-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
+    background: -webkit-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
+    background: -o-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
+    background: -ms-linear-gradient(-45deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 31%, #ededed 81%, #d4d4d4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4', GradientType=1 );
+}
+
+a:link, a:visited, a {
+    color: #1e9bfa;
+}
+
+.breadcrumb .breadcrumb-item {
+    float: right;
+}
+
+.breadcrumb {
+    margin-top: -10px;
+    margin-bottom: 5px;
+    padding: 2px 20px;
+    background-color: transparent;
+    font-size: 90%;
+    float: right;
+}
+
+.jumbotron {
+    padding: 10px 8px;
+    font-size: 80%;
+    background-color: transparent;
+    border:0;
+    border-bottom: 1px solid #bebebe;
+    color: #4d4d4d;
+    border-radius: 0;
+}
+.jumbotron {
+    background: rgba(235,235,235,0);
+    //background: linear-gradient(to right, rgba(235,235,235,0) 0%, rgba(235,235,235,0.66) 66%, rgba(100,181,246,1) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.66) 66%, rgba(30,155,250,1) 100%);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #64b5f6;
+    border-color: #64b5f6;
+}
+
+.card {
+    background-color: #fdfdfd;
+    border-radius: 1px;
+}
+
+.card-info {
+    background-color: #64b5f6;
+    border-color: #64b5f6;
+    color:#FFF;
+}
+.card-info a, .card-info a:link, .card-info a:visited {
+    color:#FFF;
+}
+
+table thead tr:first-child th {
+    border-top: 0;
+}

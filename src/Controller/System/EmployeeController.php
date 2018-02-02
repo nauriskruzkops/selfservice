@@ -26,7 +26,13 @@ class EmployeeController extends ExtendController
             'method' => 'POST',
         ]);
 
+        $company = null;
+        if ($employee->getCompanyRelation()) {
+            $company = $employee->getCompanyRelation()->last()->getCompany();
+        }
+
         return $this->render('system/employee.html.php', [
+            'company' => $company,
             'employee' => $employee,
             'form' => $form->createView(),
         ]);
@@ -91,6 +97,11 @@ class EmployeeController extends ExtendController
             'method' => 'POST',
         ]);
 
+        $company = null;
+        if ($employee->getCompanyRelation()) {
+            $company = $employee->getCompanyRelation()->last()->getCompny();
+        }
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
@@ -110,7 +121,7 @@ class EmployeeController extends ExtendController
         }
 
         return $this->render('system/employee.html.php', [
-            'company' => null,
+            'company' => $company,
             'employee' => $employee,
             'form' => $form->createView(),
         ]);

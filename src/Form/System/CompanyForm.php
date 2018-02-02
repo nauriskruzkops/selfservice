@@ -24,6 +24,18 @@ class CompanyForm extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
+            ->add('parent', EntityType::class, [
+                'required' => false,
+                'class' => Company::class,
+                'query_builder' => function (CompanyRepository $er) {
+                    return $er->getSelectList();
+                },
+                'choice_label' => 'title',
+                'placeholder' => '-- Select parent --',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
         ;
     }
 
