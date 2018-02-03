@@ -7,9 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class NavigationController extends Controller
 {
 
-    public function navigation()
+    public function navigation($_parent = null)
     {
-        return $this->render('layout/partial/navigation.html.php', []);
+        return $this->render('layout/partial/navigation.html.php', [
+            '_parent' => $_parent
+        ]);
     }
 
     public function breadcrumb(array $params = [])

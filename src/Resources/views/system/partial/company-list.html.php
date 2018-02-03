@@ -12,28 +12,30 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 <div class="row">
     <?php if ($companies): ?>
         <?php foreach ($companies ?? [] as $company) :?>
-            <div class="col-md-2">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <div class="card card-info">
                     <div class="card-body text-center" style="font-size: 130%; height: 200px;">
                         <i class="fa fa-building-o"></i>
                         <p><?= $company->getTitle()?></p>
                     </div>
-                    <div class="card-footer">
-                        <a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>" class="btn btn-sm btn-default">Edit</a>
+                    <div class="card-footer clearfix ">
+                        <a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>">Edit</a>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
                     </div>
                 </div>
             </div>
         <?php endforeach;?>
     <?php endif;?>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-3 col-xs-6">
         <div class="card">
             <div class="card-body text-center" style="font-size: 130%; height: 200px;">
-                <i class="fa fa-building-o" style="font-size: 200%"></i>
+                <i class="fa fa-building-o"></i>
                 <p> </p>
-                <a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>" class="btn btn-sm btn-default">Add new</a>
+                <i class="fa fa-plus-square-o" style="font-size: 200%; color: #a8aaae"></i>
             </div>
-            <div class="card-footer">
-                <a href="<?= $view['router']->path('system_company_add',[]) ?>" class="btn btn-sm btn-default">Add</a>
+            <div class="card-footer clearfix ">
+                <a href="<?= $view['router']->path('system_company_add') ?>">Add</a>
+                <span class="float-right"><i class="fa fa-angle-right"></i></span>
             </div>
         </div>
     </div>

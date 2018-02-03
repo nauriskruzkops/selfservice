@@ -17,11 +17,11 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
     ])
 ) ?>
 <div class="jumbotron bot-left">
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-sm-12">
             <h2 class="display-5">
                 <span style="margin-right: 10px; float: left">
-                    <i class="<?= $pageIcon ?? ''?>" style="display: block"></i>
+                    <i class="<?= $pageIcon ?? ''?>" style="display: inline-block"></i>
                 </span>
                 <?= $pageTitle ?? ''?></h2>
         </div>

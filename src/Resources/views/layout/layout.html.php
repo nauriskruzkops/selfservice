@@ -16,7 +16,7 @@ $view->extend('layout/base.html.php')
     </button>
 
     <?php echo $view['actions']->render(
-        new ControllerReference('App\\Controller\\Layout\\NavigationController::navigation')
+        new ControllerReference('App\\Controller\\Layout\\NavigationController::navigation', ['_parent' => $app->getRequest()])
     ) ?>
 </nav>
 
