@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="vocation")
+ * @ORM\Table(name="vacation")
  */
-class Vocation {
+class Vacation {
 
     use Traits\Traceability;
 
@@ -49,16 +49,16 @@ class Vocation {
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="vocations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="vacations")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      */
     private $employee;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\VocationPeriod", inversedBy="vocations")
-     * @ORM\JoinColumn(name="vocation_period_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="VacationPeriod", inversedBy="vacations")
+     * @ORM\JoinColumn(name="vacation_period_id", referencedColumnName="id")
      */
-    private $vocationPeriod;
+    private $vacationPeriod;
 
     /**
      * @ORM\Column(type="date", nullable=false)
@@ -85,7 +85,7 @@ class Vocation {
 
     /**
      * @param mixed $id
-     * @return Vocation
+     * @return Vacation
      */
     public function setId($id)
     {
@@ -104,7 +104,7 @@ class Vocation {
 
     /**
      * @param mixed $type
-     * @return Vocation
+     * @return Vacation
      */
     public function setType($type)
     {
@@ -123,7 +123,7 @@ class Vocation {
 
     /**
      * @param mixed $employee
-     * @return Vocation
+     * @return Vacation
      */
     public function setEmployee($employee)
     {
@@ -142,7 +142,7 @@ class Vocation {
 
     /**
      * @param mixed $startDate
-     * @return Vocation
+     * @return Vacation
      */
     public function setStartDate($startDate)
     {
@@ -161,7 +161,7 @@ class Vocation {
 
     /**
      * @param mixed $endDate
-     * @return Vocation
+     * @return Vacation
      */
     public function setEndDate($endDate)
     {
@@ -191,18 +191,18 @@ class Vocation {
     /**
      * @return mixed
      */
-    public function getVocationPeriod()
+    public function getVacationPeriod()
     {
-        return $this->vocationPeriod;
+        return $this->vacationPeriod;
     }
 
     /**
-     * @param mixed $vocationPeriod
-     * @return Vocation
+     * @param mixed $vacationPeriod
+     * @return Vacation
      */
-    public function setVocationPeriod($vocationPeriod)
+    public function setVacationPeriod($vacationPeriod)
     {
-        $this->vocationPeriod = $vocationPeriod;
+        $this->vacationPeriod = $vacationPeriod;
 
         return $this;
     }
@@ -217,7 +217,7 @@ class Vocation {
 
     /**
      * @param mixed $status
-     * @return Vocation
+     * @return Vacation
      */
     public function setStatus($status)
     {

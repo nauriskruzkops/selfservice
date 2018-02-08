@@ -5,14 +5,14 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 /**
  * @var PhpEngine $view
  * @var Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables $app
- * @var \App\Entity\CompanyDepartment $department
+ * @var \App\Entity\VacationType $type
  */
 
 $formView = $form;
 $formHelper = $view['form'];
 $request = $app->getRequest();
 
-$new = (!$department || !$department->getId());
+$new = (!$type || !$type->getId());
 
 $view->extend('layout/layout.html.php');
 ?>
@@ -21,7 +21,7 @@ $view->extend('layout/layout.html.php');
         'pageTitle' => 'System',
         'pageUrl' => $view['router']->path('system'),
     ],
-    'pageTitle' => 'Department : '.($department ? $this->escape($department->getTitle()) : 'New'),
+    'pageTitle' => 'Vacation / Leave type : '.(!$new ? $this->escape($type->getTitle()) : 'New'),
     'pageIcon' => 'fa fa-briefcase',
 ])?>
 
@@ -35,9 +35,8 @@ $view->extend('layout/layout.html.php');
                     <?= $formHelper->widget($formView['title']) ?>
                 </div>
             </div>
-        </div>
-        <div class="offset-md-2 col-sm-6">
-            <div class="form-group row">
+
+            <div class="form-group row" style="display: none">
                 <div class="col-sm-3 text-right"><?= $formHelper->label($formView['company']) ?></div>
                 <div class="col-sm-9">
                     <?= $formHelper->errors($formView['company']) ?>
@@ -46,10 +45,18 @@ $view->extend('layout/layout.html.php');
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['manager']) ?></div>
+                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['daysLeave']) ?></div>
                 <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['manager']) ?>
-                    <?= $formHelper->widget($formView['manager']) ?>
+                    <?= $formHelper->errors($formView['daysLeave']) ?>
+                    <?= $formHelper->widget($formView['daysLeave']) ?>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['paidPercents']) ?></div>
+                <div class="col-sm-9">
+                    <?= $formHelper->errors($formView['paidPercents']) ?>
+                    <?= $formHelper->widget($formView['paidPercents']) ?>
                 </div>
             </div>
 

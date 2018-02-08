@@ -3,9 +3,19 @@ body, .content-wrapper {
     background: linear-gradient(160deg, #ffffff 0%, #f5f5f5 31%, #ededed 71%, #d4d4d4 100%);
 }
 
-a:link, a:visited, a {
+/** A **/
+
+a:link:not(.btn), a:visited:not(.btn), a:not(.btn) {
     color: #1e9bfa;
 }
+a:hover {
+    text-decoration: none;
+}
+a:hover:not(.btn) {
+    color: #0069d9;
+}
+
+/** NAV **/
 
 #mainNav.bg-dark {
     background: rgba(42,38,34,1);
@@ -55,6 +65,7 @@ a:link, a:visited, a {
     border-color: #64b5f6;
 }
 
+/** CARD **/
 .card {
     background-color: #fdfdfd;
     border-radius: 1px;
@@ -69,6 +80,13 @@ a:link, a:visited, a {
     color:#FFF;
 }
 
+/** TABLE **/
 table thead tr:first-child th {
     border-top: 0;
+}
+
+/** BTN **/
+.btn-primary {
+    background-color: #64b5f6;
+    border-color: #64b5f6;
 }

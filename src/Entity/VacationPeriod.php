@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="vocation_period")
+ * @ORM\Table(name="vacation_period")
  */
-class VocationPeriod {
+class VacationPeriod {
 
     use Traits\Traceability;
 
@@ -20,15 +20,15 @@ class VocationPeriod {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="vocations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="vacations")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      */
     private $employee;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vocation", mappedBy="vocationPeriod")
+     * @ORM\OneToMany(targetEntity="Vacation", mappedBy="vacationPeriod")
      */
-    private $vocations;
+    private $vacations;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -68,7 +68,7 @@ class VocationPeriod {
 
     /**
      * @param mixed $employee
-     * @return VocationPeriod
+     * @return VacationPeriod
      */
     public function setEmployee($employee)
     {
@@ -80,18 +80,18 @@ class VocationPeriod {
     /**
      * @return mixed
      */
-    public function getVocations()
+    public function getVacations()
     {
-        return $this->vocations;
+        return $this->vacations;
     }
 
     /**
-     * @param mixed $vocations
-     * @return VocationPeriod
+     * @param mixed $vacations
+     * @return VacationPeriod
      */
-    public function setVocations($vocations)
+    public function setVacations($vacations)
     {
-        $this->vocations = $vocations;
+        $this->vacations = $vacations;
 
         return $this;
     }
@@ -106,7 +106,7 @@ class VocationPeriod {
 
     /**
      * @param mixed $startDate
-     * @return VocationPeriod
+     * @return VacationPeriod
      */
     public function setStartDate($startDate)
     {
@@ -125,7 +125,7 @@ class VocationPeriod {
 
     /**
      * @param mixed $endDate
-     * @return VocationPeriod
+     * @return VacationPeriod
      */
     public function setEndDate($endDate)
     {
@@ -144,7 +144,7 @@ class VocationPeriod {
 
     /**
      * @param mixed $annualDays
-     * @return VocationPeriod
+     * @return VacationPeriod
      */
     public function setAnnualDays($annualDays)
     {
@@ -163,7 +163,7 @@ class VocationPeriod {
 
     /**
      * @param mixed $additionalDays
-     * @return VocationPeriod
+     * @return VacationPeriod
      */
     public function setAdditionalDays($additionalDays)
     {

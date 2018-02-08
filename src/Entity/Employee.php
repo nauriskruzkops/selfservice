@@ -55,9 +55,9 @@ class Employee {
 
     /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="Vocation", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="Vacation", mappedBy="employee")
      */
-    private $vocations;
+    private $vacations;
 
     /**
      * One Product has Many Features.
@@ -199,18 +199,18 @@ class Employee {
     /**
      * @return mixed
      */
-    public function getVocations()
+    public function getVacations()
     {
-        return $this->vocations;
+        return $this->vacations;
     }
 
     /**
-     * @param mixed $vocations
+     * @param mixed $vacations
      * @return Employee
      */
-    public function setVocations($vocations)
+    public function setVacations($vacations)
     {
-        $this->vocations = $vocations;
+        $this->vacations = $vacations;
 
         return $this;
     }

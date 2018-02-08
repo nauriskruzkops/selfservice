@@ -22,7 +22,7 @@ class EmployeeController extends ExtendController
 
         /** @var EmployeeForm $form */
         $form = $this->createForm(EmployeeForm::class, $employee, [
-            'action' => $this->generateUrl('vocation_info', ['id' => $employee->getId()]),
+            'action' => $this->generateUrl('vacation_info', ['id' => $employee->getId()]),
             'method' => 'POST',
         ]);
 

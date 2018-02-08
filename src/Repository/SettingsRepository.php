@@ -2,30 +2,21 @@
 
 namespace App\Repository;
 
+use App\Entity\Company;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 class SettingsRepository extends EntityRepository
 {
-    private function getMyAvailable(): QueryBuilder
-    {
-        $qb = $this->createQueryBuilder('e');
-        $qb->where($qb->expr()->isNull('e.deletedAt'));
 
-        return $qb;
+    public function getGlobalList()
+    {
+        return $this->findBy(['company' => null]);
     }
 
-    public function getList()
+    public function getCompanyList(Company $company)
     {
-        return $this->findAll();
-    }
-
-    public function getSelectList()
-    {
-        $qb = $this->getMyAvailable();
-        $qb->orderBy('e.name', 'ASC');
-
-        return $qb;
+        return $this->findBy(['company' => $company]);
     }
 
 }

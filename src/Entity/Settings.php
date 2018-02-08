@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,12 +13,12 @@ class Settings {
 
     use Traits\Traceability;
 
-    const GROUPS = [
-        'system' => 'System',
-        'company' => 'Company',
-        'employee' => 'Employee',
-        'vocation' => 'Vocation',
-    ];
+    const TYPE_SINGLE = 'single';
+    const TYPE_COLLECTION = 'collection';
+
+    const RELATION_GLOBAL = 'system';
+    const RELATION_COMPANY = 'company';
+    const RELATION_EMPLOYEE = 'employee';
 
     /**
      * @ORM\Column(type="integer")
@@ -34,7 +35,17 @@ class Settings {
     private $company;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $type = self::TYPE_SINGLE;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $relation = self::RELATION_GLOBAL;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $group;
 
@@ -51,7 +62,18 @@ class Settings {
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $value;
+    private $defaultValue;
+
+    /**
+     * One Customer has One Cart.
+     * @ORM\OneToMany(targetEntity="App\Entity\SettingsValue", mappedBy="company")
+     */
+    private $values;
+
+    public function __construct()
+    {
+        $this->values = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -151,20 +173,81 @@ class Settings {
     /**
      * @return mixed
      */
-    public function getValue()
+    public function getDefaultValue()
     {
-        return $this->value;
+        return $this->defaultValue;
     }
 
     /**
-     * @param mixed $value
+     * @param mixed $defaultValue
      * @return Settings
      */
-    public function setValue($value)
+    public function setDefaultValue($defaultValue)
     {
-        $this->value = $value;
+        $this->defaultValue = $defaultValue;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRelation()
+    {
+        return $this->relation;
+    }
+
+    /**
+     * @param mixed $relation
+     */
+    public function setRelation($relation): void
+    {
+        $this->relation = $relation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValues()
+    {
+        return $this->values;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if ($this->getType() == self::TYPE_SINGLE) {
+            return $this->getValues()->first();
+        }
+
+        return $this->getValues();
+    }
+
+
+    /**
+     * @param mixed $values
+     */
+    public function setValues($values): void
+    {
+        $this->values = $values;
     }
 
 }

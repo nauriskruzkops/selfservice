@@ -24,9 +24,9 @@ $view->extend('layout/blocks/card.html.php');
         <?php if ($company->getEmployees()->count()): ?>
             <?php foreach ($employees->getIterator() ?? [] as $employee) :?>
                 <tr>
-                    <td><?= $employee->getEmployee()->getFullName()?></td>
+                    <td><?= $this->escape($employee->getEmployee()->getFullName())?></td>
                     <td><?= $employee->getStartDate()->format('d.m.Y')?></td>
-                    <td><?= $employee->getDepartment()?></td>
+                    <td><?= $this->escape($employee->getDepartment())?></td>
                     <td> </td>
                     <td><a href="<?= $view['router']->path('system_employee',['id'=>$employee->getEmployee()->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>

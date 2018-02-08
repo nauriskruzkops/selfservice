@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Entity\Vocation;
+use App\Entity\Vacation;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmployeeForm extends AbstractType

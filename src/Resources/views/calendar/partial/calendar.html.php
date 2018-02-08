@@ -8,18 +8,18 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var \DateTime $calendarDay
  * @var \DateTime $startDate
  * @var \App\Entity\CompanyEmployee[] $employees
- * @var \App\Entity\Vocation $vocation
+ * @var \App\Entity\Vacation $vacation
  */
 
 $view->extend('layout/blocks/div.html.php');
 
-$daysFromPeriodStart = function (\DateTime $vocationStartDate) use ($startDate) {
-    $days = $startDate->diff($vocationStartDate)->days;
+$daysFromPeriodStart = function (\DateTime $vacationStartDate) use ($startDate) {
+    $days = $startDate->diff($vacationStartDate)->days;
     return $days === 1 ? 0 : $days;
 };
 
-$styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
-    $days = $daysFromPeriodStart($vocationStartDate);
+$styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
+    $days = $daysFromPeriodStart($vacationStartDate);
         $days++;
     return $days * 30;
 };
@@ -33,7 +33,7 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
                         <?=$employee->getEmployee()->getFullName()?>
                     </span>
                     <span class="pull-right" style="font-size: 80%">
-                        <a href="#" data-url="<?php echo $view['router']->path('vocation_add',['employee' => $employee->getEmployee()->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                        <a href="#" data-url="<?php echo $view['router']->path('vacation_add',['employee' => $employee->getEmployee()->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
                             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
                     </span>
                 </li>
@@ -53,13 +53,13 @@ $styleLeft = function ($vocationStartDate) use ($daysFromPeriodStart) {
                         <?php endforeach;?>
                     </ul>
                 </div>
-                <ul class="timeline-vocation">
+                <ul class="timeline-vacation">
                     <?php foreach ($employees as $employee):?>
                         <li>
-                            <?php foreach ($employee->getEmployee()->getVocations() as $vocation): ?>
-                                <a href="#" data-url="<?php echo $view['router']->path('vocation_info',['id' => $vocation->getId()]) ?>" class="time-entry" data-toggle="modal" data-target="#globalAjaxModal" <?php
-                                ?> style="width: <?=$vocation->getDays()*30 ?>px; left: <?=$styleLeft($vocation->getStartDate()) ?>px"<?php
-                                ?> data-days="<?= $vocation->getDays()?>"> </a>
+                            <?php foreach ($employee->getEmployee()->getVacations() as $vacation): ?>
+                                <a href="#" data-url="<?php echo $view['router']->path('vacation_info',['id' => $vacation->getId()]) ?>" class="time-entry" data-toggle="modal" data-target="#globalAjaxModal" <?php
+                                ?> style="width: <?=$vacation->getDays()*30 ?>px; left: <?=$styleLeft($vacation->getStartDate()) ?>px"<?php
+                                ?> data-days="<?= $vacation->getDays()?>"> </a>
                             <?php endforeach;?>
                         </li>
                     <?php endforeach;?>

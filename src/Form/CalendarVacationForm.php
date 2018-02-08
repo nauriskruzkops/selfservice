@@ -9,16 +9,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use App\Entity\Vocation;
+use App\Entity\Vacation;
 
-class CalendarVocationForm extends AbstractType
+class CalendarVacationForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('type', ChoiceType::class, [
                 'choice_translation_domain' => null,
-                'choices'  => array_flip(Vocation::TYPES),
+                'choices'  => array_flip(Vacation::TYPES),
                 'attr' => [
                     'class' => 'form-control',
                 ],

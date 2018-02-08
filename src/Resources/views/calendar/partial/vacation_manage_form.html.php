@@ -5,13 +5,13 @@
  * @var Symfony\Component\Form\FormView $form
  */
 
-$vocation  = $vocation ?? null;
+$vacation  = $vacation ?? null;
 $formHelper = $view['form'];
 
 ?>
 <?= $formHelper->start($form);?>
 <div class="modal-header">
-    <h5 class="modal-title">Add vocation</h5>
+    <h5 class="modal-title">Add vacation</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -49,7 +49,7 @@ $formHelper = $view['form'];
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary"><?= $vocation ? 'Edit' : 'Add'?> vocation</button>
+    <button type="submit" class="btn btn-primary"><?= $vacation ? 'Edit' : 'Add'?> vacation</button>
 </div>
 <?= $formHelper->end($form);?>
 

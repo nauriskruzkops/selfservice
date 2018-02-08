@@ -23,7 +23,7 @@ $new = (!$company || !$company->getId());
             'pageTitle' => 'System',
             'pageUrl' => $view['router']->path('system'),
         ],
-        'pageTitle' => 'Company : '.( !$new ? $company->getTitle() : 'New'),
+        'pageTitle' => 'Company : '.( !$new ? $this->escape($company->getTitle()) : 'New'),
         'pageIcon' => 'fa fa-building-o',
 ])?>
 
@@ -34,7 +34,7 @@ $new = (!$company || !$company->getId());
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" data-toggle="pill" href="#baseData" role="tab" aria-controls="v-pills-home" aria-selected="true">Base info</a>
                     <?php if (!$new) :?>
-                        <a class="nav-link" data-toggle="pill" href="#settings" role="tab" aria-controls="v-pills-profile" aria-selected="false">Settings</a>
+                        <a class="nav-link" data-toggle="pill" href="#vacation-types" role="tab" aria-controls="v-pills-profile" aria-selected="false">Vacation types</a>
                         <a class="nav-link" data-toggle="pill" href="#employees" role="tab" aria-controls="v-pills-messages" aria-selected="false">Employees</a>
                         <a class="nav-link" data-toggle="pill" href="#departments" role="tab" aria-controls="v-pills-messages" aria-selected="false">Departments</a>
                     <?php endif;?>
@@ -71,6 +71,11 @@ $new = (!$company || !$company->getId());
                                                         <?= $formHelper->widget($formView['parent']) ?>
                                                     </div>
                                                 </div>
+
+                                                <?php echo $view['actions']->render(
+                                                    new ControllerReference('App\\Controller\\System\\SettingsController::globalList',['company' => $company])
+                                                ) ?>
+
                                                 <div class="col-sm-12">
                                                     <div class="form-group row">
                                                         <div class="col-sm-12 text-right">
@@ -79,17 +84,29 @@ $new = (!$company || !$company->getId());
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             <?= $formHelper->end($formView);?>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <?php echo $view['actions']->render(
+                                                    new ControllerReference('App\\Controller\\System\\VacationTypeController::list',['company' => $company])
+                                                ) ?>
+                                            </div>
+                                            <div class="col">
+                                                <?php echo $view['actions']->render(
+                                                    new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
+                                                ) ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <?php if (!$new) :?>
-                            <div class="tab-pane fade" id="settings" role="tabpanel">
+                            <div class="tab-pane fade" id="vacation-types" role="tabpanel">
                                 <?php echo $view['actions']->render(
-                                    new ControllerReference('App\\Controller\\System\\SettingsController::companyList',['company' => $company])
+                                    new ControllerReference('App\\Controller\\System\\VacationTypeController::list',['company' => $company])
                                 ) ?>
 
                                 <div class="col-sm-12">

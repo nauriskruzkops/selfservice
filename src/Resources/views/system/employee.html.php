@@ -22,7 +22,7 @@ $view->extend('layout/layout.html.php');
         'pageTitle' => 'System',
         'pageUrl' => $view['router']->path('system'),
     ],
-    'pageTitle' => 'Employee : '.(!$new ? $employee->getFullName() : 'New'),
+    'pageTitle' => 'Employee : '.(!$new ? $this->escape($employee->getFullName()) : 'New'),
     'pageIcon' => 'fa fa-user-o',
 ])?>
 

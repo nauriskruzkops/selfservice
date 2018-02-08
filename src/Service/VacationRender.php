@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class VocationRender
+class VacationRender
 {
     public function getList()
     {

@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var \App\Entity\Company[] $companies
  */
 
-//$view->extend('layout/blocks/list.html.php');
-
 ?>
 <div class="row">
     <?php if ($companies): ?>
@@ -16,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
                 <div class="card card-info">
                     <div class="card-body text-center" style="font-size: 130%; height: 200px;">
                         <i class="fa fa-building-o"></i>
-                        <p><?= $company->getTitle()?></p>
+                        <p><?= $this->escape($company->getTitle())?></p>
                     </div>
                     <div class="card-footer clearfix ">
                         <a href="<?= $view['router']->path('system_company_edit',['id'=>$company->getId()]) ?>">Edit</a>

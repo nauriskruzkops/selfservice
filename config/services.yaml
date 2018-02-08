@@ -23,7 +23,7 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-    App\Service\VocationRender:
+    App\Service\VacationRender:
         arguments: ['@doctrine.orm.entity_manager']
     App\Service\SettingsService:
         arguments: ['@doctrine.orm.entity_manager']

@@ -3,27 +3,27 @@
 namespace App\Controller\Calendar;
 
 use App\Entity\Employee;
-use App\Entity\Vocation;
-use App\Form\CalendarVocationForm;
+use App\Entity\Vacation;
+use App\Form\CalendarVacationForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class VocationController extends Controller
+class VacationController extends Controller
 {
 
     /**
      * AJAX request
-     * @Route("/calendar/vocation/{id}/info", name="vocation_info")
+     * @Route("/calendar/vacation/{id}/info", name="vacation_info")
      */
     public function editAction(Request $request)
     {
-        /** @var Vocation $vocation */
-        $vocation = $this->getDoctrine()->getRepository(Vocation::class)->find($request->get('id'));
+        /** @var Vacation $vacation */
+        $vacation = $this->getDoctrine()->getRepository(Vacation::class)->find($request->get('id'));
 
-        /** @var CalendarVocationForm $form */
-        $form = $this->createForm(CalendarVocationForm::class, $vocation, [
-            'action' => $this->generateUrl('vocation_info', ['id' => $vocation->getId()]),
+        /** @var CalendarVacationForm $form */
+        $form = $this->createForm(CalendarVacationForm::class, $vacation, [
+            'action' => $this->generateUrl('vacation_info', ['id' => $vacation->getId()]),
             'method' => 'POST',
         ]);
 
@@ -46,22 +46,22 @@ class VocationController extends Controller
         }
 
         if ($request->isXmlHttpRequest()) {
-            return $this->render('calendar/partial/vocation_manage_form.html.php', [
+            return $this->render('calendar/partial/vacation_manage_form.html.php', [
                 'form' => $form->createView(),
-                'vocation' => $vocation,
+                'vacation' => $vacation,
             ]);
         }
     }
 
     /**
      * HTML & AJAX request
-     * @Route("/calendar/vocation/add", name="vocation_add")
+     * @Route("/calendar/vacation/add", name="vacation_add")
      */
     public function addAction(Request $request)
     {
-        /** @var CalendarVocationForm $form */
-        $form = $this->createForm(CalendarVocationForm::class, new Vocation(), [
-            'action' => $this->generateUrl('vocation_add'),
+        /** @var CalendarVacationForm $form */
+        $form = $this->createForm(CalendarVacationForm::class, new Vacation(), [
+            'action' => $this->generateUrl('vacation_add'),
             'method' => 'POST',
         ]);
 
@@ -89,7 +89,7 @@ class VocationController extends Controller
         }
 
         if ($request->isXmlHttpRequest()) {
-            return $this->render('calendar/partial/vocation_manage_form.html.php', [
+            return $this->render('calendar/partial/vacation_manage_form.html.php', [
                 'form' => $form->createView(),
             ]);
         }
@@ -102,7 +102,7 @@ class VocationController extends Controller
 
     /**
      * AJAX request
-     * @Route("/calendar/vocation/{id}/add", name="vocation_delete")
+     * @Route("/calendar/vacation/{id}/add", name="vacation_delete")
      */
     public function deleteAction(Request $request)
     {
