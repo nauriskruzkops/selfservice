@@ -67,7 +67,10 @@ class VacationController extends Controller
 
         /** @var Employee $employee */
         if (($employee = $request->get('employee', null))) {
-            $form->get('employee')->setData($this->getDoctrine()->getRepository(Employee::class)->find($employee));
+            $form->get('employee')
+                ->setData($this->getDoctrine()->getRepository(Employee::class)->find($employee))
+            ;
+            //$form->get('employee')->setAttributes(['readonly' => 'readonly']);
         }
 
         $form->handleRequest($request);

@@ -50,6 +50,13 @@ $view->extend('layout/layout.html.php');
                     <?= $formHelper->widget($formView['personalId']) ?>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['email']) ?></div>
+                <div class="col-sm-9">
+                    <?= $formHelper->errors($formView['email']) ?>
+                    <?= $formHelper->widget($formView['email']) ?>
+                </div>
+            </div>
         </div>
         <div class="offset-md-2 col-sm-6">
             <div class="form-group row">

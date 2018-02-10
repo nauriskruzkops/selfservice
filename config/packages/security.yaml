@@ -1,0 +1,33 @@
+security:
+    providers:
+        db_entity:
+            entity:
+                class: App\Entity\User
+                property: username
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+    firewalls:
+        main:
+            anonymous: ~
+            provider: db_entity
+            form_login:
+                login_path: login
+                check_path: login
+                use_referer: true
+                username_parameter: _username
+                password_parameter: _password
+                post_only: true
+                remember_me: false
+            logout:
+                path:   /logout
+                target: /
+
+    # Roles and Access Control
+    role_hierarchy:
+            ROLE_ADMIN: [ROLE_USER]
+            ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+    access_control:
+        - { path: ^/(login|register|password-recovery), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/system, roles: ROLE_ADMIN }

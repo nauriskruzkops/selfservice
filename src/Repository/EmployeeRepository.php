@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Company;
+use App\Entity\Employee;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -29,6 +30,20 @@ class EmployeeRepository extends EntityRepository
         $qb = $this->getMyAvailable();
 
         return $qb;
+    }
+
+    /**
+     * @param $email
+     * @return Employee|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getByEmail($email)
+    {
+        $qb = $this->getMyAvailable();
+        $qb->where($qb->expr()->eq('e.email', ':email'))
+            ->setParameter('email', trim($email));
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getPaginateList(Company $company, $page = 1, $limit = 5)

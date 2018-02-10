@@ -21,7 +21,7 @@ $view->extend('layout/layout.html.php');
         'pageTitle' => 'System',
         'pageUrl' => $view['router']->path('system'),
     ],
-    'pageTitle' => 'Department : '.($department ? $this->escape($department->getTitle()) : 'New'),
+    'pageTitle' => 'Department : '.(!$new ? $this->escape($department->getTitle()) : 'New'),
     'pageIcon' => 'fa fa-briefcase',
 ])?>
 

@@ -27,4 +27,6 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
     App\Service\SettingsService:
         arguments: ['@doctrine.orm.entity_manager']
+    App\Service\SecurityService:
+        arguments: ['@doctrine.orm.entity_manager','Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterfac']
 

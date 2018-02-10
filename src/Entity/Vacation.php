@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\VacationType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,7 +45,9 @@ class Vacation {
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @var VacationType
+     * @ORM\ManyToOne(targetEntity="App\Entity\VacationType")
+     * @ORM\JoinColumn(name="vacation_type_id", referencedColumnName="id")
      */
     private $type;
 
@@ -95,7 +98,7 @@ class Vacation {
     }
 
     /**
-     * @return mixed
+     * @return VacationType
      */
     public function getType()
     {
@@ -103,10 +106,10 @@ class Vacation {
     }
 
     /**
-     * @param mixed $type
+     * @param VacationType $type
      * @return Vacation
      */
-    public function setType($type)
+    public function setType(VacationType $type)
     {
         $this->type = $type;
 

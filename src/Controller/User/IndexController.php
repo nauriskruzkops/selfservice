@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
 
     /**
-     * @Route("/login", name="login")
+     * @Route("/profile", name="user_profile")
      */
     public function loginAction(Request $request)
     {

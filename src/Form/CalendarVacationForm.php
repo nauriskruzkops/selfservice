@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Employee;
+use App\Entity\VacationType;
 use App\Repository\EmployeeRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,15 +18,13 @@ class CalendarVacationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, [
-                'choice_translation_domain' => null,
-                'choices'  => array_flip(Vacation::TYPES),
+            ->add('type', EntityType::class, [
+                'class' => VacationType::class,
+                'choice_label' => 'title',
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label_attr' => [
-
-                ]
+                'label_attr' => []
             ])
             ->add('employee', EntityType::class, [
                 'class' => Employee::class,
@@ -35,9 +35,7 @@ class CalendarVacationForm extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label_attr' => [
-
-                ]
+                'label_attr' => []
             ])
             ->add('startDate', DateType::class, [
                 'widget' => 'single_text',

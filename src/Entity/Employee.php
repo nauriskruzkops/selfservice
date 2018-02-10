@@ -49,6 +49,11 @@ class Employee {
     private $gender;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $email;
+
+    /**
      * @ORM\Column(type="boolean", nullable=false)
      */
     private $foreigner;
@@ -175,6 +180,25 @@ class Employee {
     public function setGender($gender)
     {
         $this->gender = $gender;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     * @return Employee
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
         return $this;
     }
 
