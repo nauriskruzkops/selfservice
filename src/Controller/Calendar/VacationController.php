@@ -94,6 +94,7 @@ class VacationController extends Controller
         if ($request->isXmlHttpRequest()) {
             return $this->render('calendar/partial/vacation_manage_form.html.php', [
                 'form' => $form->createView(),
+                'vacation' => null,
             ]);
         }
 

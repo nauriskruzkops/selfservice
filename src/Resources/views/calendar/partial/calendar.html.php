@@ -33,7 +33,7 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
                         <?=$employee->getEmployee()->getFullName()?>
                     </span>
                     <span class="pull-right" style="font-size: 80%">
-                        <a href="#" data-url="<?php echo $view['router']->path('vacation_add',['employee' => $employee->getEmployee()->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                        <a href="<?php echo $view['router']->path('vacation_add',['employee' => $employee->getEmployee()->getId()]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
                             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
                     </span>
                 </li>
@@ -57,7 +57,7 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
                     <?php foreach ($employees as $employee):?>
                         <li>
                             <?php foreach ($employee->getEmployee()->getVacations() as $vacation): ?>
-                                <a href="#" data-url="<?php echo $view['router']->path('vacation_info',['id' => $vacation->getId()]) ?>" class="time-entry" data-toggle="modal" data-target="#globalAjaxModal" <?php
+                                <a href="<?php echo $view['router']->path('vacation_info',['id' => $vacation->getId()]) ?>" class="time-entry" data-toggle="modal" data-target="#globalAjaxModal" <?php
                                 ?> style="width: <?=$vacation->getDays()*30 ?>px; left: <?=$styleLeft($vacation->getStartDate()) ?>px"<?php
                                 ?> data-days="<?= $vacation->getDays()?>"> </a>
                             <?php endforeach;?>

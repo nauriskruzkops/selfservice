@@ -10,8 +10,9 @@ $view->extend('layout/base.html.php');
 ?><div class="container">
     <?= $view->render('layout/partial/flash-messages.html.php')?>
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Login</div>
         <div class="card-body">
+            <h2>Login</h2>
+            <p></p>
             <form action="<?= $view['router']->path('login') ?>" method="post">
                 <div class="form-group">
                     <input class="form-control" id="inputEmail" type="text" aria-describedby="emailHelp" placeholder="Enter email" name="_username" value="<?= $last_username ?? ''?>">

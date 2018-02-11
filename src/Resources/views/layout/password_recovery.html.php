@@ -9,8 +9,9 @@ $view->extend('layout/base.html.php');
 
 ?><div class="container">
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Password recovery</div>
         <div class="card-body">
+            <h2>Forgot your password?</h2>
+            <p>Enter your email address and we will send you instructions on how to reset your password.</p>
             <form action="<?= $view['router']->path('password_recovery') ?>" method="post">
                 <div class="form-group">
                     <input class="form-control" id="inputEmail" type="text" aria-describedby="emailHelp" placeholder="Enter email" name="_username">

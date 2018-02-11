@@ -15,11 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Selfservice</title>
-        <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
         <link href="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/css/bootstrap.min.css', 'vendor') ?>" rel="stylesheet">
-
         <link href="<?= $view['assets']->getUrl('/assets/theme/sb-admin.css', 'sbadmin') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css', 'css') ?>" rel="stylesheet">
+        <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
         <link href="<?= $view['assets']->getUrl('/assets/css/theme-base.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/theme-overwrite.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar.css', 'css') ?>" rel="stylesheet">
@@ -28,10 +27,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <script src="<?= $view['assets']->getUrl('/assets/vendor/jquery/jquery.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/vendor/popper.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/js/bootstrap.min.js', 'vendor') ?>"></script>
-        <script src="<?= $view['assets']->getUrl('/assets/js/main.js', 'vendor') ?>"></script>
-
     </head>
-    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <body class="fixed-nav sticky-footer bg-dark">
         <?php $view['slots']->output('_content') ?>
 
         <!-- Global AJAX Modal:START -->
@@ -47,6 +44,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <script src="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/theme/sb-admin.js', 'sbadmin') ?>"></script>
+        <script src="<?= $view['assets']->getUrl('/assets/js/main.js', 'js') ?>"></script>
     </body>
 </html>
 

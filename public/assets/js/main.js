@@ -1,7 +1,7 @@
 $(function () {
     var globalAjaxModal = $('#globalAjaxModal');
     globalAjaxModal.on('show.bs.modal', function(e) {
-        var globalAjaxModalUrl = $(e.relatedTarget).data('url');
+        var globalAjaxModalUrl = $(e.relatedTarget).attr('href');
         $(this)
             .addClass('modal-scrollfix')
             .find('.modal-content')

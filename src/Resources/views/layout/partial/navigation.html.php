@@ -60,7 +60,7 @@ $check_active_menu = function ($item) use ($menu, $parentRequest) {
 };
 
 ?><div class="collapse navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+    <ul class="navbar-nav navbar-sidenav">
         <?php foreach ($menu as $menuKey => $menuItem) :?>
             <li class="nav-item <?= $check_active_menu($menuKey)?>" data-toggle="tooltip" data-placement="right" title="<?= $menuItem['title']?>">
                 <a class="nav-link" href="<?php echo $view['router']->path($menuItem['route']['key'],$menuItem['route']['params']) ?>">
@@ -78,8 +78,18 @@ $check_active_menu = function ($item) use ($menu, $parentRequest) {
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-fw fa-user-circle fa-lg"></i>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            </div>
+        </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
                 <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
     </ul>
