@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EmployeeRepository")
@@ -69,6 +70,12 @@ class Employee {
      * @ORM\OneToMany(targetEntity="CompanyEmployee", mappedBy="employee", cascade={"persist", "remove"})
      */
     private $companyRelation;
+
+    /**
+     * @var User
+     * @ORM\OneToOne(targetEntity="User", mappedBy="employee", orphanRemoval=true, fetch="EAGER")
+     */
+    private $user;
 
     public function __construct()
     {
@@ -277,4 +284,23 @@ class Employee {
         }
         return $this;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

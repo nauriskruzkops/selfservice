@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Employee;
+use App\Form\System\UserForm;
 use App\Service\SecurityService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,5 +66,4 @@ class SecurityController extends Controller
     {
         return $this->render('layout/password_recovery.html.php', []);
     }
-
 }

@@ -6,5 +6,5 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ExtendController extends Controller
 {
-
+    public function __construct(){/** ... */}
 }

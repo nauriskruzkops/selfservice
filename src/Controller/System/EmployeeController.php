@@ -8,6 +8,7 @@ use App\Entity\Employee;
 use App\Form\System\EmployeeForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class EmployeeController extends ExtendController
 {
@@ -22,7 +23,7 @@ class EmployeeController extends ExtendController
 
         /** @var EmployeeForm $form */
         $form = $this->createForm(EmployeeForm::class, $employee, [
-            'action' => $this->generateUrl('vacation_info', ['id' => $employee->getId()]),
+            'action' => $this->generateUrl('system_employee_edit', ['id' => $employee->getId()]),
             'method' => 'POST',
         ]);
 
@@ -84,7 +85,7 @@ class EmployeeController extends ExtendController
     /**
      * @Route("/system/employee/{id}/edit", name="system_employee_edit", requirements={"id"="\d+"})
      */
-    public function editAction($id, Request $request)
+    public function editAction($id, UserPasswordEncoderInterface $encoder, Request $request)
     {
         /** @var Employee $employee */
         if(!($employee = $this->getDoctrine()->getRepository(Employee::class)->find($id))){
@@ -99,12 +100,15 @@ class EmployeeController extends ExtendController
 
         $company = null;
         if ($employee->getCompanyRelation()) {
-            $company = $employee->getCompanyRelation()->last()->getCompny();
+            $company = $employee->getCompanyRelation()->last()->getCompany();
         }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                /** @var Employee $employee */
+                $employee = $form->getData();
+                $employee->getUser()->setRoles($request->get('employee_form')['user']['roles']);
                 $em = $this->getDoctrine()->getManager();
                 $em->merge($form->getData());
                 $em->flush();

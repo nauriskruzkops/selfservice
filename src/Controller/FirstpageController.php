@@ -13,6 +13,6 @@ class FirstpageController extends Controller
      */
     public function indexAction()
     {
-        return $this->redirectToRoute('dashboard');
+        return $this->redirectToRoute('calendar');
     }
 }

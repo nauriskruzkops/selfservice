@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 
 /**
@@ -7,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  */
 
 $menu = [
+/*
     'dashboard' => [
         'icon' => 'fa fa-fw fa-dashboard',
         'title' => 'Dashboard',
@@ -16,6 +18,7 @@ $menu = [
         ],
         'matching' => ['dashboard'],
     ],
+*/
     'calendar' => [
         'icon' => 'fa fa-fw fa-calendar',
         'title' => 'Calendar',
@@ -24,8 +27,11 @@ $menu = [
             'params' => []
         ],
         'matching' => ['calendar'],
-    ],
-    'employees' => [
+    ]
+];
+
+if ($this->get('security')->isGranted(User::ROLE_MANAGER)) {
+    $menu['employees']= [
         'icon' => 'fa fa-fw fa-users',
         'title' => 'Employees',
         'route' => [
@@ -33,8 +39,11 @@ $menu = [
             'params' => []
         ],
         'matching' => ['employees'],
-    ],
-    'system' => [
+    ];
+}
+
+if ($this->get('security')->isGranted(User::ROLE_ADMIN)) {
+    $menu['system']= [
         'icon' => 'fa fa-fw fa-cogs',
         'title' => 'System',
         'route' => [
@@ -43,8 +52,10 @@ $menu = [
         ],
         'matching' => ['system'],
         'matching_regex' => '/system_/',
-    ],
-];
+    ];
+}
+
+
 
 $parentRequest = $_parent;
 

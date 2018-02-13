@@ -25,75 +25,108 @@ $view->extend('layout/layout.html.php');
     'pageTitle' => 'Employee : '.(!$new ? $this->escape($employee->getFullName()) : 'New'),
     'pageIcon' => 'fa fa-user-o',
 ])?>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12 col-md-2">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" data-toggle="pill" href="#baseData" role="tab" aria-controls="v-pills-home" aria-selected="true">Base info</a>
+                    <?php if (!$new) :?>
+                        <a class="nav-link" data-toggle="pill" href="#access" role="tab" aria-controls="v-pills-profile" aria-selected="false">Access</a>
+                    <?php endif;?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-10">
+                <div class="">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="baseData" role="tabpanel">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-8">
+                                        <?= $formHelper->start($form);?>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['name']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['name']) ?>
+                                                <?= $formHelper->widget($formView['name']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['surname']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['surname']) ?>
+                                                <?= $formHelper->widget($formView['surname']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['personalId']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['personalId']) ?>
+                                                <?= $formHelper->widget($formView['personalId']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['email']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['email']) ?>
+                                                <?= $formHelper->widget($formView['email']) ?>
+                                            </div>
+                                        </div>
 
-<?= $formHelper->start($form);?>
-    <div class="row">
-        <div class="offset-md-2 col-sm-6">
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['name']) ?></div>
-                <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['name']) ?>
-                    <?= $formHelper->widget($formView['name']) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['surname']) ?></div>
-                <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['surname']) ?>
-                    <?= $formHelper->widget($formView['surname']) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['personalId']) ?></div>
-                <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['personalId']) ?>
-                    <?= $formHelper->widget($formView['personalId']) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['email']) ?></div>
-                <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['email']) ?>
-                    <?= $formHelper->widget($formView['email']) ?>
-                </div>
-            </div>
-        </div>
-        <div class="offset-md-2 col-sm-6">
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['company']) ?></div>
-                <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['companyRelation'][0]['company']) ?>
-                    <?= $formHelper->widget($formView['companyRelation'][0]['company']) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['department']) ?></div>
-                <div class="col-sm-9">
-                    <?= $formHelper->errors($formView['companyRelation'][0]['department']) ?>
-                    <?= $formHelper->widget($formView['companyRelation'][0]['department']) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['startDate']) ?></div>
-                <div class="col-sm-9">
-                    <div class="form-row">
-                        <div class="col">
-                            <?= $formHelper->widget($form['companyRelation'][0]['startDate']) ?>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['company']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['companyRelation'][0]['company']) ?>
+                                                <?= $formHelper->widget($formView['companyRelation'][0]['company']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['department']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['companyRelation'][0]['department']) ?>
+                                                <?= $formHelper->widget($formView['companyRelation'][0]['department']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['startDate']) ?></div>
+                                            <div class="col-sm-9">
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <?= $formHelper->widget($form['companyRelation'][0]['startDate']) ?>
+                                                    </div>
+                                                    <div class="col">
+                                                        <?= $formHelper->widget($form['companyRelation'][0]['endDate']) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-right">
+                                            <a href="<?= $view['router']->path('system_company_edit',['id'=>$company ? $company->getId() : 0]) ?>" class="btn btn-link">Cancel</a>
+                                            <input type="submit" class="btn btn-primary" value="Save">
+                                        </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <?= $formHelper->widget($form['companyRelation'][0]['endDate']) ?>
+                    <?php if (!$new) :?>
+                        <div class="tab-pane fade" id="access" role="tabpanel">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-8">
+                                        <?php echo $view['actions']->render(
+                                            new ControllerReference('App\\Controller\\System\\UserController::editForm',['employee' => $employee])
+                                        ) ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-3 text-right"></div>
-                <div class="col-sm-9 text-right">
-                    <a href="<?= $view['router']->path('system_company_edit',['id'=>$company ? $company->getId() : 0]) ?>" class="btn btn-link">Cancel</a>
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
 

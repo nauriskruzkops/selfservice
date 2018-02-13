@@ -2,23 +2,16 @@
 
 namespace App\Form\System;
 
-use App\Entity\Company;
-use App\Entity\CompanyEmployee;
 use App\Entity\Employee;
-use App\Repository\CompanyRepository;
-use App\Repository\EmployeeRepository;
-use ArrayAccess;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Entity\Vacation;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmployeeForm extends AbstractType
@@ -40,12 +33,10 @@ class EmployeeForm extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
-            //->add('companyRelation', CompanyEmployeeForm::class)
             ->add('companyRelation', CollectionType::class, [
                 'entry_type' => CompanyEmployeeForm::class,
                 'entry_options' => ['label' => false],
-            ]);
-
+            ])
         ;
     }
 

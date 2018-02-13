@@ -32,6 +32,7 @@ class SecurityService
     public function registerUser(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $email = $request->get('_useremail', null);
+
         if (!empty($email) && strlen($email) > 3 && strlen($email) < 100) {
 
             if (($employee = $this->em->getRepository(Employee::class)->getByEmail($email))) {

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Traversable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -17,6 +18,24 @@ class User implements UserInterface, \Serializable {
     use Traits\Traceability;
     use Traits\Serializable;
 
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_MANAGER = 'ROLE_MANAGER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+
+    const ROLES = [
+        self::ROLE_USER => 'User',
+        self::ROLE_MANAGER => 'Department menager',
+        self::ROLE_ADMIN => 'Company menager',
+    ];
+
+    const ROLES_ALL = [
+        self::ROLE_USER => 'User',
+        self::ROLE_MANAGER => 'Department menager',
+        self::ROLE_ADMIN => 'Company menager',
+        self::ROLE_SUPER_ADMIN => 'Superadmin',
+    ];
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -26,7 +45,7 @@ class User implements UserInterface, \Serializable {
 
     /**
      * @var Employee
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
+     * @ORM\OneToOne(targetEntity="Employee", inversedBy="user")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      */
     private $employee;
@@ -47,9 +66,21 @@ class User implements UserInterface, \Serializable {
     private $salt;
 
     /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $roles;
+
+    /**
      * @ORM\Column(type="boolean", length=100, nullable=true)
      */
     private $active;
+
+    public function __construct()
+    {
+        //$this->rols = new ArrayCollection();
+        $this->active = true;
+        //$this->salt = md5(uniqid(null, true));
+    }
 
     public function __toString()
     {
@@ -82,6 +113,7 @@ class User implements UserInterface, \Serializable {
      */
     public function setEmployee(Employee $employee): User
     {
+        $employee->setUser($this);
         $this->employee = $employee;
 
         return $this;
@@ -150,11 +182,22 @@ class User implements UserInterface, \Serializable {
     }
 
     /**
-     * @return (Role|string)[] The user roles
+     * @return []
      */
     public function getRoles()
     {
-        return ['ROLE_USER', 'ROLE_SUPER_ADMIN'];
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     * @return User
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
