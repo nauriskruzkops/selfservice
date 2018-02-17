@@ -11,20 +11,16 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 $formView = $form;
 $formHelper = $view['form'];
 $request = $app->getRequest();
-
 $new = (!$department || !$department->getId());
 
-$view->extend('layout/layout.html.php');
-?>
-<?= $view->render('system/layout/page-title.html.php', [
-    'parentPage' => [
-        'pageTitle' => 'System',
-        'pageUrl' => $view['router']->path('system'),
-    ],
-    'pageTitle' => 'Department : '.(!$new ? $this->escape($department->getTitle()) : 'New'),
-    'pageIcon' => 'fa fa-briefcase',
-])?>
+$view['slots']->set('pageTitle', 'Department : '.(!$new ? $this->escape($department->getTitle()) : 'New'));
+$view['slots']->set('pageIcon', 'fa fa-briefcase');
+$view['slots']->set('parentPageTitle', 'System');
+$view['slots']->set('parentPageUrl', $view['router']->path('system'));
 
+$view->extend('layout/layout.html.php');
+
+?>
 <?= $formHelper->start($form);?>
     <div class="row">
         <div class="offset-md-2 col-sm-6">

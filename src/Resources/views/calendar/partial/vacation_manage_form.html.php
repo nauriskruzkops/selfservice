@@ -3,6 +3,7 @@
  * @var Symfony\Bundle\FrameworkBundle\Templating\PhpEngine $view
  * @var Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper $formHelper
  * @var Symfony\Component\Form\FormView $form
+ * @var \App\Entity\Vacation $vacation
  */
 
 $vacation  = $vacation ?? null;
@@ -20,12 +21,11 @@ $new = (!$vacation ?? false);
     <div class="form-group row">
         <div class="col-sm-3"><?= $formHelper->label($form['employee']) ?></div>
         <div class="col-sm-9">
-            <?= $formHelper->errors($form['employee']) ?>
-            <?= $formHelper->widget($form['employee']) ?>
+            <p class="form-control-plaintext"><?= (string) $employee ?></p>
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-sm-3"><?=  $formHelper->label($form['type']) ?></div>
+        <div class="col-sm-3"><?= $formHelper->label($form['type']) ?></div>
         <div class="col-sm-9">
             <?= $formHelper->errors($form['type']) ?>
             <?= $formHelper->widget($form['type']) ?>
@@ -51,5 +51,5 @@ $new = (!$vacation ?? false);
     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary"><?= $vacation ? 'Edit' : 'Add'?> vacation</button>
 </div>
-<?= $formHelper->end($form);?>
+</form>
 

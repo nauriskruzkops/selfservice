@@ -83,6 +83,11 @@ class Employee {
         $this->companyRelation = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getFullName();
+    }
+
     /**
      * @return mixed
      */

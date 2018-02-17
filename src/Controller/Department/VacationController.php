@@ -1,29 +1,34 @@
 <?php
 
-namespace App\Controller\Calendar;
+namespace App\Controller\Department;
 
+use App\Controller\ExtendController;
 use App\Entity\Employee;
 use App\Entity\Vacation;
-use App\Form\CalendarVacationForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Form\EmployeeVacationForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class VacationController extends Controller
+class VacationController extends ExtendController
 {
 
     /**
      * AJAX request
-     * @Route("/calendar/vacation/{id}/info", name="vacation_info")
+     * @Route("/employee/{employee_id}/vacation/{vacation_id}/info", name="employee_vacation_info")
      */
     public function editAction(Request $request)
     {
-        /** @var Vacation $vacation */
-        $vacation = $this->getDoctrine()->getRepository(Vacation::class)->find($request->get('id'));
+        $employee = $this->getEmployeeBy($request);
 
-        /** @var CalendarVacationForm $form */
-        $form = $this->createForm(CalendarVacationForm::class, $vacation, [
-            'action' => $this->generateUrl('vacation_info', ['id' => $vacation->getId()]),
+        /** @var Vacation $vacation */
+        $vacation = $this->getDoctrine()->getRepository(Vacation::class)->find($request->get('vacation_id'));
+
+        /** @var EmployeeVacationForm $form */
+        $form = $this->createForm(EmployeeVacationForm::class, $vacation, [
+            'action' => $this->generateUrl('employee_vacation_info', [
+                'employee_id' => $vacation->getEmployee()->getId(),
+                'vacation_id' => $vacation->getId(),
+            ]),
             'method' => 'POST',
         ]);
 
@@ -49,29 +54,29 @@ class VacationController extends Controller
             return $this->render('calendar/partial/vacation_manage_form.html.php', [
                 'form' => $form->createView(),
                 'vacation' => $vacation,
+                'employee' => $employee,
             ]);
         }
     }
 
     /**
      * HTML & AJAX request
-     * @Route("/calendar/vacation/add", name="vacation_add")
+     * @Route("/employee/{employee_id}/vacation/add", name="employee_vacation_add")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request)
     {
-        /** @var CalendarVacationForm $form */
-        $form = $this->createForm(CalendarVacationForm::class, new Vacation(), [
-            'action' => $this->generateUrl('vacation_add'),
+        /** @var EmployeeVacationForm $form */
+        $form = $this->createForm(EmployeeVacationForm::class, new Vacation(), [
+            'action' => $this->generateUrl('employee_vacation_add',[
+                'employee_id' => $request->get('employee_id')
+            ]),
             'method' => 'POST',
         ]);
 
         /** @var Employee $employee */
-        if (($employee = $request->get('employee', null))) {
-            $form->get('employee')
-                ->setData($this->getDoctrine()->getRepository(Employee::class)->find($employee))
-            ;
-            //$form->get('employee')->setAttributes(['readonly' => 'readonly']);
-        }
+        $employee = $this->getEmployeeBy($request);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,6 +99,7 @@ class VacationController extends Controller
         if ($request->isXmlHttpRequest()) {
             return $this->render('calendar/partial/vacation_manage_form.html.php', [
                 'form' => $form->createView(),
+                'employee' => $employee,
                 'vacation' => null,
             ]);
         }

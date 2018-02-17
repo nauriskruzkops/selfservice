@@ -10,8 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 <div class="row">
     <?php if ($companies): ?>
         <?php foreach ($companies ?? [] as $company) :?>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                <div class="card card-info">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+                <div class="card bg-secondary">
                     <div class="card-body text-center" style="font-size: 130%; height: 200px;">
                         <i class="fa fa-building-o"></i>
                         <p><?= $this->escape($company->getTitle())?></p>

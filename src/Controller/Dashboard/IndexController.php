@@ -2,13 +2,12 @@
 
 namespace App\Controller\Dashboard;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Controller\ExtendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class IndexController extends Controller
+class IndexController extends ExtendController
 {
-
     /**
      * @Route("/dashboard", name="dashboard")
      */

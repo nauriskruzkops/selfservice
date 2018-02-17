@@ -26,6 +26,5 @@ $current = $current ?? '';
     <?php endif;?>
     <li class="breadcrumb-item active"><?= $current?></li>
 </ol>
-<div class="clearfix"></div>
 
 

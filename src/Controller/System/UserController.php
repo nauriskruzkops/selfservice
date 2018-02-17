@@ -14,6 +14,7 @@ class UserController extends ExtendController
     /**
      * @param Employee $employee
      * @return \Symfony\Component\HttpFoundation\Response
+     * @method({"POST"})
      */
     public function editForm(Employee $employee, Request $request)
     {

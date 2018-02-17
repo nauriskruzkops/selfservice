@@ -14,17 +14,13 @@ $request = $app->getRequest();
 
 $new = (!$type || !$type->getId());
 
+$view['slots']->set('pageTitle', 'Vacation / Leave type : '.(!$new ? $this->escape($type->getTitle()) : 'New'));
+$view['slots']->set('pageIcon', 'fa fa-briefcase');
+$view['slots']->set('parentPageTitle', 'System');
+$view['slots']->set('parentPageUrl', $view['router']->path('system'));
+
 $view->extend('layout/layout.html.php');
 ?>
-<?= $view->render('system/layout/page-title.html.php', [
-    'parentPage' => [
-        'pageTitle' => 'System',
-        'pageUrl' => $view['router']->path('system'),
-    ],
-    'pageTitle' => 'Vacation / Leave type : '.(!$new ? $this->escape($type->getTitle()) : 'New'),
-    'pageIcon' => 'fa fa-briefcase',
-])?>
-
 <?= $formHelper->start($form);?>
     <div class="row">
         <div class="offset-md-2 col-sm-6">

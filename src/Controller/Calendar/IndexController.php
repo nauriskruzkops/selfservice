@@ -2,12 +2,13 @@
 
 namespace App\Controller\Calendar;
 
+use App\Controller\ExtendController;
 use App\Entity\CompanyEmployee;
-use App\Form\CalendarVacationForm;
+use App\Form\EmployeeVacationForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class IndexController extends VacationController
+class IndexController extends ExtendController
 {
     /**
      * @Route("/calendar", name="calendar")
@@ -15,7 +16,7 @@ class IndexController extends VacationController
     public function indexAction(Request $request)
     {
         $employees = $this->getDoctrine()->getRepository(CompanyEmployee::class)->getListByDepartments();
-        $form = $this->createForm(CalendarVacationForm::class);
+        $form = $this->createForm(EmployeeVacationForm::class);
 
         return $this->render('calendar/index.html.php', [
             'startDate' => (new \DateTime('now'))->modify('first day of this month'),

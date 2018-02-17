@@ -2,12 +2,12 @@
 
 namespace App\Controller\Calendar;
 
+use App\Controller\ExtendController;
 use App\Entity\CompanyEmployee;
 use App\Service\CalendarGenerator;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class LayoutController extends Controller
+class LayoutController extends ExtendController
 {
     public function calendar(CalendarGenerator $calendarGenerator, Request $request)
     {

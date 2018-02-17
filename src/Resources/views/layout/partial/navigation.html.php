@@ -27,18 +27,27 @@ $menu = [
             'params' => []
         ],
         'matching' => ['calendar'],
+    ],
+    'employee' => [
+        'icon' => 'fa fa-fw fa-user-o',
+        'title' => 'Employee',
+        'route' => [
+            'key' => 'employee',
+            'params' => []
+        ],
+        'matching' => ['employee'],
     ]
 ];
 
 if ($this->get('security')->isGranted(User::ROLE_MANAGER)) {
-    $menu['employees']= [
+    $menu['department']= [
         'icon' => 'fa fa-fw fa-users',
-        'title' => 'Employees',
+        'title' => 'Department',
         'route' => [
-            'key' => 'employees',
+            'key' => 'department',
             'params' => []
         ],
-        'matching' => ['employees'],
+        'matching' => ['department'],
     ];
 }
 
@@ -70,8 +79,9 @@ $check_active_menu = function ($item) use ($menu, $parentRequest) {
     }
 };
 
-?><div class="collapse navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav navbar-sidenav">
+?>
+<div>
+    <ul id="sidebarNav" class="navbar-nav navbar-sidenav navbar-dark">
         <?php foreach ($menu as $menuKey => $menuItem) :?>
             <li class="nav-item <?= $check_active_menu($menuKey)?>" data-toggle="tooltip" data-placement="right" title="<?= $menuItem['title']?>">
                 <a class="nav-link" href="<?php echo $view['router']->path($menuItem['route']['key'],$menuItem['route']['params']) ?>">
@@ -80,28 +90,5 @@ $check_active_menu = function ($item) use ($menu, $parentRequest) {
                 </a>
             </li>
         <?php endforeach;?>
-    </ul>
-    <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-            <a class="nav-link text-center" id="sidenavToggler">
-                <i class="fa fa-fw fa-angle-left"></i>
-            </a>
-        </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-fw fa-user-circle fa-lg"></i>
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
     </ul>
 </div>

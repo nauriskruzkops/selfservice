@@ -1,0 +1,90 @@
+
+/** BG **/
+.btn-default {
+    background-color: #cde1f3;
+    color: #6b6b6b;
+}
+.bg-dark {
+    background-color: #2F323E;
+    color: #FFF;
+}
+.bg-secondary {
+    background-color: #6b6b6b;
+    color: #FFF;
+}
+.bg-primary, .btn-primary {
+    background-color: #2CABE3 !important;
+    color: #FFF;
+}
+.bg-success, .btn-success  {
+    background-color: #53E69D !important;
+    color: #FFF;
+}
+.bg-danger, .btn-danger  {
+    background-color: #FF7676 !important;
+    color: #FFF;
+}
+.btn-link  {
+    background-color: transparent !important;
+    color: #6b6b6b;
+}
+
+/** BTN **/
+.btn, .nav-pills .nav-link {
+    border-radius: 0px;
+}
+
+/** BTN **/
+.form-control {
+    border-radius: 0px;
+}
+
+/** CARD **/
+.card {
+    background-color: transparent;
+    border-radius: 1px;
+    border: 0;
+}
+
+.card-header {
+    background-color: transparent;
+    border: 0;
+    font-size: 16px;
+    font-weight: 400;
+    border-bottom: 1px solid #bebebe ;
+    text-transform: uppercase;
+    color: #6b6b6b;
+}
+
+.card-body {
+    border: 0;
+}
+
+/** TABLE **/
+table thead tr th {
+    font-weight: 400;
+    color: #6b6b6b;
+}
+table thead tr:first-child th {
+    border-top: 0;
+}
+
+.page-title {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bebebe;
+}
+
+.page-title h4 {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+.page-title .breadcrumb {
+    margin-top: 4px;
+    background: 0 0;
+    margin-bottom: 0;
+    float: right;
+    padding: 0;
+}

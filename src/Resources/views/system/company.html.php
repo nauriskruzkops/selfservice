@@ -10,23 +10,18 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
  */
 $view->extend('layout/layout.html.php');
 
-
 $formView = $form->createView();
 $formHelper = $view['form'];
 $request = $app->getRequest();
 $new = (!$company || !$company->getId());
 
 
-?>
-<?= $view->render('system/layout/page-title.html.php', [
-        'parentPage' => [
-            'pageTitle' => 'System',
-            'pageUrl' => $view['router']->path('system'),
-        ],
-        'pageTitle' => 'Company : '.( !$new ? $this->escape($company->getTitle()) : 'New'),
-        'pageIcon' => 'fa fa-building-o',
-])?>
+$view['slots']->set('pageTitle', 'Company : '.( !$new ? $this->escape($company->getTitle()) : 'New'));
+$view['slots']->set('pageIcon', 'fa fa-building-o');
+$view['slots']->set('parentPageTitle', 'System');
+$view['slots']->set('parentPageUrl', 'system');
 
+?>
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
@@ -41,65 +36,60 @@ $new = (!$company || !$company->getId());
                 </div>
             </div>
             <div class="col-sm-12 col-md-10">
-                <div class="">
+                <div class="white-box">
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="baseData" role="tabpanel">
-                            <div class="col">
-                                <div class="row justify-content-md-center">
-                                    <div class="col-md-12 col-lg-8">
-                                        <?= $formHelper->start($formView);?>
-                                            <div class="form-group row">
-                                                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['title']) ?></div>
-                                                <div class="col-sm-9">
-                                                    <?= $formHelper->errors($formView['title']) ?>
-                                                    <?= $formHelper->widget($formView['title']) ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['registrationNo']) ?></div>
-                                                <div class="col-sm-9">
-                                                    <?= $formHelper->errors($formView['registrationNo']) ?>
-                                                    <?= $formHelper->widget($formView['registrationNo']) ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-3 text-right"><?= $formHelper->label($formView['parent']) ?></div>
-                                                <div class="col-sm-9">
-                                                    <?= $formHelper->errors($formView['parent']) ?>
-                                                    <?= $formHelper->widget($formView['parent']) ?>
-                                                </div>
-                                            </div>
-
-                                            <?php echo $view['actions']->render(
-                                                new ControllerReference('App\\Controller\\System\\SettingsController::globalList',['company' => $company])
-                                            ) ?>
-
-                                            <div class="col-sm-12">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 text-right">
-                                                        <a href="<?= $view['router']->path('system') ?>" class="btn btn-link">Cancel</a>
-                                                        <input type="submit" class="btn btn-primary" value="<?= $new ? 'Create' : 'Save' ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?= $formHelper->end($formView);?>
+                            <?= $formHelper->start($formView);?>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <?= $formHelper->label($formView['title']) ?>
+                                        <?= $formHelper->widget($formView['title']) ?>
+                                        <?= $formHelper->errors($formView['title']) ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <?= $formHelper->label($formView['registrationNo']) ?>
+                                        <?= $formHelper->widget($formView['registrationNo']) ?>
+                                        <?= $formHelper->errors($formView['registrationNo']) ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <?= $formHelper->label($formView['parent']) ?>
+                                        <?= $formHelper->widget($formView['parent']) ?>
+                                        <?= $formHelper->errors($formView['parent']) ?>
                                     </div>
                                 </div>
-                                <?php if (!$new) :?>
-                                <div class="row">
-                                    <div class="col">
-                                        <?php echo $view['actions']->render(
-                                            new ControllerReference('App\\Controller\\System\\VacationTypeController::list',['company' => $company])
-                                        ) ?>
-                                    </div>
-                                    <div class="col">
-                                        <?php echo $view['actions']->render(
-                                            new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
-                                        ) ?>
-                                    </div>
+                                <div class="col">
+                                    <?php echo $view['actions']->render(
+                                        new ControllerReference('App\\Controller\\System\\SettingsController::globalList',['company' => $company])
+                                    ) ?>
                                 </div>
-                                <?php endif; ?>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group text-right">
+                                        <a href="<?= $view['router']->path('system') ?>" class="btn btn-link">Cancel</a>
+                                        <input type="submit" class="btn btn-danger" value="<?= $new ? 'Create' : 'Save' ?>">
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <?= $formHelper->end($formView);?>
+
+                            <?php if (!$new) :?>
+                            <div class="row">
+                                <div class="col">
+                                    <?php echo $view['actions']->render(
+                                        new ControllerReference('App\\Controller\\System\\VacationTypeController::list',['company' => $company])
+                                    ) ?>
+                                </div>
+                                <div class="col">
+                                    <?php echo $view['actions']->render(
+                                        new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
+                                    ) ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
                         </div>
                         <?php if (!$new) :?>
                             <div class="tab-pane fade" id="vacation-types" role="tabpanel">

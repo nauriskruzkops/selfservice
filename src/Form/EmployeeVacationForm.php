@@ -5,15 +5,14 @@ namespace App\Form;
 use App\Entity\Employee;
 use App\Entity\VacationType;
 use App\Repository\EmployeeRepository;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\Entity\Vacation;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CalendarVacationForm extends AbstractType
+class EmployeeVacationForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,6 +45,13 @@ class CalendarVacationForm extends AbstractType
                 'input' => 'datetime',
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Vacation::class,
+        ));
     }
 }
 

@@ -16,15 +16,13 @@ $request = $app->getRequest();
 $new = (!$employee || !$employee->getId());
 
 $view->extend('layout/layout.html.php');
+
+$view['slots']->set('pageTitle', 'Employee : '.(!$new ? $this->escape($employee->getFullName()) : 'New'));
+$view['slots']->set('pageIcon', 'fa fa-user-o');
+$view['slots']->set('parentPageTitle', 'System');
+$view['slots']->set('parentPageUrl', $view['router']->path('system'));
+
 ?>
-<?= $view->render('system/layout/page-title.html.php', [
-    'parentPage' => [
-        'pageTitle' => 'System',
-        'pageUrl' => $view['router']->path('system'),
-    ],
-    'pageTitle' => 'Employee : '.(!$new ? $this->escape($employee->getFullName()) : 'New'),
-    'pageIcon' => 'fa fa-user-o',
-])?>
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
@@ -37,7 +35,7 @@ $view->extend('layout/layout.html.php');
                 </div>
             </div>
             <div class="col-sm-12 col-md-10">
-                <div class="">
+                <div class="white-box">
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="baseData" role="tabpanel">
                             <div class="col">
