@@ -39,13 +39,17 @@ body:not(.bg-dark), .content-wrapper {
 
 /** A **/
 a:link:not(.btn), a:visited:not(.btn), a:not(.btn) {
-    color: #1e9bfa;
+    color: #313131;
 }
 a:hover {
     text-decoration: none;
 }
 a:hover:not(.btn) {
-    color: #0069d9;
+    color: #313131;
+}
+
+strong {
+    font-weight: 500;
 }
 
 /** NAV **/
@@ -91,7 +95,7 @@ a:hover:not(.btn) {
     padding-top: 6px;
     z-index: 1001;
     position: fixed;
-    width: 240px;
+    width: 200px;
     height: 100%;
     transition: .05s ease-in;
 }
@@ -103,7 +107,7 @@ a:hover:not(.btn) {
     box-shadow: inset 0px 9px 14px -7px rgba(176,176,176,1);
     margin-top: 50px;
     padding-top: 10px;
-    margin-left: 240px ;
+    margin-left: 200px ;
     margin-bottom: 20px ;
 }
 

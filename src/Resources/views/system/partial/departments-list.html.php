@@ -18,6 +18,7 @@ $view->extend('layout/blocks/card.html.php');
     <thead>
         <tr>
             <th class="col-md-6">Title</th>
+            <th class="col-md-6">Short</th>
             <th style="width: 3%">
                 <a href="<?= $view['router']->path('system_department_add',['id'=> $company ? $company->getId() : 0]) ?>" class="btn btn-sm btn-primary">Add</a>
             </th>
@@ -28,6 +29,7 @@ $view->extend('layout/blocks/card.html.php');
             <?php foreach ($departments ?? [] as $department) :?>
                 <tr>
                     <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>"><?= $this->escape($department->getTitle())?></a></td>
+                    <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>"><?= $this->escape($department->getShortTitle())?></a></td>
                     <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>
             <?php endforeach;?>

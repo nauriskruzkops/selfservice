@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
  * @var PhpEngine $view
  */
 
+$view['slots']->set('department', $department ?? null);
+
 $view->extend('layout/base.html.php');
 
 $pageTitle = $view['slots']->get('pageTitle');

@@ -136,4 +136,12 @@ class VacationType {
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isFullyPaid()
+    {
+        return ($this->paidPercents == 100);
+    }
+
 }

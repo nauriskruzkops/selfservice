@@ -58,6 +58,11 @@ class Company {
         $this->parent = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     /**
      * @return mixed
      */

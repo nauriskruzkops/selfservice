@@ -12,8 +12,6 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 $formHelper = $view['form'];
 $view['slots']->set('pageTitle', 'Leave days overview');
 $view['slots']->set('pageIcon', 'fa fa-building-o');
-$view['slots']->set('parentPageTitle', 'System');
-$view['slots']->set('parentPageUrl', 'system');
 
 $view->extend('layout/layout.html.php');
 ?>

@@ -108,7 +108,6 @@ class EmployeeController extends ExtendController
             try {
                 /** @var Employee $employee */
                 $employee = $form->getData();
-                $employee->getUser()->setRoles($request->get('employee_form')['user']['roles']);
                 $em = $this->getDoctrine()->getManager();
                 $em->merge($form->getData());
                 $em->flush();

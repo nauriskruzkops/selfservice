@@ -9,5 +9,4 @@ $view->extend('department/layout.html.php');
 
 $view['slots']->set('department', $department);
 ?>
-
-Welcome to <?= $department ?>!
+...

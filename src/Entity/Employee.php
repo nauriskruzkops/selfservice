@@ -81,6 +81,7 @@ class Employee {
     {
         $this->foreigner = false;
         $this->companyRelation = new ArrayCollection();
+        $this->vacations = new ArrayCollection();
     }
 
     public function __toString()
@@ -157,6 +158,25 @@ class Employee {
             $this->getSecondName(),
             $this->getSurname()
         ]));
+    }
+
+
+    public function getShortTitle()
+    {
+        $splitWords = explode(' ', $this->getFullName());
+        if (count($splitWords) === 1) {
+            return
+                strtoupper(mb_substr($splitWords[0], 0, 3));
+        } elseif (count($splitWords) <= 2) {
+            return
+                strtoupper(mb_substr($splitWords[0], 0, 1)).
+                strtoupper(mb_substr($splitWords[1], 0, 2));
+        } else {
+            return
+                strtoupper(mb_substr($splitWords[0], 0, 1)).
+                strtoupper(mb_substr($splitWords[1], 0, 1)).
+                strtoupper(mb_substr($splitWords[2], 0, 1));
+        }
     }
 
     /**
@@ -252,7 +272,7 @@ class Employee {
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getCompanyRelation()
     {

@@ -19,7 +19,7 @@ $current = $current ?? '';
     <li class="breadcrumb-item">
         <a href="/">Home</a>
     </li>
-    <?php if ($parent) :?>
+    <?php if ($parent && $parent['pageTitle'] ?? false) :?>
         <li class="breadcrumb-item">
             <a href="<?=$parent['pageUrl']??''?>"><?=$parent['pageTitle']??''?></a>
         </li>

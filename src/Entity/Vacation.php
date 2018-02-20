@@ -117,7 +117,7 @@ class Vacation {
     }
 
     /**
-     * @return mixed
+     * @return Employee
      */
     public function getEmployee()
     {
@@ -125,10 +125,10 @@ class Vacation {
     }
 
     /**
-     * @param mixed $employee
+     * @param Employee $employee
      * @return Vacation
      */
-    public function setEmployee($employee)
+    public function setEmployee(Employee $employee = null)
     {
         $this->employee = $employee;
 

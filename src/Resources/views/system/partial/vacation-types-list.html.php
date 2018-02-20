@@ -18,7 +18,7 @@ $view->extend('layout/blocks/card.html.php');
         <tr>
             <th class="col-md-6">Title</th>
             <th>Leave days</th>
-            <th>Paid %</th>
+            <th>Fully Paid</th>
             <th style="width: 3%">
                 <a href="<?= $view['router']->path('system_vacation_type_add',['id'=> $company ? $company->getId() : 0]) ?>" class="btn btn-sm btn-primary">Add</a>
             </th>
@@ -30,7 +30,7 @@ $view->extend('layout/blocks/card.html.php');
                 <tr>
                     <td><a href="<?= $view['router']->path('system_vacation_type_edit',['id'=>$type->getId()]) ?>"><?= $this->escape($type->getTitle())?></a></td>
                     <td><?= $this->escape($type->getDaysLeave())?></td>
-                    <td><?= $this->escape($type->getPaidPercents())?></td>
+                    <td><?= $type->isFullyPaid() ? 'Yes' : 'No'?></td>
                     <td><a href="<?= $view['router']->path('system_vacation_type_edit',['id'=>$type->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>
             <?php endforeach;?>

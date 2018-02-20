@@ -10,4 +10,4 @@ $view->extend('employee/layout.html.php');
 $view['slots']->set('employee', $employee);
 ?>
 
-Hello <?= $employee ?>!
+...

@@ -3,37 +3,28 @@
 namespace App\Controller\Department;
 
 use App\Controller\ExtendController;
-use App\Entity\CompanyEmployee;
-use App\Entity\Employee;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends ExtendController
 {
     /**
-     * @Route("/department", name="department")
+     * @Route("/department/{department_id}", name="department", defaults={"department_id"=""})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function idAction(Request $request)
     {
-        /** @var CompanyEmployee $employee */
-        $employee = $this->getUser()->getEmployee()->getCompanyRelation()->first();
-        $department = $employee->getDepartment();
+        $employee = $this->getEmployeeByUser($this->getUser());
+        if (($departmentId = $request->get('department_id', null))) {
+            $department = $this->getDepartmentBy($departmentId);
+        } else {
+            $department = $this->getDepartmentByUser($this->getUser());
+        }
 
         return $this->render('department/overview.html.php', [
             'department' => $department,
             'employee' => $employee,
-        ]);
-    }
-
-    /**
-     * @Route("/department/{department_id}", name="department_id")
-     */
-    public function idAction(Request $request)
-    {
-        $department = $this->getDepartmentBy($request->get('department_id'));
-
-        return $this->render('department/overview.html.php', [
-            'department' => $department
         ]);
     }
 }

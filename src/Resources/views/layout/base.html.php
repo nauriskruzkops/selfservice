@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <link href="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/css/bootstrap.min.css', 'vendor') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
+        <link href="<? $view['assets']->getUrl('//use.fontawesome.com/releases/v5.0.6/css/all.css', 'vendor') ?>" rel="stylesheet" type="text/css">
         <link href="<?= $view['assets']->getUrl('/assets/css/theme-base.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/bootstrap-overwrite.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar.css', 'css') ?>" rel="stylesheet">

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\CompanyDepartment;
+use App\Entity\CompanyEmployee;
 use App\Entity\Employee;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,11 +23,24 @@ class ExtendController extends Controller
             $findBy = $id;
         }
 
-        if (is_numeric($id) && !empty($findBy)) {
+        if (!empty($findBy) && is_numeric($findBy)) {
             /** @var Employee $employee */
             if (($employee = $this->getDoctrine()->getRepository(Employee::class)->find($findBy))) {
                 return $employee;
             }
+        }
+
+        return $this->createNotFoundException();
+    }
+
+    /**
+     * @param User $user
+     * @return CompanyEmployee|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function getEmployeeByUser(User $user)
+    {
+        if (($employee = $user->getEmployee()->getCompanyRelation()->first())) {
+            return $employee;
         }
 
         return $this->createNotFoundException();
@@ -46,6 +61,22 @@ class ExtendController extends Controller
         if (is_numeric($id) && !empty($findBy)) {
             /** @var CompanyDepartment $department */
             if (($department = $this->getDoctrine()->getRepository(CompanyDepartment::class)->find($findBy))) {
+                return $department;
+            }
+        }
+
+        return $this->createNotFoundException();
+    }
+
+    /**
+     * @param User $user
+     * @return CompanyDepartment|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function getDepartmentByUser(User $user)
+    {
+        if (($employee = $this->getUser()->getEmployee()->getCompanyRelation()->first())) {
+            $department = $employee->getDepartment();
+            if ($department) {
                 return $department;
             }
         }

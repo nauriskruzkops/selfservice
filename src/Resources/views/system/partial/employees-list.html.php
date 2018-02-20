@@ -14,6 +14,7 @@ $view->extend('layout/blocks/card.html.php');
     <thead>
     <tr>
         <th>Full name</th>
+        <th>Short</th>
         <th>Start date</th>
         <th>Department</th>
         <th>Access</th>
@@ -25,6 +26,7 @@ $view->extend('layout/blocks/card.html.php');
             <?php foreach ($employees->getIterator() ?? [] as $employee) :?>
                 <tr>
                     <td><?= $this->escape($employee->getEmployee()->getFullName())?></td>
+                    <td><?= $this->escape($employee->getEmployee()->getShortTitle())?></td>
                     <td><?= $employee->getStartDate()->format('d.m.Y')?></td>
                     <td><?= $this->escape($employee->getDepartment())?></td>
                     <td>

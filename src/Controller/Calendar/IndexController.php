@@ -15,12 +15,12 @@ class IndexController extends ExtendController
      */
     public function indexAction(Request $request)
     {
-        $employees = $this->getDoctrine()->getRepository(CompanyEmployee::class)->getListByDepartments();
+        $department = $this->getEmployeeByUser($this->getUser());
         $form = $this->createForm(EmployeeVacationForm::class);
 
         return $this->render('calendar/index.html.php', [
             'startDate' => (new \DateTime('now'))->modify('first day of this month'),
-            'employees' => $employees,
+            'department' => $department,
             'form' => $form->createView(),
         ]);
     }

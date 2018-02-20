@@ -22,11 +22,12 @@ class VacationController extends ExtendController
 
         /** @var Vacation $vacation */
         $vacation = $this->getDoctrine()->getRepository(Vacation::class)->find($request->get('vacation_id'));
+        $vacation->setEmployee($employee);
 
         /** @var EmployeeVacationForm $form */
         $form = $this->createForm(EmployeeVacationForm::class, $vacation, [
             'action' => $this->generateUrl('employee_vacation_info', [
-                'employee_id' => $vacation->getEmployee()->getId(),
+                'employee_id' => $employee->getId(),
                 'vacation_id' => $vacation->getId(),
             ]),
             'method' => 'POST',
@@ -35,8 +36,11 @@ class VacationController extends ExtendController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                $vacation = $form->getData();
+                $vacation->setEmployee($employee);
+
                 $em = $this->getDoctrine()->getManager();
-                $em->merge($form->getData());
+                $em->merge($vacation);
                 $em->flush();
 
                 return $this->json([
@@ -67,22 +71,25 @@ class VacationController extends ExtendController
      */
     public function addAction(Request $request)
     {
-        /** @var EmployeeVacationForm $form */
-        $form = $this->createForm(EmployeeVacationForm::class, new Vacation(), [
-            'action' => $this->generateUrl('employee_vacation_add',[
-                'employee_id' => $request->get('employee_id')
-            ]),
-            'method' => 'POST',
-        ]);
 
         /** @var Employee $employee */
         $employee = $this->getEmployeeBy($request);
 
+        /** @var EmployeeVacationForm $form */
+        $form = $this->createForm(EmployeeVacationForm::class, new Vacation(), [
+            'action' => $this->generateUrl('employee_vacation_add',[
+                'employee_id' => $employee->getId()
+            ]),
+            'method' => 'POST',
+        ]);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                $vacation = $form->getData();
+                $vacation->setEmployee($employee);
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($form->getData());
+                $em->persist($vacation);
                 $em->flush();
 
                 return $this->json([

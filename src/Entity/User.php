@@ -193,7 +193,7 @@ class User implements UserInterface, \Serializable {
      * @param mixed $roles
      * @return User
      */
-    public function setRoles(array $roles)
+    public function setRoles(array $roles = null)
     {
         $this->roles = $roles;
 

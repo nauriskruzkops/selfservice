@@ -5,15 +5,30 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 /**
  * @var PhpEngine $view
+ * @var Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables $app
  */
-?><div class="row page-title" style="padding-top: 5px; padding-bottom: 5px; ">
+
+$request = $app->getRequest();
+
+/**
+ * @var PhpEngine $view
+ */
+?><div class="row page-title">
     <div class="col-md-6 col-sm-12">
-        <h4>
-        <span style="margin-right: 10px; float: left">
-            <i class="<?= $pageIcon ?? ''?>" style="display: inline-block"></i>
-        </span>
+        <span class="breadcrumb-page-title" style="text-transform: uppercase">
+            <span style="margin-right: 10px; float: left">
+                <i class="<?= $pageIcon ?? ''?>" style="display: inline-block"></i>
+            </span>
             <?= $pageTitle ?? ''?>
-        </h4>
+        </span>
+
+        <?php if (strpos($request->attributes->get('_route'),'department') !== false) {?>
+            <?= $view['actions']->render(
+                new ControllerReference('App\\Controller\\Layout\\LayoutController::departmentsDropdown',[
+                    'request' => $request,
+                ])
+            ) ?>
+        <?php }?>
     </div>
     <div class="col-md-6 col-sm-12">
         <?php echo $view['actions']->render(

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Company;
+use App\Entity\CompanyDepartment;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -24,9 +25,14 @@ class CompanyEmployeeRepository extends EntityRepository
         return $qb;
     }
 
-    public function getListByDepartments($department = null)
+    public function getListByDepartments(CompanyDepartment $department)
     {
         $qb = $this->getMyAvailable();
+        $qb->where(
+            $qb->expr()->eq(
+                'ce.department', $department->getId()
+            )
+        );
         $result = $qb->getQuery()->getResult();
 
         return $result;

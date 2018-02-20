@@ -34,7 +34,6 @@ class CompanyDepartment {
      */
     private $manager;
 
-
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      */
@@ -100,6 +99,17 @@ class CompanyDepartment {
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function getShortTitle()
+    {
+        $splitWords = explode(' ', $this->getTitle());
+        if (count($splitWords) > 1) {
+            return implode('',array_map(function ($v){
+                return strtoupper($v[0]);
+            }, $splitWords));
+        }
+        return strtoupper(substr(reset($splitWords), 0, 2));
     }
 
     /**
