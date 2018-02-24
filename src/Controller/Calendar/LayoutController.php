@@ -24,7 +24,11 @@ class LayoutController extends ExtendController
             $employees = $this->getDoctrine()->getRepository(CompanyEmployee::class)->getListByDepartments($getEmployeesBy);
         } else {
             $department = $this->getDepartmentByUser($this->getUser());
-            $employees = $this->getDoctrine()->getRepository(CompanyEmployee::class)->getListByDepartments($department);
+            if ($department instanceof CompanyDepartment ) {
+                $employees = $this->getDoctrine()->getRepository(CompanyEmployee::class)->getListByDepartments($department);
+            } else {
+                $employees = null;
+            }
         }
 
         return $this->render('calendar/partial/calendar.html.php', [

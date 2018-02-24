@@ -28,13 +28,19 @@ class Company {
     private $parent;
 
     /**
-     * One Customer has One Cart.
-     * @ORM\OneToMany(targetEntity="App\Entity\CompanyDepartment", mappedBy="company")
+     * @var CompanyDepartment[]
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyDepartment", mappedBy="company", cascade={"persist"})
      */
     private $departments;
 
     /**
-     * One Customer has One Cart.
+     * @var VacationType
+     * @ORM\OneToMany(targetEntity="App\Entity\VacationType", mappedBy="company", cascade={"persist"})
+     */
+    private $vacationTypes;
+
+    /**
+     * @var CompanyEmployee
      * @ORM\OneToMany(targetEntity="App\Entity\CompanyEmployee", mappedBy="company")
      */
     private $employees;
@@ -55,7 +61,9 @@ class Company {
     public function __construct()
     {
         $this->employees = new ArrayCollection();
-        $this->parent = new ArrayCollection();
+        $this->departments = new ArrayCollection();
+        $this->vacationTypes = new ArrayCollection();
+        $this->parent = null;
     }
 
     public function __toString()
@@ -80,7 +88,7 @@ class Company {
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getDepartments()
     {
@@ -88,12 +96,60 @@ class Company {
     }
 
     /**
-     * @param mixed $departments
+     * @param ArrayCollection $departments
      * @return Company
      */
     public function setDepartments($departments)
     {
         $this->departments = $departments;
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyDepartment $departments
+     * @return Company
+     */
+    public function addDepartments(CompanyDepartment $department)
+    {
+        if (!$this->departments->contains($department)) {
+            $department->setCompany($this);
+            $this->departments->add($department);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return VacationType
+     */
+    public function getVacationTypes(): VacationType
+    {
+        return $this->vacationTypes;
+    }
+
+    /**
+     * @param VacationType $vacationTypes
+     * @return Company
+     */
+    public function setVacationTypes(VacationType $vacationTypes): Company
+    {
+        $this->vacationTypes = $vacationTypes;
+
+        return $this;
+    }
+
+    /**
+     * @param VacationType $departments
+     * @return Company
+     */
+    public function addVacationType(VacationType $type)
+    {
+        if (!$this->vacationTypes->contains($type)) {
+            $type->setCompany($this);
+            $this->vacationTypes->add($type);
+        }
+
         return $this;
     }
 

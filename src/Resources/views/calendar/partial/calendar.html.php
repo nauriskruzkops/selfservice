@@ -27,7 +27,7 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
 ?><div class="calendar_content">
     <div class="timetable">
         <ul class="timeline-employees">
-            <?php foreach ($employees as $employee):?>
+            <?php foreach ($employees ?? [] as $employee):?>
                 <li>
                     <span class="row-heading">
                         <?=$employee->getEmployee()->getFullName()?>
@@ -56,7 +56,7 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
                     </ul>
                 </div>
                 <ul class="timeline-vacation">
-                    <?php foreach ($employees as $employee):?>
+                    <?php foreach ($employees ?? [] as $employee):?>
                         <li>
                             <?php foreach ($employee->getEmployee()->getVacations() as $vacation): ?>
                                 <a href="<?php echo $view['router']->path('employee_vacation_info',[
