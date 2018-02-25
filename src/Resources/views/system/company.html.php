@@ -52,13 +52,13 @@ $view['slots']->set('parentPageUrl', 'system');
                                         <?= $formHelper->widget($formView['registrationNo']) ?>
                                         <?= $formHelper->errors($formView['registrationNo']) ?>
                                     </div>
+                                </div>
+                                <div class="col">
                                     <div class="form-group">
                                         <?= $formHelper->label($formView['parent']) ?>
                                         <?= $formHelper->widget($formView['parent']) ?>
                                         <?= $formHelper->errors($formView['parent']) ?>
                                     </div>
-                                </div>
-                                <div class="col">
                                     <?php echo $view['actions']->render(
                                         new ControllerReference('App\\Controller\\System\\SettingsController::globalList',['company' => $company])
                                     ) ?>

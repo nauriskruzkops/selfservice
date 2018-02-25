@@ -12,11 +12,8 @@ class LayoutController extends ExtendController
 {
     public function calendar(CalendarGenerator $calendarGenerator, Request $request)
     {
-        $getDate = $request->get('date', new \DateTime('now'));
-
-        if (!$getDate instanceof \DateTime) {
-            $getDate = new \DateTime($getDate);
-        }
+        $today = new \DateTime('now');
+        $getDate = clone $today->setDate($today->format('Y'), 1, 1);
 
         $getEmployeesBy = $request->get('getEmployeesBy');
 

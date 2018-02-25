@@ -22,13 +22,15 @@ $request = $app->getRequest();
             <?= $pageTitle ?? ''?>
         </span>
 
-        <?php if (strpos($request->attributes->get('_route'),'department') !== false) {?>
-            <?= $view['actions']->render(
-                new ControllerReference('App\\Controller\\Layout\\LayoutController::departmentsDropdown',[
-                    'request' => $request,
-                ])
-            ) ?>
-        <?php }?>
+        <?php if (strpos($request->attributes->get('_route'),'department') !== false) :?>
+            <?php if ($app->getUser()->isAdmin() or $app->getUser()->isSuperAdmin()) :?>
+                <?= $view['actions']->render(
+                    new ControllerReference('App\\Controller\\Layout\\LayoutController::departmentsDropdown',[
+                        'request' => $request,
+                    ])
+                ) ?>
+            <?php endif; ?>
+        <?php endif;?>
     </div>
     <div class="col-md-6 col-sm-12">
         <?php echo $view['actions']->render(

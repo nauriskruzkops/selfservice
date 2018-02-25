@@ -44,7 +44,7 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @var CompanyDepartment
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyDepartment", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyDepartment", inversedBy="employees", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
      */
     private $department;
@@ -199,7 +199,7 @@ class CompanyEmployee implements \ArrayAccess
     /**
      * @return Employee
      */
-    public function getManager(): Employee
+    public function getManager()
     {
         return $this->manager;
     }
@@ -208,7 +208,7 @@ class CompanyEmployee implements \ArrayAccess
      * @param Employee $manager
      * @return CompanyEmployee
      */
-    public function setManager(Employee $manager)
+    public function setManager(Employee $manager = null)
     {
         $this->manager = $manager;
         return $this;

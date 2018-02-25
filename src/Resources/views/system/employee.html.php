@@ -86,6 +86,14 @@ $view['slots']->set('parentPageUrl', $view['router']->path('system'));
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['manager']) ?></div>
+                                            <div class="col-sm-9">
+                                                <?= $formHelper->errors($formView['companyRelation'][0]['manager']) ?>
+                                                <?= $formHelper->widget($formView['companyRelation'][0]['manager']) ?>
+                                                <span class="small text-muted">By default (if empty) department manager</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['startDate']) ?></div>
                                             <div class="col-sm-9">
                                                 <div class="form-row">

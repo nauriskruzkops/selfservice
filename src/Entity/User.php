@@ -77,7 +77,7 @@ class User implements UserInterface, \Serializable {
 
     public function __construct()
     {
-        //$this->rols = new ArrayCollection();
+        $this->roles = [self::ROLE_USER];
         $this->active = true;
         //$this->salt = md5(uniqid(null, true));
     }
@@ -198,6 +198,33 @@ class User implements UserInterface, \Serializable {
         $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     * @deprecated use $authChecker->isGranted('ROLE_MANAGER')
+     */
+    public function isManager()
+    {
+        return (in_array(self::ROLE_MANAGER, $this->getRoles()));
+    }
+
+    /**
+     * @return bool
+     * @deprecated use $authChecker->isGranted('ROLE_ADMIN')
+     */
+    public function isAdmin()
+    {
+        return (in_array(self::ROLE_ADMIN, $this->getRoles()));
+    }
+
+    /**
+     * @return bool
+     * @deprecated use $authChecker->isGranted('ROLE_SUPER_ADMIN')
+     */
+    public function isSuperAdmin()
+    {
+        return (in_array(self::ROLE_SUPER_ADMIN, $this->getRoles()));
     }
 
     /**

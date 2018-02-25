@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Company;
+use App\Entity\CompanyDepartment;
 use App\Entity\CompanyEmployee;
 use App\Entity\Employee;
 
@@ -19,7 +20,7 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
         $companies = $manager->getRepository(Company::class)->findAll();
         /** @var Company $company */
         $company = end($companies);
-        $departments = $company->getDepartments()->getIterator();
+        $departments = $company->getDepartments();
         $totalDepartments = $departments->count();
 
         for ($i = 1; $i <= 100; $i++) {
@@ -43,15 +44,23 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
                     (new \DateTime())->setDate('20'.rand(15,17),''.rand(1,12),''.rand(1,27))
                 );
             }{
-                $companyEmployee->setDepartment($departments[rand(0, $totalDepartments-1)]);
+                $companyEmployee->setDepartment($departments->getIterator()[rand(0, $totalDepartments-1)]);
             }
             $manager->persist($companyEmployee);
             $manager->flush();
         }
 
+        foreach ($departments as $department) {
+            $employees = $department->getEmployees();
+            if ($employees) {
+                $department->setManager($employees->getIterator()[rand(1, $employees->count() - 1)]->getEmployee());
+            }
+        }
+
         /** @var User $admin - add superuser to system */
         $admin = $manager->getRepository(User::class)->findOneBy(['username' => 'admin']);
         $admin->setEmployee($employee);
+
         $manager->merge($admin);
         $manager->flush();
     }

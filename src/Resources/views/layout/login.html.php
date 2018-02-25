@@ -13,6 +13,20 @@ $view->extend('layout/base.html.php');
             <div class="card-body">
                 <h2>Login</h2>
                 <p></p>
+                <?php foreach ($view['session']->getFlashes() as $type => $flash_messages): ?>
+                    <?php
+                    $alertType = 'alert-success';
+                    if ($type == 'error') {
+                        $alertType = 'alert-danger';
+                    }
+                    ?>
+                    <div class="col alert <?= $alertType?> alert-dismissible fade show" role="alert">
+                        <?= '- '.implode('<br>- ', $flash_messages)?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php endforeach ?>
                 <form action="<?= $view['router']->path('login') ?>" method="post">
                     <div class="form-group">
                         <input class="form-control" id="inputEmail" type="text" aria-describedby="emailHelp" placeholder="Enter email" name="_username" value="<?= $last_username ?? ''?>">

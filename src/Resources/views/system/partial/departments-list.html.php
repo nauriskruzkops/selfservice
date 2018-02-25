@@ -17,8 +17,10 @@ $view->extend('layout/blocks/card.html.php');
 ?><table class="table table-sm table-hover" role="grid">
     <thead>
         <tr>
-            <th class="col-md-6">Title</th>
-            <th class="col-md-6">Short</th>
+            <th class="col-md-4">Title</th>
+            <th>Short</th>
+            <th>Manager</th>
+            <th>Employees</th>
             <th style="width: 3%">
                 <a href="<?= $view['router']->path('system_department_add',['id'=> $company ? $company->getId() : 0]) ?>" class="btn btn-sm btn-primary">Add</a>
             </th>
@@ -30,6 +32,8 @@ $view->extend('layout/blocks/card.html.php');
                 <tr>
                     <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>"><?= $this->escape($department->getTitle())?></a></td>
                     <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>"><?= $this->escape($department->getShortTitle())?></a></td>
+                    <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>"><?= $this->escape($department->getManager())?></a></td>
+                    <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>"><?= $department->getEmployees()->count()?></a></td>
                     <td><a href="<?= $view['router']->path('system_department_edit',['id'=>$department->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>
             <?php endforeach;?>

@@ -5,8 +5,10 @@ namespace App\Form\System;
 use App\Entity\Company;
 use App\Entity\CompanyDepartment;
 use App\Entity\CompanyEmployee;
+use App\Entity\Employee;
 use App\Repository\CompanyDepartmentRepository;
 use App\Repository\CompanyRepository;
+use App\Repository\EmployeeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,6 +42,19 @@ class CompanyEmployeeForm extends AbstractType
                 },
                 'choice_label' => 'title',
                 'placeholder' => '-- Select --',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('manager', EntityType::class, [
+                'required' => false,
+                'class' => Employee::class,
+                'query_builder' => function (EmployeeRepository $er) {
+                    return $er->getSelectList();
+                },
+                'choice_label' => 'getFullName',
+                'placeholder' => '-- Select direct manager --',
+                'label' => 'Direct manager',
                 'attr' => [
                     'class' => 'form-control',
                 ],

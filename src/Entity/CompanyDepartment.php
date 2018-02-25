@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +34,12 @@ class CompanyDepartment {
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      */
     private $manager;
+
+    /**
+     * @var CompanyEmployee[]
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyEmployee", mappedBy="department", cascade={"persist"})
+     */
+    private $employees;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
@@ -106,7 +113,12 @@ class CompanyDepartment {
         $splitWords = explode(' ', $this->getTitle());
         if (count($splitWords) > 1) {
             return implode('',array_map(function ($v){
-                return strtoupper($v[0]);
+                $v = trim($v);
+                if (strlen($v) > 2) {
+                    return strtoupper(substr($v, 0, 1));
+                } else {
+                    return strtoupper($v);
+                }
             }, $splitWords));
         }
         return strtoupper(substr(reset($splitWords), 0, 2));
@@ -119,6 +131,25 @@ class CompanyDepartment {
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return CompanyEmployee[]
+     */
+    public function getEmployees()
+    {
+        return $this->employees;
+    }
+
+    /**
+     * @param ArrayCollection $employees
+     * @return CompanyDepartment
+     */
+    public function setEmployees($employees): CompanyDepartment
+    {
+        $this->employees = $employees;
 
         return $this;
     }

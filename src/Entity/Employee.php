@@ -165,18 +165,20 @@ class Employee {
     {
         $splitWords = explode(' ', $this->getFullName());
         if (count($splitWords) === 1) {
-            return
+            $short =
                 strtoupper(mb_substr($splitWords[0], 0, 3));
         } elseif (count($splitWords) <= 2) {
-            return
+            $short =
                 strtoupper(mb_substr($splitWords[0], 0, 1)).
                 strtoupper(mb_substr($splitWords[1], 0, 2));
         } else {
-            return
-                strtoupper(mb_substr($splitWords[0], 0, 1)).
-                strtoupper(mb_substr($splitWords[1], 0, 1)).
-                strtoupper(mb_substr($splitWords[2], 0, 1));
+            $short = "";
+            foreach ($splitWords as $w) {
+                $short .= strtoupper(mb_substr($w, 0, 1));
+            }
         }
+
+        return trim($short);
     }
 
     /**

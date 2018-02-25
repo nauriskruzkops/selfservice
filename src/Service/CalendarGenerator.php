@@ -12,7 +12,7 @@ class CalendarGenerator
     /**
      * @var int
      */
-    private $periodShown = 2;
+    private $periodShown = 6;
 
     /**
      * @return \DateTime

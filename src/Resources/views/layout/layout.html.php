@@ -18,7 +18,11 @@ $parentPageUrl = $view['slots']->get('parentPageUrl');
 
 ?>
 <nav id="mainTopNav" class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
-    <a class="navbar-brand" href="\">Self-service panel</a>
+    <a class="navbar-brand" href="\">
+        Crocolab
+        <strong>HRMS</strong>
+        <span class="small" style="font-weight: normal">Human resource management system</span>
+    </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

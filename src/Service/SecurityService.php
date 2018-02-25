@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Entity\CompanyDepartment;
 use App\Entity\Employee;
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -43,6 +45,7 @@ class SecurityService
                 $user->setEmployee($employee);
                 $user->setUsername(trim($email));
                 $user->setActive(true);
+                $user->setRoles($this->getUserRole($employee));
 
                 $this->em->persist($user);
                 $this->em->flush();
@@ -50,5 +53,28 @@ class SecurityService
                 return $user;
             }
         }
+    }
+
+    /**
+     * @param Employee $employee
+     * @return array
+     */
+    private function getUserRole(Employee $employee)
+    {
+        $role = $employee->getUser()->getRoles();
+
+        /** @var CompanyDepartment[] $departments */
+        $departments = $this->em->getRepository(CompanyDepartment::class)->findAll();
+
+        if ($departments) {
+            foreach ($departments as $department) {
+                if ($department->getManager() == $employee) {
+                    array_push($role, User::ROLE_MANAGER);
+                    break;
+                }
+            }
+        }
+
+        return $role;
     }
 }

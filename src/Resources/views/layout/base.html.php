@@ -12,9 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Selfservice</title>
+        <meta name="description" content="Human resource management system">
+        <meta name="author" content="nauris.kruzkops@gmail.com">
+        <title>Crocolab HRMS (Human resource management system)</title>
         <link href="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/css/bootstrap.min.css', 'vendor') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
