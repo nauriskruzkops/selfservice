@@ -44,7 +44,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <!-- Global AJAX Modal:END -->
 
         <script src="<?= $view['assets']->getUrl('/assets/vendor/moment.min.js', 'vendor') ?>"></script>
-        <script src="<?= $view['assets']->getUrl('/assets/vendor/bootstrap-datepicker/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js', 'vendor') ?>"></script>
+        <script src="<?= $view['assets']->getUrl('/assets/vendor/bootstrap-datepicker/bootstrap-datetimepicker.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/js/main.js', 'js') ?>"></script>
     </body>
 </html>
