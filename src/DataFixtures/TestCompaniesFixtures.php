@@ -15,13 +15,14 @@ class TestCompaniesFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        if ($manager->getRepository(Company::class)->findBy(['title' => 'Main Company inc.'])) {
-            return ;
+        $companyTitle = "Main Company inc.";
+        if (($cc = $manager->getRepository(Company::class)->findBy(['title' => 'Main Company inc.']))) {
+            $companyTitle = "Other Company ".(count($cc)+1)." inc.";
         }
 
         $company = new Company();
         $company->setCreatedAt(new \DateTime());
-        $company->setTitle('Main Company inc.');
+        $company->setTitle($companyTitle);
 
         $company->addDepartments((new CompanyDepartment())->setTitle('Head Office'));
         $company->addDepartments((new CompanyDepartment())->setTitle('Accounting'));

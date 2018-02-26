@@ -30,21 +30,34 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
 ?><div class="calendar_content">
     <div class="timetable">
         <ul class="timeline-employees" style="padding-top: 20px !important;">
-            <?php foreach ($employees ?? [] as $employee):?>
+            <?php foreach ($employees ?? [] as $employee) : ?>
+                <?php $currentUser = ($employee->getEmployee() == $app->getUser()->getEmployee()); ?>
                 <li>
                     <span class="row-heading">
                         <span class="bg-dark small" style="padding: 0 3px; margin-right: 3px">
                             <?=$employee->getEmployee()->getShortTitle()?>
                         </span>
-
-                        <?=$employee->getEmployee()->getName()?>
+                        <span class="<?= ($currentUser)?'font-weight-bold':''?>">
+                            <?= $this->escape($employee->getEmployee()->getName())?>
+                        </span>
                     </span>
-                    <span class="pull-right" style="font-size: 80%">
-                        <a href="<?php echo $view['router']->path('employee_vacation_add',[
+                    <?php /** @todo : refactor */ if($app->getUser()->isUser()) :?>
+                        <?php if($currentUser) :?>
+                            <span class="pull-right" style="font-size: 80%">
+                                <strong><a class="font-weight-bold" href="<?php echo $view['router']->path('employee_vacation_add',[
+                                        'employee_id' => $employee->getEmployee()->getId()
+                                ]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                                    <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a></strong>
+                            </span>
+                        <?php endif;?>
+                    <?php else :?>
+                        <span class="pull-right" style="font-size: 80%">
+                            <a href="<?php echo $view['router']->path('employee_vacation_add',[
                                 'employee_id' => $employee->getEmployee()->getId()
-                        ]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
-                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
-                    </span>
+                            ]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
+                                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
+                        </span>
+                    <? endif;?>
                 </li>
             <?php endforeach;?>
         </ul>

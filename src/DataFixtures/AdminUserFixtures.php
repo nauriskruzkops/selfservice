@@ -18,7 +18,7 @@ class AdminUserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        if (!$manager->getRepository(User::class)->findOneBy(['username' => 'admin'])) {
+        if (!($manager->getRepository(User::class)->findOneBy(['username' => 'admin']))) {
 
             $user = new User();
             $user->setUsername('admin');

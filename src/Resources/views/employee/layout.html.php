@@ -23,8 +23,8 @@ $view->extend('layout/layout.html.php');
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-12 col-md-2">
-                <div class="text-center p-md-4">
+            <div class="col-sm-12 col-md-2 align-middle">
+                <div class="text-center p-md-4 align-middle">
                     <i class="fa fa-user-circle-o fa-4x"></i>
                 </div>
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">

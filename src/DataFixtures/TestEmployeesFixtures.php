@@ -17,9 +17,9 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $companies = $manager->getRepository(Company::class)->findAll();
+        $companies = $manager->getRepository(Company::class)->findBy([],['id' => 'DESC']);
         /** @var Company $company */
-        $company = end($companies);
+        $company = reset($companies);
         $departments = $company->getDepartments();
         $totalDepartments = $departments->count();
 

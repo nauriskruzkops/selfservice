@@ -36,21 +36,26 @@ class SecurityService
         $email = $request->get('_useremail', null);
 
         if (!empty($email) && strlen($email) > 3 && strlen($email) < 100) {
-
+            /** @var Employee $employee */
             if (($employee = $this->em->getRepository(Employee::class)->getByEmail($email))) {
 
-                $user = new \App\Entity\User();
-                $encoded = $encoder->encodePassword($user, $email);
-                $user->setPassword($encoded);
-                $user->setEmployee($employee);
-                $user->setUsername(trim($email));
-                $user->setActive(true);
-                $user->setRoles($this->getUserRole($employee));
+                if (!$employee->getUser()) {
 
-                $this->em->persist($user);
-                $this->em->flush();
+                    $user = new \App\Entity\User();
+                    $encoded = $encoder->encodePassword($user, $email);
+                    $user->setPassword($encoded);
+                    $user->setEmployee($employee);
+                    $user->setUsername(trim($email));
+                    $user->setActive(true);
+                    $user->setRoles($this->getUserRole($employee));
 
-                return $user;
+                    $this->em->persist($user);
+                    $this->em->flush();
+
+                    return $user;
+                }
+
+                return $employee->getUser();
             }
         }
     }

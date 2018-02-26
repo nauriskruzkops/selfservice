@@ -202,6 +202,15 @@ class User implements UserInterface, \Serializable {
 
     /**
      * @return bool
+     * @deprecated use $authChecker->isGranted('ROLE_USER')
+     */
+    public function isUser()
+    {
+        return (in_array(self::ROLE_USER, $this->getRoles()));
+    }
+
+    /**
+     * @return bool
      * @deprecated use $authChecker->isGranted('ROLE_MANAGER')
      */
     public function isManager()
