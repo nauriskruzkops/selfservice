@@ -17,11 +17,10 @@ $parentPageTitle = $view['slots']->get('parentPageTitle');
 $parentPageUrl = $view['slots']->get('parentPageUrl');
 
 ?>
-<nav id="mainTopNav" class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
-    <a class="navbar-brand" href="\">
-        Crocolab
-        <strong>HRMS</strong>
-        <span class="small" style="font-weight: normal">Human resource management system</span>
+<nav id="mainTopNav" class="navbar navbar-expand-lg navbar-light bg-primary fixed-top align-middle">
+    <a class="navbar-brand text-dark" href="\" style="padding-left: 30px">
+        <span class="text-dark">Crocolab</span> <strong class="text-dark">HRMS</strong>
+        <span class="align-middle text-dark" style="font-weight: normal; font-size: 10px;"> | Human resource management system </span>
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

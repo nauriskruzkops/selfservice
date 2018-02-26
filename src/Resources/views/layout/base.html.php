@@ -16,9 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <meta name="author" content="nauris.kruzkops@gmail.com">
         <title>Crocolab HRMS (Human resource management system)</title>
         <link href="<?= $view['assets']->getUrl('/assets/vendor/bootstrap/css/bootstrap.min.css', 'vendor') ?>" rel="stylesheet">
-        <link href="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css', 'css') ?>" rel="stylesheet">
+        <link href="<?= $view['assets']->getUrl('/assets/vendor/bootstrap-datepicker/bootstrap-datetimepicker.min.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
-        <link href="<? $view['assets']->getUrl('//use.fontawesome.com/releases/v5.0.6/css/all.css', 'vendor') ?>" rel="stylesheet" type="text/css">
         <link href="<?= $view['assets']->getUrl('/assets/css/theme-base.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/bootstrap-overwrite.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar.css', 'css') ?>" rel="stylesheet">
@@ -44,8 +43,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         </div>
         <!-- Global AJAX Modal:END -->
 
-        <script src="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js', 'vendor') ?>"></script>
-        <script src="<?= $view['assets']->getUrl('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js', 'vendor') ?>"></script>
+        <script src="<?= $view['assets']->getUrl('/assets/vendor/moment.min.js', 'vendor') ?>"></script>
+        <script src="<?= $view['assets']->getUrl('/assets/vendor/bootstrap-datepicker/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js', 'vendor') ?>"></script>
         <script src="<?= $view['assets']->getUrl('/assets/js/main.js', 'js') ?>"></script>
     </body>
 </html>

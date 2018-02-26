@@ -6,5 +6,4 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /public/sb-admin/
-/public/assets/vendor/
 /assets/
