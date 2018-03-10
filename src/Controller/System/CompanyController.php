@@ -4,7 +4,7 @@ namespace App\Controller\System;
 
 use App\Entity\Company;
 use App\Form\System\CompanyForm;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +24,7 @@ class CompanyController extends ExtendController
         /** @var Company $company */
         $company = $request->get('company');
         $employees = $this->getDoctrine()
-            ->getRepository(CompanyEmployee::class)
+            ->getRepository(EmployeeDepartments::class)
             ->getPaginateList($company);
 
         return $this->render('system/partial/employees-list.html.php', [

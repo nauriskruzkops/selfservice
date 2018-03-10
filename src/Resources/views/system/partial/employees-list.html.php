@@ -4,7 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 /**
  * @var PhpEngine $view
  * @var \App\Entity\Company $company
- * @var \App\Entity\CompanyEmployee $employee
+ * @var \App\Entity\EmployeeDepartments $employee
  * @var Doctrine\ORM\Tools\Pagination\Paginator $employees
  */
 $view->extend('layout/blocks/card.html.php');
@@ -22,21 +22,21 @@ $view->extend('layout/blocks/card.html.php');
     </tr>
     </thead>
     <tbody>
-        <?php if ($company->getEmployees()->count()): ?>
-            <?php foreach ($employees->getIterator() ?? [] as $employee) :?>
+        <?php if ($company->getEmployees()) :?>
+            <?php foreach ($company->getEmployees() as $employee) : ?>
                 <tr>
-                    <td><?= $this->escape($employee->getEmployee()->getFullName())?></td>
-                    <td><?= $this->escape($employee->getEmployee()->getShortTitle())?></td>
-                    <td><?= $employee->getStartDate()->format('d.m.Y')?></td>
+                    <td><?= $this->escape($employee->getFullName())?></td>
+                    <td><?= $this->escape($employee->getShortTitle())?></td>
+                    <td><?= $employee->getDepartment()->getStartDate()->format('d.m.Y')?></td>
                     <td><?= $this->escape($employee->getDepartment())?></td>
                     <td>
-                        <?php if ($employee->getEmployee()->getUser()) {;?>
+                        <?php if ($employee->getUser()) {;?>
                             <span class="small text-muted">
-                                <?= implode(', ', $employee->getEmployee()->getUser()->getRoles())?>
+                                <?= implode(', ', $employee->getUser()->getRoles())?>
                             </span>
                         <?php }?>
                     </td>
-                    <td><a href="<?= $view['router']->path('system_employee',['id'=>$employee->getEmployee()->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
+                    <td><a href="<?= $view['router']->path('system_employee',['id'=>$employee->getId()]) ?>" class="btn btn-sm btn-default">Edit</a></td>
                 </tr>
             <?php endforeach;?>
         <?php endif;?>

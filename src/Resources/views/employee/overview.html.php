@@ -5,12 +5,12 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 /**
  * @var PhpEngine $view
  * @var \App\Entity\Employee $employee
- * @var \App\Entity\CompanyEmployee $companyEmployee
+ * @var \App\Entity\EmployeeDepartments $companyEmployee
  */
 $view->extend('employee/layout.html.php');
 
 $view['slots']->set('employee', $employee);
-$companyEmployee = $employee->getCompanyRelation()->first();
+$companyEmployee = $employee->getDepartments()->first();
 ?>
 
 <?= sprintf(

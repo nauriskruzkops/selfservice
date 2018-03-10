@@ -1,5 +1,7 @@
 <?php
 
+use App\Entity\CompanyDepartment;
+use App\Entity\EmployeeDepartments;
 use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
 use Symfony\Bundle\FrameworkBundle\Templating\Helper\RequestHelper;
 use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
@@ -9,7 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var GlobalVariables $app
  * @var RequestHelper $request
  * @var array $parent
- * @var \App\Entity\CompanyDepartment[] $departments
+ * @var EmployeeDepartments $current
+ * @var CompanyDepartment[] $departments
  */
 
 $request = $app->getRequest();

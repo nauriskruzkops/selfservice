@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Company;
 use App\Entity\CompanyDepartment;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use App\Entity\Employee;
 
 use App\Entity\User;
@@ -25,9 +25,10 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 1; $i <= 100; $i++) {
 
-            $companyEmployee = new CompanyEmployee();
+            $companyEmployee = new EmployeeDepartments();
             {
                 $employee = new Employee();
+                $employee->setCompany($company);
                 $employee->setCreatedAt(new \DateTime());
                 $employee->setName($this->getRandomName());
                 $employee->setSurname($this->getRandomSurname());
@@ -39,7 +40,6 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
                 $employee->setPersonalId('980' . rand(100000, 100000));
                 $companyEmployee->setEmployee($employee);
             }{
-                $companyEmployee->setCompany($company);
                 $companyEmployee->setStartDate(
                     (new \DateTime())->setDate('20'.rand(15,17),''.rand(1,12),''.rand(1,27))
                 );

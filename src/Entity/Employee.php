@@ -25,6 +25,13 @@ class Employee {
     private $id;
 
     /**
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     */
+    private $company;
+
+    /**
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $name;
@@ -67,9 +74,9 @@ class Employee {
 
     /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="CompanyEmployee", mappedBy="employee", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="EmployeeDepartments", mappedBy="employee", cascade={"persist", "remove"})
      */
-    private $companyRelation;
+    private $departments;
 
     /**
      * @var User
@@ -80,8 +87,27 @@ class Employee {
     public function __construct()
     {
         $this->foreigner = false;
-        $this->companyRelation = new ArrayCollection();
+        $this->departments = new ArrayCollection();
         $this->vacations = new ArrayCollection();
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     * @return Employee
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+
+        return $this;
     }
 
     public function __toString()
@@ -276,26 +302,26 @@ class Employee {
     /**
      * @return ArrayCollection
      */
-    public function getCompanyRelation()
+    public function getDepartments()
     {
-        return $this->companyRelation;
+        return $this->departments;
     }
 
     /**
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
-    public function getLastRelation()
+    public function getDepartment()
     {
-        return $this->companyRelation->last();
+        return $this->departments->last();
     }
 
     /**
-     * @param mixed $companyRelation
+     * @param mixed $departments
      * @return Employee
      */
-    public function setCompanyRelation($companyRelation)
+    public function setDepartments($departments)
     {
-        $this->companyRelation = $companyRelation;
+        $this->departments = $departments;
         return $this;
     }
 
@@ -303,11 +329,11 @@ class Employee {
      * @param mixed $companyRelation
      * @return Employee
      */
-    public function addCompanyRelation(CompanyEmployee $companyRelation)
+    public function addDepartment(EmployeeDepartments $companyRelation)
     {
-        if (!$this->companyRelation->contains($companyRelation)) {
+        if (!$this->departments->contains($companyRelation)) {
             $companyRelation->setEmployee($this);
-            $this->companyRelation->add($companyRelation);
+            $this->departments->add($companyRelation);
         }
         return $this;
     }

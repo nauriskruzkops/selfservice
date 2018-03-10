@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CompanyDepartment;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use App\Entity\Employee;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -35,11 +35,11 @@ class ExtendController extends Controller
 
     /**
      * @param User $user
-     * @return CompanyEmployee|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return Employee|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function getEmployeeByUser(User $user)
     {
-        if (($employee = $user->getEmployee()->getCompanyRelation()->first())) {
+        if (($employee = $user->getEmployee())) {
             return $employee;
         }
 
@@ -74,8 +74,9 @@ class ExtendController extends Controller
      */
     public function getDepartmentByUser(User $user)
     {
-        if (($employee = $this->getUser()->getEmployee()->getCompanyRelation()->first())) {
-            $department = $employee->getDepartment();
+        /** @var $employee Employee */
+        if (($employee = $this->getUser()->getEmployee())) {
+            $department = $employee->getDepartment()->getDepartment(); // ToDo: find related department
             if ($department) {
                 return $department;
             }

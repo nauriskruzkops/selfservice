@@ -40,8 +40,8 @@ class Company {
     private $vacationTypes;
 
     /**
-     * @var CompanyEmployee
-     * @ORM\OneToMany(targetEntity="App\Entity\CompanyEmployee", mappedBy="company")
+     * @var EmployeeDepartments
+     * @ORM\OneToMany(targetEntity="Employee", mappedBy="company")
      */
     private $employees;
 

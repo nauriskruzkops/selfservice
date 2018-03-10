@@ -70,38 +70,37 @@ $view['slots']->set('parentPageUrl', $view['router']->path('system'));
                                                 <?= $formHelper->widget($formView['email']) ?>
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
-                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['company']) ?></div>
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['company']) ?></div>
                                             <div class="col-sm-9">
-                                                <?= $formHelper->errors($formView['companyRelation'][0]['company']) ?>
-                                                <?= $formHelper->widget($formView['companyRelation'][0]['company']) ?>
+                                                <?= $formHelper->errors($formView['company']) ?>
+                                                <?= $formHelper->widget($formView['company']) ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['department']) ?></div>
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['departments'][0]['department']) ?></div>
                                             <div class="col-sm-9">
-                                                <?= $formHelper->errors($formView['companyRelation'][0]['department']) ?>
-                                                <?= $formHelper->widget($formView['companyRelation'][0]['department']) ?>
+                                                <?= $formHelper->errors($formView['departments'][0]['department']) ?>
+                                                <?= $formHelper->widget($formView['departments'][0]['department']) ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['manager']) ?></div>
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['departments'][0]['manager']) ?></div>
                                             <div class="col-sm-9">
-                                                <?= $formHelper->errors($formView['companyRelation'][0]['manager']) ?>
-                                                <?= $formHelper->widget($formView['companyRelation'][0]['manager']) ?>
+                                                <?= $formHelper->errors($formView['departments'][0]['manager']) ?>
+                                                <?= $formHelper->widget($formView['departments'][0]['manager']) ?>
                                                 <span class="small text-muted">By default (if empty) department manager</span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['companyRelation'][0]['startDate']) ?></div>
+                                            <div class="col-sm-3 text-right"><?= $formHelper->label($formView['departments'][0]['startDate']) ?></div>
                                             <div class="col-sm-9">
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <?= $formHelper->widget($form['companyRelation'][0]['startDate']) ?>
+                                                        <?= $formHelper->widget($form['departments'][0]['startDate']) ?>
                                                     </div>
                                                     <div class="col">
-                                                        <?= $formHelper->widget($form['companyRelation'][0]['endDate']) ?>
+                                                        <?= $formHelper->widget($form['departments'][0]['endDate']) ?>
                                                     </div>
                                                 </div>
                                             </div>

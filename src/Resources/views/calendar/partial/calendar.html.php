@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var \DatePeriod $calendar
  * @var \DateTime $calendarDay
  * @var \DateTime $startDate
- * @var \App\Entity\CompanyEmployee[] $employees
+ * @var \App\Entity\EmployeeDepartments[] $employees
  * @var \App\Entity\Vacation $vacation
  */
 

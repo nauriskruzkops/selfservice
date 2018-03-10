@@ -23,8 +23,8 @@ class UserController extends ExtendController
         }
 
         $company = null;
-        if ($employee->getCompanyRelation()) {
-            $company = $employee->getCompanyRelation()->last()->getCompany();
+        if ($employee->getDepartments()) {
+            $company = $employee->getDepartments()->last()->getCompany();
         }
 
         /** @var UserForm $form */
@@ -57,8 +57,8 @@ class UserController extends ExtendController
         }
 
         $company = null;
-        if ($employee->getCompanyRelation()) {
-            $company = $employee->getCompanyRelation()->last()->getCompany();
+        if ($employee->getDepartments()) {
+            $company = $employee->getDepartments()->last()->getCompany();
         }
 
         /** @var UserForm $form */

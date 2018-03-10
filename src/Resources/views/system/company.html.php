@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 /**
  * @var PhpEngine $view
  * @var \App\Entity\Company $company
- * @var \App\Entity\CompanyEmployee $employee
+ * @var \App\Entity\EmployeeDepartments $employee
  */
 $view->extend('layout/layout.html.php');
 
@@ -98,7 +98,7 @@ $view['slots']->set('parentPageUrl', 'system');
                                 ) ?>
                             </div>
 
-                            <div class="tab-pane fade" id="employees" role="tabpanel">
+                            <div class="tab-pane fade" id="employees" data-block="employees" role="tabpanel">
                                 <?php echo $view['actions']->render(
                                     new ControllerReference('App\\Controller\\System\\CompanyController::employees',['company' => $company])
                                 ) ?>

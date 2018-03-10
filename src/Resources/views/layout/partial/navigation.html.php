@@ -20,13 +20,13 @@ $menu = [
     ],
 */
     'calendar' => [
-        'icon' => 'fa fa-fw fa-calendar',
-        'title' => 'Calendar',
+        'icon' => 'fa fa-fw fa-dashboard',
+        'title' => 'Dashboard',
         'route' => [
-            'key' => 'calendar',
+            'key' => 'dashboard',
             'params' => []
         ],
-        'matching' => ['calendar'],
+        'matching' => ['dashboard'],
     ],
     'employee' => [
         'icon' => 'fa fa-fw fa-user',

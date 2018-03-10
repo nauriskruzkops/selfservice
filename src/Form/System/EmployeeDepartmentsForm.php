@@ -4,7 +4,7 @@ namespace App\Form\System;
 
 use App\Entity\Company;
 use App\Entity\CompanyDepartment;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use App\Entity\Employee;
 use App\Repository\CompanyDepartmentRepository;
 use App\Repository\CompanyRepository;
@@ -17,23 +17,11 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class CompanyEmployeeForm extends AbstractType
+class EmployeeDepartmentsForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('company', EntityType::class, [
-                'required' => true,
-                'class' => Company::class,
-                'query_builder' => function (CompanyRepository $er) {
-                    return $er->getSelectList();
-                },
-                'choice_label' => 'title',
-                'placeholder' => '-- Select --',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
             ->add('department', EntityType::class, [
                 'required' => true,
                 'class' => CompanyDepartment::class,
@@ -82,7 +70,7 @@ class CompanyEmployeeForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => CompanyEmployee::class,
+            'data_class' => EmployeeDepartments::class,
         ));
     }
 }

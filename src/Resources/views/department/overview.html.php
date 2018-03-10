@@ -13,4 +13,5 @@ $view['slots']->set('department', $department);
 <?= sprintf(
         'Department manager is <strong>%s</strong> (%s)',
         $department->getManager(),
-        $department->getManager()->getEmail())?>
+        ($department->getManager() ? $department->getManager()->getEmail() : null )
+) ?>

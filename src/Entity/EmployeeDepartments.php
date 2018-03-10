@@ -3,23 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CompanyEmployeeRepository;
+use App\Repository\EmployeeDepartmentsRepository;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CompanyEmployeeRepository")
- * @ORM\Table(name="company_employees")
+ * @ORM\Entity(repositoryClass="App\Repository\EmployeeDepartmentsRepository")
+ * @ORM\Table(name="employee_departments")
  */
-class CompanyEmployee implements \ArrayAccess
+class EmployeeDepartments implements \ArrayAccess
 {
     use Traits\Traceability;
-
-    const DEPARTMENTS = [
-        'accounting' => 'Accounting',
-        'it' => 'IT',
-        'customer_service' => 'Customer service',
-        'head_devision' => 'Head devision',
-        'debt' => 'Debt'
-    ];
 
     /**
      * @ORM\Column(type="integer")
@@ -27,13 +19,6 @@ class CompanyEmployee implements \ArrayAccess
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var Company
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
-     */
-    private $company;
 
     /**
      * @var Employee
@@ -71,38 +56,14 @@ class CompanyEmployee implements \ArrayAccess
      */
     private $endDate;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
     public function __toString()
     {
-        return $this->getEmployee()->getFullName();
+        return (string)$this->getDepartment()->getTitle();
     }
 
-    /**
-     * @return Company
-     */
-    public function getCompany()
+    public function getTitle()
     {
-        return $this->company;
-    }
-
-    /**
-     * @param Company $company
-     * @return CompanyEmployee
-     */
-    public function setCompany(Company $company)
-    {
-        $this->company = $company;
-        return $this;
+        return $this->getDepartment()->getTitle();
     }
 
     /**
@@ -114,13 +75,30 @@ class CompanyEmployee implements \ArrayAccess
     }
 
     /**
+     * @return Employee
+     */
+    public function getCompany()
+    {
+        return $this->employee;
+    }
+
+    /**
      * @param Employee $employee
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
     public function setEmployee(Employee $employee)
     {
         $this->employee = $employee;
+
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -133,7 +111,7 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @param mixed $position
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
     public function setPosition($position)
     {
@@ -151,7 +129,7 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @param mixed $startDate
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
     public function setStartDate($startDate)
     {
@@ -169,7 +147,7 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @param mixed $endDate
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
     public function setEndDate($endDate)
     {
@@ -187,7 +165,7 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @param CompanyDepartment $department
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
     public function setDepartment(CompanyDepartment $department)
     {
@@ -206,7 +184,7 @@ class CompanyEmployee implements \ArrayAccess
 
     /**
      * @param Employee $manager
-     * @return CompanyEmployee
+     * @return EmployeeDepartments
      */
     public function setManager(Employee $manager = null)
     {

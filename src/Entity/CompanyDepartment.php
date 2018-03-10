@@ -36,8 +36,8 @@ class CompanyDepartment {
     private $manager;
 
     /**
-     * @var CompanyEmployee[]
-     * @ORM\OneToMany(targetEntity="App\Entity\CompanyEmployee", mappedBy="department", cascade={"persist"})
+     * @var EmployeeDepartments[]
+     * @ORM\OneToMany(targetEntity="EmployeeDepartments", mappedBy="department", cascade={"persist"})
      */
     private $employees;
 
@@ -136,7 +136,7 @@ class CompanyDepartment {
     }
 
     /**
-     * @return CompanyEmployee[]
+     * @return EmployeeDepartments[]
      */
     public function getEmployees()
     {

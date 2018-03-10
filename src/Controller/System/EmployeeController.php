@@ -3,7 +3,7 @@
 namespace App\Controller\System;
 
 use App\Entity\Company;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use App\Entity\Employee;
 use App\Form\System\EmployeeForm;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +28,8 @@ class EmployeeController extends ExtendController
         ]);
 
         $company = null;
-        if ($employee->getCompanyRelation()) {
-            $company = $employee->getCompanyRelation()->last()->getCompany();
+        if ($employee->getCompany()) {
+            $company = $employee->getCompany();
         }
 
         return $this->render('system/employee.html.php', [
@@ -46,9 +46,9 @@ class EmployeeController extends ExtendController
     {
         $employee = new Employee();
         if (($company = $this->getDoctrine()->getRepository(Company::class)->find($id))){
-            $relation = new CompanyEmployee();
-            $relation->setCompany($company);
-            $employee->addCompanyRelation($relation);
+            $department = new EmployeeDepartments();
+            $department->setEmployee($employee);
+            $employee->addDepartment($department);
         }
 
         /** @var EmployeeForm $form */
@@ -99,8 +99,8 @@ class EmployeeController extends ExtendController
         ]);
 
         $company = null;
-        if ($employee->getCompanyRelation()) {
-            $company = $employee->getCompanyRelation()->last()->getCompany();
+        if ($employee->getDepartments()) {
+            $company = $employee->getDepartments()->last()->getCompany();
         }
 
         $form->handleRequest($request);

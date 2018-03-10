@@ -3,7 +3,7 @@
 namespace App\Controller\Calendar;
 
 use App\Controller\ExtendController;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use App\Form\EmployeeVacationForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

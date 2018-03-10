@@ -71,7 +71,6 @@ class VacationController extends ExtendController
      */
     public function addAction(Request $request)
     {
-
         /** @var Employee $employee */
         $employee = $this->getEmployeeBy($request);
 

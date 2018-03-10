@@ -19,6 +19,7 @@ class VacationController extends ExtendController
     public function indexAction(Request $request)
     {
         $employee = $this->getEmployeeByUser($this->getUser());
+
         if (($departmentId = $request->get('department_id', null))) {
             $department = $this->getDepartmentBy($departmentId);
         } else {

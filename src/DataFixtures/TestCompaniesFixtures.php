@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Company;
 use App\Entity\CompanyDepartment;
-use App\Entity\CompanyEmployee;
+use App\Entity\EmployeeDepartments;
 use App\Entity\VacationType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

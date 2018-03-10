@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class CompanyEmployeeRepository extends EntityRepository
+class EmployeeDepartmentsRepository extends EntityRepository
 {
     private function getMyAvailable(): QueryBuilder
     {
@@ -41,7 +41,7 @@ class CompanyEmployeeRepository extends EntityRepository
     public function getPaginateList(Company $company, $page = 1, $limit = 20)
     {
         $qb = $this->getList();
-        $qb->where($qb->expr()->eq('ce.company', $company->getId()));
+        //$qb->where($qb->expr()->eq('ce.company', $company->getId()));
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()

@@ -2,8 +2,11 @@
 
 namespace App\Form\System;
 
+use App\Entity\Company;
 use App\Entity\Employee;
 use App\Entity\User;
+use App\Repository\CompanyRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,8 +36,20 @@ class EmployeeForm extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('companyRelation', CollectionType::class, [
-                'entry_type' => CompanyEmployeeForm::class,
+            ->add('company', EntityType::class, [
+                'required' => true,
+                'class' => Company::class,
+                'query_builder' => function (CompanyRepository $er) {
+                    return $er->getSelectList();
+                },
+                'choice_label' => 'title',
+                'placeholder' => '-- Select --',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('departments', CollectionType::class, [
+                'entry_type' => EmployeeDepartmentsForm::class,
                 'entry_options' => ['label' => false],
             ])
         ;
