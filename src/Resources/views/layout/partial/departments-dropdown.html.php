@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  * @var RequestHelper $request
  * @var array $parent
  * @var EmployeeDepartments $current
- * @var CompanyDepartment[] $departments
+ * @var EmployeeDepartments[] $departments
  */
 
 $request = $app->getRequest();
@@ -24,7 +24,7 @@ $current = $current ?? '';
 </a>
 <div class="dropdown-menu" aria-labelledby="departmentDropdown">
     <?php foreach ($departments as $department) :?>
-        <a class="dropdown-item" href="<?= $view['router']->path('department',['department_id' => $department->getId()]) ?>">
+        <a class="dropdown-item" href="<?= $view['router']->path('department',['department_id' => $department->getDepartment()->getId()]) ?>">
             <strong><?= $this->escape($department->getTitle())?></strong>
             <div class="dropdown-message small"><?= $this->escape($department->getCompany())?></div>
         </a>

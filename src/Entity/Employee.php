@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\PersistentCollection;
 
 /**
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\EmployeeRepository")
  * @ORM\Table(name="employee")
  */
@@ -79,6 +81,11 @@ class Employee {
     private $departments;
 
     /**
+     * @var EmployeeDepartments[]
+     */
+    private $allRelatedDepartments;
+
+    /**
      * @var User
      * @ORM\OneToOne(targetEntity="User", mappedBy="employee", orphanRemoval=true, fetch="EAGER")
      */
@@ -89,6 +96,14 @@ class Employee {
         $this->foreigner = false;
         $this->departments = new ArrayCollection();
         $this->vacations = new ArrayCollection();
+    }
+
+    /**
+     * ORM\PostLoad()
+     */
+    public function postLoadFunction(LifecycleEventArgs $eventArgs)
+    {
+        $em = $eventArgs->getEntityManager();
     }
 
     /**
@@ -313,6 +328,53 @@ class Employee {
     public function getDepartment()
     {
         return $this->departments->last();
+    }
+
+    /**
+     * Get all departments where employee take action
+     *
+     * @return array
+     */
+    public function getAllDepartment()
+    {
+        $collector = [
+            'manager' => $this->getDepartments(),
+            'user' => new ArrayCollection(),
+            'all' => new ArrayCollection(),
+        ];
+
+        if (($manager = $this->getManager())) {
+            $collector['user']->add($manager->getDepartment());
+            $collector['all'] = new ArrayCollection(
+                array_merge(
+                    $this->getDepartments()->toArray(),
+                    [$manager->getDepartment()]
+                )
+            );
+        } else {
+            $collector['all'] = $collector['user'];
+        }
+
+        return $collector;
+    }
+
+    /** @return Employee */
+    public function getManager()
+    {
+        $manager = null;
+
+        /** @var EmployeeDepartments[] $departments */
+        $departments = $this->departments->filter(function (EmployeeDepartments $d){
+            return ($d->getManager() !== $this);
+        });
+
+        if ($departments) {
+            if (!($manager = $departments->last()->getManager())) {
+                $manager = $departments->last()->getDepartment()->getManager();
+            }
+        }
+
+        return $manager !== $this ? $manager : null;
     }
 
     /**

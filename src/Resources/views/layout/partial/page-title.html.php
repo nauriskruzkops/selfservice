@@ -23,13 +23,11 @@ $request = $app->getRequest();
         </span>
 
         <?php if (strpos($request->attributes->get('_route'),'department') !== false) :?>
-            <?php if ($app->getUser()->isAdmin() or $app->getUser()->isSuperAdmin()) :?>
-                <?= $view['actions']->render(
-                    new ControllerReference('App\\Controller\\Layout\\LayoutController::departmentsDropdown',[
-                        'request' => $request,
-                    ])
-                ) ?>
-            <?php endif; ?>
+            <?= $view['actions']->render(
+                new ControllerReference('App\\Controller\\Layout\\LayoutController::departmentsDropdown',[
+                    'request' => $request,
+                ])
+            ) ?>
         <?php endif;?>
     </div>
     <div class="col-md-6 col-sm-12">

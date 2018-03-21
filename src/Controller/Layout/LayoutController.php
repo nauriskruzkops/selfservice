@@ -9,7 +9,6 @@ class LayoutController extends ExtendController
 {
     public function departmentsDropdown(Request $request, array $params = [])
     {
-
         $employee = $this->getEmployeeByUser($this->getUser());
 
         if (($departmentId = $request->get('department_id', null))) {
@@ -18,11 +17,19 @@ class LayoutController extends ExtendController
             $department = $this->getDepartmentByUser($this->getUser());
         }
 
+        // ToDo: permission limitation for other departments
+
         $company = $employee->getCompany();
+
+        if ($this->getUser()->isAdmin()) {
+            $departments = $company->getDepartments();
+        } else {
+            $departments = $employee->getAllDepartment()['all'];
+        }
 
         return $this->render('layout/partial/departments-dropdown.html.php', [
             'current' => $department,
-            'departments' => $company->getDepartments(),
+            'departments' => $departments,
         ]);
     }
 }

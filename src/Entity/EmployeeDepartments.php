@@ -41,7 +41,7 @@ class EmployeeDepartments implements \ArrayAccess
 
     /**
      * @var Employee
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      */
     private $manager;
