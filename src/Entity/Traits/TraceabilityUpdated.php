@@ -2,8 +2,13 @@
 
 namespace App\Entity\Traits;
 
+/**
+ * Trait TraceabilityUpdated
+ * @package App\Entity\Traits
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\EntityListeners({"TraceabilityListener"})
+ */
 trait TraceabilityUpdated {
-
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
@@ -13,7 +18,7 @@ trait TraceabilityUpdated {
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    public $updateBy;
+    public $updatedBy;
 
     /**
      * @return \DateTime
@@ -37,18 +42,18 @@ trait TraceabilityUpdated {
     /**
      * @return mixed
      */
-    public function getUpdateBy()
+    public function getUpdatedBy()
     {
-        return $this->updateBy;
+        return $this->updatedBy;
     }
 
     /**
-     * @param mixed $updateBy
+     * @param mixed $updatedBy
      * @return TraceabilityUpdated
      */
-    public function setUpdateBy($updateBy)
+    public function setUpdatedBy($updatedBy)
     {
-        $this->updateBy = $updateBy;
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }

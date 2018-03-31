@@ -9,6 +9,7 @@ security:
             algorithm: bcrypt
     firewalls:
         main:
+            security: true
             anonymous: ~
             provider: db_entity
             form_login:

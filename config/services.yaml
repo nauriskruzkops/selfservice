@@ -18,8 +18,7 @@ services:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests}'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
+    # SERVICES
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
@@ -28,12 +27,11 @@ services:
     App\Service\SettingsService:
         arguments: ['@doctrine.orm.entity_manager']
     App\Service\SecurityService:
-        arguments: ['@doctrine.orm.entity_manager','Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterfac']
-    # Example:
-    #App\Repository\UserRepository:
-        #abstract:  true
-        #arguments: ['@doctrine.orm.entity_manager']
-        #calls:
-          # - [setLogger, ['@logger']]
+        arguments: ['@doctrine.orm.entity_manager']
 
-
+    # LISTENERS
+    App\EventListener\TraceabilityListener:
+        arguments: ['@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface']
+        tags:
+            - { name: 'doctrine.event_listener', event: preUpdate}
+            - { name: 'doctrine.event_listener', event: prePersist}

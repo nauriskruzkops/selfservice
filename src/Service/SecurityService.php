@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityService
 {
-
     /** @var EntityManager  */
     private $em;
 

@@ -2,6 +2,12 @@
 
 namespace App\Entity\Traits;
 
+/**
+ * Trait TraceabilityCreated
+ * @package App\Entity\Traits
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\EntityListeners({"App\EventListener\TraceabilityListener"})
+ */
 trait TraceabilityCreated {
 
     /**
