@@ -2,9 +2,14 @@
 
 namespace App\Entity\Traits;
 
+use App\Entity\User;
+
 /**
  * Trait TraceabilityDeleted
+ *
  * @package App\Entity\Traits
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\EntityListeners({"App\EventListener\TraceabilityListener"})
  */
 trait TraceabilityDeleted {
     /**
@@ -14,7 +19,9 @@ trait TraceabilityDeleted {
     public $deletedAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="deleted_by", referencedColumnName="id")
      */
     public $deletedBy;
 

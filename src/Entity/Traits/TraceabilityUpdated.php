@@ -2,8 +2,11 @@
 
 namespace App\Entity\Traits;
 
+use App\Entity\User;
+
 /**
  * Trait TraceabilityUpdated
+ *
  * @package App\Entity\Traits
  * @ORM\HasLifecycleCallbacks
  * @ORM\EntityListeners({"TraceabilityListener"})
@@ -16,7 +19,9 @@ trait TraceabilityUpdated {
     public $updatedAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
      */
     public $updatedBy;
 

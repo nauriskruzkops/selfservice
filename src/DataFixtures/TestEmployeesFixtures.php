@@ -17,6 +17,7 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $employees = [];
         $companies = $manager->getRepository(Company::class)->findBy([],['id' => 'DESC']);
         /** @var Company $company */
         $company = reset($companies);
@@ -29,7 +30,6 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
             {
                 $employee = new Employee();
                 $employee->setCompany($company);
-                $employee->setCreatedAt(new \DateTime());
                 $employee->setName($this->getRandomName());
                 $employee->setSurname($this->getRandomSurname());
                 if (rand(0,2) === 0) {
@@ -47,14 +47,11 @@ class TestEmployeesFixtures extends Fixture implements DependentFixtureInterface
                 $companyEmployee->setDepartment($departments->getIterator()[rand(0, $totalDepartments-1)]);
             }
             $manager->persist($companyEmployee);
-            $manager->flush();
+            $employees[] = $employee;
         }
 
         foreach ($departments as $department) {
-            $employees = $department->getEmployees();
-            if ($employees) {
-                $department->setManager($employees->getIterator()[rand(1, $employees->count() - 1)]->getEmployee());
-            }
+            $department->setManager($employees[rand(1, count($employees)- 1)]);
         }
 
         /** @var User $admin - add superuser to system */

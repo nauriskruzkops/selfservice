@@ -31,7 +31,7 @@ services:
 
     # LISTENERS
     App\EventListener\TraceabilityListener:
-        arguments: ['@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface']
+        arguments: ['@security.token_storage']
         tags:
             - { name: 'doctrine.event_listener', event: preUpdate}
             - { name: 'doctrine.event_listener', event: prePersist}

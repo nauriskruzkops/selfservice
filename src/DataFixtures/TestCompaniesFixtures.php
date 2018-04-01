@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Company;
 use App\Entity\CompanyDepartment;
-use App\Entity\EmployeeDepartments;
 use App\Entity\VacationType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -21,7 +20,6 @@ class TestCompaniesFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $company = new Company();
-        $company->setCreatedAt(new \DateTime());
         $company->setTitle($companyTitle);
 
         $company->addDepartments((new CompanyDepartment())->setTitle('Head Office'));
@@ -55,6 +53,7 @@ class TestCompaniesFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($company);
         $manager->flush();
+        $manager->clear();
     }
 
     public function getDependencies()

@@ -2,14 +2,16 @@
 
 namespace App\Entity\Traits;
 
+use App\Entity\User;
+
 /**
  * Trait TraceabilityCreated
+ *
  * @package App\Entity\Traits
  * @ORM\HasLifecycleCallbacks
  * @ORM\EntityListeners({"App\EventListener\TraceabilityListener"})
  */
 trait TraceabilityCreated {
-
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
@@ -17,9 +19,11 @@ trait TraceabilityCreated {
     public $createdAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
-    public $createBy;
+    public $createdBy;
 
     /**
      * @return \DateTime
@@ -43,18 +47,18 @@ trait TraceabilityCreated {
     /**
      * @return mixed
      */
-    public function getCreateBy()
+    public function getCreatedBy()
     {
-        return $this->createBy;
+        return $this->createdBy;
     }
 
     /**
-     * @param mixed $createBy
+     * @param mixed $createdBy
      * @return $this
      */
-    public function setCreateBy($createBy)
+    public function setCreatedBy($createdBy)
     {
-        $this->createBy = $createBy;
+        $this->createdBy = $createdBy;
 
         return $this;
     }

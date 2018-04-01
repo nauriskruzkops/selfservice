@@ -18,16 +18,24 @@ class AdminUserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        if (!($manager->getRepository(User::class)->findOneBy(['username' => 'admin']))) {
-
-            $user = new User();
-            $user->setUsername('admin');
-            $user->setRoles([User::ROLE_SUPER_ADMIN]);
-            $user->setPassword($this->encoder->encodePassword($user, 'admin'));
-            $user->setCreatedAt(new \DateTime());
-
-            $manager->persist($user);
-            $manager->flush();
+        if (!($manager->getRepository(User::class)->findOneBy(['username' => 'system']))) {
+            $systemUser = new User();
+            $systemUser->setUsername('system');
+            $systemUser->setRoles([User::ROLE_SUPER_ADMIN]);
+            $systemUser->setPassword('DO-NOT-USE-THIS-USER');
+            $manager->persist($systemUser);
         }
+
+        if (!($manager->getRepository(User::class)->findOneBy(['username' => 'admin']))) {
+            $adminUser = new User();
+            $adminUser->setUsername('admin');
+            $adminUser->setRoles([User::ROLE_SUPER_ADMIN]);
+            $adminUser->setPassword($this->encoder->encodePassword($adminUser, 'admin'));
+            $adminUser->setCreatedBy($systemUser);
+            $manager->persist($adminUser);
+        }
+
+        $manager->flush();
+        $manager->clear();
     }
 }
