@@ -26,8 +26,11 @@ $parentPageUrl = $view['slots']->get('parentPageUrl');
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse text-right" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#"><?=$app->getUser()->getEmployee()?></a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-user-circle fa-lg"></i>
@@ -37,10 +40,6 @@ $parentPageUrl = $view['slots']->get('parentPageUrl');
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
             </li>
         </ul>
     </div>

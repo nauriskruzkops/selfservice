@@ -18,19 +18,23 @@ class EmployeeController extends ExtendController
         /** @var Employee $employee */
         $employee = $this->getUser()->getEmployee();
 
-        return $this->render('employee/overview.html.php', [
-            'employee' => $employee
+        $response = $this->forward('App\Controller\Employee\EmployeeController::idAction', [
+            'request'  => $request,
+            'employee'  => $employee,
         ]);
+
+        return $response;
     }
 
     /**
      * @Route("/employee/{employee_id}", name="employee_id")
      */
-    public function idAction(Request $request)
+    public function idAction(Request $request, $employee = null)
     {
-        $employee = $this->getDepartmentBy($request->get('employee_id'));
+        /** @var Employee $employee */
+        $employee = $employee ?? $this->getEmployeeBy($request);
 
-        return $this->render('department/overview.html.php', [
+        return $this->render('employee/overview.html.php', [
             'employee' => $employee
         ]);
     }

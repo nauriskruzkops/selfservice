@@ -16,9 +16,9 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests}'
+        exclude: '../src/{Entity,Migrations,Tests,Resources}'
 
-    # SERVICES
+    # SERVICES ############################
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
@@ -29,9 +29,23 @@ services:
     App\Service\SecurityService:
         arguments: ['@doctrine.orm.entity_manager']
 
-    # LISTENERS
+    # LISTENERS ############################
     App\EventListener\TraceabilityListener:
         arguments: ['@security.token_storage']
         tags:
             - { name: 'doctrine.event_listener', event: preUpdate}
             - { name: 'doctrine.event_listener', event: prePersist}
+
+    # VIEW HELPERS ############################
+    App\View\Helpers\ObjectUrlHelper:
+        arguments: ['@templating']
+        tags:
+            - { name: templating.helper, alias: object_url }
+    App\View\Helpers\EmployeeHelper:
+        arguments: ['@templating']
+        tags:
+            - { name: templating.helper, alias: employee }
+    App\View\Helpers\DepartmentHelper:
+        arguments: ['@templating']
+        tags:
+            - { name: templating.helper, alias: department }

@@ -224,6 +224,9 @@
     "symfony/yaml": {
         "version": "v4.0.2"
     },
+    "twbs/bootstrap": {
+        "version": "v4.0.0"
+    },
     "zendframework/zend-code": {
         "version": "3.3.0"
     },

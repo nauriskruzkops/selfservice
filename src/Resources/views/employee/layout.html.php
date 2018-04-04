@@ -33,7 +33,12 @@ $view->extend('layout/layout.html.php');
             </div>
             <div class="col-sm-12 col-md-10">
                 <div class="p-md-4">
-                    <h1><span style="font-weight: 100; font-size: 90%">Hi, </span> <?= $this->escape($employee->getFullName())?></h1>
+                    <h1>
+                        <?php if ($employee == $app->getUser()->getEmployee()){?>
+                            <span style="font-weight: 100; font-size: 90%">Hi, </span>
+                        <?php }?>
+                        <?= $this->escape($employee->getFullName())?>
+                    </h1>
                 </div>
                 <div class="white-box">
                     <div class="tab-content">
