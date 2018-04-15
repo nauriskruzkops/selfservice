@@ -5,6 +5,7 @@ namespace App\Controller\System;
 use App\Entity\Company;
 use App\Entity\VacationType;
 use App\Form\System\VacationTypeForm;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,27 +37,36 @@ class VacationTypeController extends ExtendController
             $type->setCompany($company);
         }
 
-        /** @var VacationTypeForm $form */
+        /** @var VacationTypeForm | Form $form */
         $form = $this->createForm(VacationTypeForm::class, $type, [
             'action' => $this->generateUrl('system_vacation_type_add', ['id' => $company ? $company->getId() : 0]),
             'method' => 'POST',
         ]);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($form->getData());
-                $em->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                try {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($form->getData());
+                    $em->flush();
 
+                    $this->addFlash(
+                        'notice',
+                        'Your changes were saved!'
+                    );
+
+                    return $this->redirectToRoute('system_vacation_type_edit', ['id' => $type->getId()]);
+                } catch (\Exception $e) {
+                    // ToDo: Error logging
+                    // Temp
+                    $this->addFlash('error', $e->getMessage());
+                }
+            } else {
                 $this->addFlash(
-                    'notice',
-                    'Your changes were saved!'
+                    'error',
+                    $form->getErrors()->current()->getMessage()
                 );
-
-                return $this->redirectToRoute('system_vacation_type_edit', ['id' => $type->getId()]);
-            } catch (\Exception $e) {
-                var_dump($e);
             }
         }
 

@@ -1,9 +1,11 @@
 <?php
 
+use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
 use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 /**
+ * @var GlobalVariables $app
  * @var PhpEngine $view
  */
 
@@ -48,7 +50,7 @@ $parentPageUrl = $view['slots']->get('parentPageUrl');
 <div id="side-wrapper">
     <?php echo $view['actions']->render(
         new ControllerReference('App\\Controller\\Layout\\NavigationController::navigation', ['_parent' => $app->getRequest()])
-    ) ?>
+    ); ?>
 </div>
 
 <div id="content-wrapper">

@@ -104,22 +104,31 @@ class EmployeeController extends ExtendController
         }
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                /** @var Employee $employee */
-                $employee = $form->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->merge($form->getData());
-                $em->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                try {
+                    /** @var Employee $employee */
+                    $employee = $form->getData();
+                    $em = $this->getDoctrine()->getManager();
+                    $em->merge($form->getData());
+                    $em->flush();
 
+                    $this->addFlash(
+                        'notice',
+                        'Your changes were saved!'
+                    );
+
+                    return $this->redirectToRoute('system_employee', ['id' => $employee->getId()]);
+                } catch (\Exception $e) {
+                    // ToDo: Error logging
+                    // Temp
+                    $this->addFlash('error', $e->getMessage());
+                }
+            } else {
                 $this->addFlash(
-                    'notice',
-                    'Your changes were saved!'
+                    'error',
+                    $form->getErrors()->current()->getMessage()
                 );
-
-                return $this->redirectToRoute('system_employee', ['id' => $employee->getId()]);
-            } catch (\Exception $e) {
-                var_dump($e);
             }
         }
 

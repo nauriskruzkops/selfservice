@@ -15,7 +15,13 @@ class IndexController extends ExtendController
      */
     public function indexAction(Request $request)
     {
-        $department = $this->getEmployeeByUser($this->getUser());
+        try {
+            $department = $this->getEmployeeByUser($this->getUser());
+        } catch (\Exception $e) {
+            // ToDo: Log error
+            $department = null;
+        }
+
         $form = $this->createForm(EmployeeVacationForm::class);
 
         return $this->render('calendar/index.html.php', [
