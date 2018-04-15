@@ -57,7 +57,7 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
                             ]) ?>" data-toggle="modal" data-target="#globalAjaxModal">
                                 <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></a>
                         </span>
-                    <? endif;?>
+                    <?php endif;?>
                 </li>
             <?php endforeach;?>
         </ul>
