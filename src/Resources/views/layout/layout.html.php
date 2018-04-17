@@ -101,5 +101,14 @@ $parentPageUrl = $view['slots']->get('parentPageUrl');
     </div>
 </div>
 
+<!-- Global AJAX Modal:START -->
+<div class="modal fade" id="globalAjaxModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+<!-- Global AJAX Modal:END -->
 
 

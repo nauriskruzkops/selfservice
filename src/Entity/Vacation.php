@@ -188,7 +188,7 @@ class Vacation {
     {
         $dateInterval = $this->getStartDate()->diff($this->getEndDate());
 
-        return $dateInterval->days;
+        return $dateInterval->days+1;
     }
 
     /**
