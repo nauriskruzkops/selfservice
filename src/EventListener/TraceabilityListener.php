@@ -56,7 +56,7 @@ class TraceabilityListener
         }
 
         if (method_exists($entity, 'setCreatedBy')) {
-            if ($this->user && !$entity->getCreatedBy()) {
+            if ($this->user instanceof User && !$entity->getCreatedBy()) {
                 $entity->setCreatedBy($this->user);
             }
         }
