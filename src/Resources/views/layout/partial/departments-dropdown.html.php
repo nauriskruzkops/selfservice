@@ -24,9 +24,8 @@ $current = $current ?? '';
 </a>
 <div class="dropdown-menu" aria-labelledby="departmentDropdown">
     <?php foreach ($departments as $department) :?>
-        <a class="dropdown-item" href="<?= $view['router']->path('department',['department_id' => $department->getDepartment()->getId()]) ?>">
+        <a class="dropdown-item" href="<?= $view['router']->path('department',['department_id' => $department->getId()]) ?>">
             <strong><?= $this->escape($department->getTitle())?></strong>
-            <div class="dropdown-message small"><?= $this->escape($department->getCompany())?></div>
         </a>
     <?php endforeach;?>
 

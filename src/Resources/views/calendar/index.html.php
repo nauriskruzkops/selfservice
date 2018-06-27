@@ -14,12 +14,15 @@ $view['slots']->set('pageTitle', 'Leave days overview');
 $view['slots']->set('pageIcon', 'fa fa-building-o');
 
 $view->extend('layout/layout.html.php');
+$startDate = $startDate ?? new \DateTime('now');
+$employees = $employees ?? null;
 ?>
 
 <h2>Calendar</h2>
 
 <?= $view['actions']->render(
     new ControllerReference('App\\Controller\\Calendar\\LayoutController::calendar',[
-            'date' => new \DateTime('now')
+            'startDate' => $startDate,
+            'employees' => $employees
     ])
 ) ?>

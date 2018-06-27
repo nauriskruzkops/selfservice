@@ -80,6 +80,11 @@ class Employee {
     private $departments;
 
     /**
+     * @ORM\OneToMany(targetEntity="CompanyDepartment", mappedBy="manager")
+     */
+    protected $manageDepartments;
+
+    /**
      * @var EmployeeDepartments[]
      */
     private $allRelatedDepartments;
@@ -337,21 +342,34 @@ class Employee {
     public function getAllDepartment()
     {
         $collector = [
-            'manager' => $this->getDepartments(),
-            'user' => new ArrayCollection(),
-            'all' => new ArrayCollection(),
+            'manager' => new ArrayCollection(),
+            'user' =>  new ArrayCollection(),
         ];
 
+        foreach ($this->getDepartments() as $employeeDepartment) {
+            /** @var ArrayCollection */
+            if (!$collector['user']->contains($employeeDepartment->getDepartment())) {
+                $collector['user']->add($employeeDepartment->getDepartment());
+            }
+        }
+
         if (($manager = $this->getManager())) {
-            $collector['user']->add($manager->getDepartment());
-            $collector['all'] = new ArrayCollection(
-                array_merge(
-                    $this->getDepartments()->toArray(),
-                    [$manager->getDepartment()]
-                )
-            );
-        } else {
-            $collector['all'] = $collector['user'];
+            if (!$collector['user']->contains($manager->getDepartment()->getDepartment())) {
+                $collector['user']->add($manager->getDepartment()->getDepartment());
+            }
+        }
+
+        foreach ($this->manageDepartments as $manageDepartment) {
+            if (!$collector['manager']->contains($manageDepartment)) {
+                $collector['manager']->add($manageDepartment);
+            }
+        }
+
+        $collector['all'] = $collector['user'];
+        foreach ($collector['manager'] as $add) {
+            if (!$collector['all']->contains($add)) {
+                $collector['all']->add($add);
+            }
         }
 
         return $collector;

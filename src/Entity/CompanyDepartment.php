@@ -30,7 +30,7 @@ class CompanyDepartment {
 
     /**
      * @var Employee
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="manageDepartments")
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      */
     private $manager;

@@ -22,12 +22,14 @@ class IndexController extends ExtendController
             $department = null;
         }
 
-        $form = $this->createForm(EmployeeVacationForm::class);
+        $employees = $this->getDoctrine()->getRepository(EmployeeDepartments::class)->findAll();
 
+        $form = $this->createForm(EmployeeVacationForm::class);
         return $this->render('calendar/index.html.php', [
-            'startDate' => (new \DateTime('now'))->modify('first day of this month'),
+            'startDate' => (new \DateTime('-3 month'))->modify('first day of this month'),
             'department' => $department,
             'form' => $form->createView(),
+            'employees' => $employees,
         ]);
     }
 

@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
         <link href="<?= $view['assets']->getUrl('/assets/vendor/font-awesome/css/font-awesome.min.css', 'vendor') ?>" rel="stylesheet" type="text/css">
         <link href="<?= $view['assets']->getUrl('/assets/css/theme-base.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/bootstrap-overwrite.css', 'css') ?>" rel="stylesheet">
+        <link href="<?= $view['assets']->getUrl('/assets/css/tools.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar.css', 'css') ?>" rel="stylesheet">
         <link href="<?= $view['assets']->getUrl('/assets/css/calendar-timetable.css', 'css') ?>" rel="stylesheet">
 

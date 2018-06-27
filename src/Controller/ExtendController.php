@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\CompanyDepartment;
-use App\Entity\EmployeeDepartments;
 use App\Entity\Employee;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

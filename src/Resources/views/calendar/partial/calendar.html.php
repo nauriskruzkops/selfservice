@@ -108,6 +108,9 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
         </section>
     </div>
 </div>
+
+<p class="sp20"></p>
+
 <div class="modal fade" id="vacationModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
