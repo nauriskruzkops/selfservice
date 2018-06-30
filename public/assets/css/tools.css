@@ -11,3 +11,7 @@
 .sp20 {height: 20px}
 .sp35 {height: 35px}
 .sp30 {height: 30px}
+
+.today {
+    background-color: #FF7676 !important;
+}

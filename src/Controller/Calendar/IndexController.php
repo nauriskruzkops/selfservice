@@ -4,6 +4,7 @@ namespace App\Controller\Calendar;
 
 use App\Controller\ExtendController;
 use App\Entity\EmployeeDepartments;
+use App\Form\EmployeeSearchForm;
 use App\Form\EmployeeVacationForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,13 +23,13 @@ class IndexController extends ExtendController
             $department = null;
         }
 
-        $employees = $this->getDoctrine()->getRepository(EmployeeDepartments::class)->findAll();
+        $filterSearchForm = $this->createForm(EmployeeSearchForm::class);
+        $filterSearchForm->handleRequest($request);
+        $employees = $this->getDoctrine()->getRepository(EmployeeDepartments::class)->serachByFilterForm($filterSearchForm->getData(), null);
 
-        $form = $this->createForm(EmployeeVacationForm::class);
         return $this->render('calendar/index.html.php', [
             'startDate' => (new \DateTime('-3 month'))->modify('first day of this month'),
             'department' => $department,
-            'form' => $form->createView(),
             'employees' => $employees,
         ]);
     }

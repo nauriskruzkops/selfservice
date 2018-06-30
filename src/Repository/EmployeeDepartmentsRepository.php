@@ -50,4 +50,24 @@ class EmployeeDepartmentsRepository extends EntityRepository
 
         return $paginator;
     }
+
+    public function serachByFilterForm(array $formData = null, $page = 1, $limit = 20)
+    {
+        $qb = $this->getMyAvailable();
+
+        if(($department = $formData['department'] ?? false)) {
+            $qb->andWhere(
+                $qb->expr()->eq('ce.department', ':department')
+            )->setParameter('department', $department);
+        }
+
+        if ($page && $limit) {
+            $paginator = new Paginator($qb->getQuery());
+            $paginator->getQuery()->setFirstResult($limit * ($page - 1));
+            $paginator->getQuery()->setMaxResults($limit);
+            return $paginator;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -29,9 +29,10 @@ $view['slots']->set('parentPageUrl', 'system');
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" data-toggle="pill" href="#baseData" role="tab" aria-controls="v-pills-home" aria-selected="true">Base info</a>
                     <?php if (!$new) :?>
-                        <a class="nav-link" data-toggle="pill" href="#vacation-types" role="tab" aria-controls="v-pills-profile" aria-selected="false">Vacation types</a>
+                        <a class="nav-link" data-toggle="pill" href="#vacation-types" role="tab" aria-controls="v-pills-profile" aria-selected="true">Vacation types</a>
                         <a class="nav-link" data-toggle="pill" href="#employees" role="tab" aria-controls="v-pills-messages" aria-selected="false">Employees</a>
                         <a class="nav-link" data-toggle="pill" href="#departments" role="tab" aria-controls="v-pills-messages" aria-selected="false">Departments</a>
+                        <a class="nav-link" data-toggle="pill" href="#teams" role="tab" aria-controls="v-pills-messages" aria-selected="false">Teams</a>
                     <?php endif;?>
                 </div>
             </div>
@@ -105,6 +106,11 @@ $view['slots']->set('parentPageUrl', 'system');
                             </div>
 
                             <div class="tab-pane fade" id="departments" role="tabpanel">
+                                <?php echo $view['actions']->render(
+                                    new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
+                                ) ?>
+                            </div>
+                            <div class="tab-pane fade" id="teams" role="tabpanel">
                                 <?php echo $view['actions']->render(
                                     new ControllerReference('App\\Controller\\System\\DepartmentController::list',['company' => $company])
                                 ) ?>
