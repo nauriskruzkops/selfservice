@@ -89,3 +89,9 @@ table thead tr:first-child th {
     float: right;
     padding: 0;
 }
+
+/** FORM **/
+.form-control::placeholder {
+    color: #b8c2ca;
+    opacity: 1;
+}

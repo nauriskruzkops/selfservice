@@ -19,19 +19,21 @@ $startDate = $startDate ?? new \DateTime('now');
 $employees = $employees ?? null;
 ?>
 
-<h2>Calendar</h2>
-
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-10">
-        <?= $view['actions']->render(
-            new ControllerReference('App\\Controller\\Employee\\SearchController::filter',[
-                    'request' => $app->getRequest()
-            ])
-        ) ?>
+    <div class="col">
+        <h2>Calendar</h2>
+    </div>
+    <div class="col">
+        <div class="pull-right">
+            <?= $view['actions']->render(
+                new ControllerReference('App\\Controller\\Employee\\SearchController::filter',[
+                        'request' => $app->getRequest()
+                ])
+            ) ?>
+        </div>
     </div>
 </div>
-
+<div class="clearfix"></div>
 <hr>
 
 <?= $view['actions']->render(
