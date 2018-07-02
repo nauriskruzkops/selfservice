@@ -8,34 +8,33 @@ use Symfony\Bundle\FrameworkBundle\Templating\PhpEngine;
  */
 
 $menu = [
-/*
-    'dashboard' => [
+    'root' => [
         'icon' => 'fa fa-fw fa-dashboard',
-        'title' => 'Dashboard',
+        'title' => 'Overview',
         'route' => [
-            'key' => 'dashboard',
+            'key' => 'root',
             'params' => []
         ],
-        'matching' => ['dashboard'],
+        'matching' => [''],
+        'matching_regex' => '/ /',
     ],
-*/
     'calendar' => [
-        'icon' => 'fa fa-fw fa-dashboard',
-        'title' => 'Dashboard',
+        'icon' => 'fa fa-fw fa-calendar',
+        'title' => 'Calendar',
         'route' => [
-            'key' => 'dashboard',
+            'key' => 'calendar',
             'params' => []
         ],
-        'matching' => ['dashboard'],
+        'matching' => ['calendar'],
     ],
-    'employee' => [
-        'icon' => 'fa fa-fw fa-user',
-        'title' => 'Employee',
+    'employees' => [
+        'icon' => 'fa fa-fw fa-users',
+        'title' => 'Employees',
         'route' => [
-            'key' => 'employee',
+            'key' => 'employees',
             'params' => []
         ],
-        'matching' => ['employee','employee_id'],
+        'matching' => ['employees'],
     ]
 ];
 
@@ -65,9 +64,7 @@ if ($this->get('security')->isGranted(User::ROLE_ADMIN)) {
     ];
 }
 
-
-
-$parentRequest = $_parent;
+$parentRequest = $request;
 
 $check_active_menu = function ($item) use ($menu, $parentRequest) {
     if ($menu[$item] ?? false) {

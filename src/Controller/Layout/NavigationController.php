@@ -3,14 +3,15 @@
 namespace App\Controller\Layout;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class NavigationController extends Controller
 {
 
-    public function navigation($_parent = null)
+    public function navigation(Request $request)
     {
         return $this->render('layout/partial/navigation.html.php', [
-            '_parent' => $_parent
+            'request' => $request
         ]);
     }
 

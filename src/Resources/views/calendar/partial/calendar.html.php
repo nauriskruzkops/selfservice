@@ -26,7 +26,7 @@ $daysFromPeriodStart = function (\DateTime $vacationStartDate) use ($startDate) 
 $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
     $days = $daysFromPeriodStart($vacationStartDate);
         $days++;
-    return $days * 30;
+    return $days * 30 - 30;
 };
 ?>
 <div class="calendar_content">
@@ -76,7 +76,7 @@ $styleLeft = function ($vacationStartDate) use ($daysFromPeriodStart) {
                                     $newMonth = ((int)$day->format('d') === 1);
                                     $isToday = ($day->format('ymd') === $today->format('ymd'));
                                     ?>
-                                    <li data-month="<?= $day->format('Ym')?>" class="day day-info day-name-<?= $day->format('N')?> <?= $day->format('N')>5?'weekend':''?> <?= $isToday?'today':''?>" data-date="<?= $day->format('Y-m-d')?>">
+                                    <li data-month="<?= $day->format('Ym')?>" class="day day-info day-name-<?= $day->format('N')?> <?= ($day->format('N') && !$isToday)>5?'weekend':''?> <?= $isToday?'today':''?>" data-date="<?= $day->format('Y-m-d')?>">
                                         <span class="day-label <?= ($newMonth)?'font-weight-bold':''?>">
                                             <?= $day->format('d')?>
                                         </span>

@@ -49,7 +49,7 @@ $parentPageUrl = $view['slots']->get('parentPageUrl');
 
 <div id="side-wrapper">
     <?php echo $view['actions']->render(
-        new ControllerReference('App\\Controller\\Layout\\NavigationController::navigation', ['_parent' => $app->getRequest()])
+        new ControllerReference('App\\Controller\\Layout\\NavigationController::navigation', ['request' => $app->getRequest()])
     ); ?>
 </div>
 

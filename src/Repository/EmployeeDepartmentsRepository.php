@@ -58,7 +58,7 @@ class EmployeeDepartmentsRepository extends EntityRepository
         $qb = $this->getMyAvailable();
 
         $department = $formData['department'] ?? false;
-        if($department && empty($department)) {
+        if($department && !empty($department)) {
             $qb->andWhere(
                 $qb->expr()->eq('ce.department', ':department')
             )->setParameter('department', $department);

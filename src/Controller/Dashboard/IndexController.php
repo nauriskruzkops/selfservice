@@ -13,8 +13,10 @@ class IndexController extends ExtendController
      */
     public function indexAction(Request $request)
     {
-        return $this->render('dashboard/index.html.php', [
-            'name' => 'Me!'
+        $response = $this->forward('App\Controller\Employee\EmployeeController::indexAction', [
+            'request' => $request
         ]);
+
+        return $response;
     }
 }

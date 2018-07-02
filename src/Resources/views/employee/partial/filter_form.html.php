@@ -5,7 +5,7 @@
  * @var Symfony\Component\Form\FormView $form
  */
 
-$form  = $form ?? null;
+$form = $form ?? null;
 $formHelper = $view['form'];
 ?>
 <?= $formHelper->start($form);?>
@@ -24,7 +24,7 @@ $formHelper = $view['form'];
         <?= $formHelper->widget($form['type']) ?>
     </div>
     <div class="form-group mx-sm-1">
-        <input class="btn btn-primary btn-sm" name="submit_search" value="search" type="submit">
+        <input class="btn btn-primary btn-sm" value="search" type="submit">
     </div>
 </div>
 
